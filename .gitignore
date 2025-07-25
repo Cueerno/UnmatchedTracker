@@ -1,4 +1,6 @@
-
+.env
+*.properties
+!application.properties.example
 
 # IntelliJ project files
 .idea/
