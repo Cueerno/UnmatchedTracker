@@ -1,0 +1,23 @@
+package com.radiuk.unmatched_backend_core.repository;
+
+import com.radiuk.unmatched_backend_core.model.Character;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface CharacterRepository extends JpaRepository<Character, Short> {
+
+    @Query(nativeQuery = true, value = """
+    select
+        c.*
+    from parties p
+    join users u on p.user_id = u.id
+    join characters c on p.character_id = c.id
+    where u.username = :username;
+    """)
+    List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
+}
