@@ -1,0 +1,38 @@
+package com.radiuk.unmatched_backend_core.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "matches")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Match {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String note;
+
+    @Column(name = "played_at")
+    private OffsetDateTime playedAt;
+
+    @OneToMany(mappedBy = "match")
+    private List<Team> teams = new ArrayList<>();
+
+    @OneToMany(mappedBy = "match")
+    private List<Party> parties = new ArrayList<>();
+
+    private MatchFormat format;
+
+    private enum MatchFormat {
+        HEADS_UP, TEAMS, FREE_FOR_ALL, COOP_PLAY_FOR_1_4
+    }
+}
