@@ -1,0 +1,36 @@
+{
+  "players": [
+    {
+      "name": "player1",
+      "character": "character1",
+      "move_order": 1,
+      "final_hp": "..."
+    }, {
+      "name": "player 2",
+      "character": "character2",
+      "move_order": 2,
+      "final_hp": "..."
+    }, {
+      "name": "player 3",
+      "character": "character 3",
+      "move_order": 3,
+      "final_hp": "..."
+    }, {
+      "name": "player 4",
+      "character": "character 4",
+      "move_order": 4,
+      "final_hp": "..."
+    }
+  ],
+  "date": "yyyy-mm-dd hh:mm:ss.msmsms +hh:mm",
+  "board_name": "board",
+  "teams": [
+    {
+      "team": "team 1"
+    },
+    {
+      "team": "team 2"
+    }
+  ],
+  "winner": "team 1"
+}
