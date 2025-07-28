@@ -30,6 +30,7 @@ public class Match {
     @OneToMany(mappedBy = "match")
     private List<Party> parties = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
     private MatchFormat format;
 
     private enum MatchFormat {
