@@ -6,6 +6,7 @@ import com.radiuk.unmatched_backend_core.dto.UserPartyDto;
 import com.radiuk.unmatched_backend_core.model.Match;
 import com.radiuk.unmatched_backend_core.model.Party;
 import com.radiuk.unmatched_backend_core.repository.*;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class PartyService {
 
     @Transactional(readOnly = true)
     public PartyDto getPartyByMatchId(Long matchId) {
-        Match match = matchRepository.findById(matchId).orElse(null); // todo exception
+        Match match = matchRepository.findById(matchId).orElseThrow(EntityExistsException::new); // todo exception
 
         List<Party> parties = partyRepository.findByMatchId(matchId);
 
