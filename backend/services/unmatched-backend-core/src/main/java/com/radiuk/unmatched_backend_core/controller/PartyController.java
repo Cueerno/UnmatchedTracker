@@ -18,9 +18,8 @@ public class PartyController {
         return ResponseEntity.ok(partyService.getPartyByMatchId(matchId));
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<?> getPatry(@RequestBody PartyDto partyDto) {
-        partyService.saveParty(partyDto);
-        return ResponseEntity.ok().build();
+    @PostMapping("")
+    public ResponseEntity<?> createParty(@RequestBody PartyDto partyDto) {
+        return ResponseEntity.ok(partyService.createParty(partyDto));
     }
 }

@@ -74,7 +74,7 @@ public class PartyService {
     }
 
     @Transactional
-    public void saveParty(PartyDto partyDto) {
+    public PartyDto createParty(PartyDto partyDto) {
         OffsetDateTime now = OffsetDateTime.now();
 
         Match match = new Match();
@@ -90,6 +90,7 @@ public class PartyService {
             team.setMatch(match);
             team.setCreatedAt(now);
             teamRepository.save(team);
+            match.getTeams().add(team);
             teamMap.put(teamDto.getName(), team);
         }
 
@@ -120,6 +121,8 @@ public class PartyService {
                             .build()
             );
         }
+
+        return getPartyByMatchId(match.getId());
     }
 
     private boolean isUserWin(UserPartyDto user, PartyDto dto) {
