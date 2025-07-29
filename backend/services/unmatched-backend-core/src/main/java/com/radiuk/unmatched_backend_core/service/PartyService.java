@@ -131,6 +131,12 @@ public class PartyService {
     }
 
     private String getUserTeamName(UserPartyDto userPartyDto, PartyDto partyDto) {
+        Match.MatchFormat format = partyDto.getFormat();
+
+        if (format != Match.MatchFormat.TEAMS) {
+            return userPartyDto.getUsername();
+        }
+
         for (TeamDto team : partyDto.getTeams()) {
             String username = userPartyDto.getUsername();
             String[] members = team.getName().split("\\s*&\\s*");
