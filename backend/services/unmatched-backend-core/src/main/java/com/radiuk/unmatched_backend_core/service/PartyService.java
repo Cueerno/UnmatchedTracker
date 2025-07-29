@@ -75,6 +75,7 @@ public class PartyService {
 
     @Transactional
     public PartyDto createParty(PartyDto partyDto) {
+        Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(EntityNotFoundException::new);
         OffsetDateTime now = OffsetDateTime.now();
 
         Match match = new Match();
@@ -97,7 +98,6 @@ public class PartyService {
         for (UserPartyDto userPartyDto : partyDto.getUsers()) {
             User user = userRepository.findByUsername(userPartyDto.getUsername()).orElseThrow(EntityNotFoundException::new);
             Character character = characterRepository.findByName(userPartyDto.getCharacter()).orElseThrow(EntityNotFoundException::new);
-            Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(EntityNotFoundException::new);
             Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
 
             TeamMember teamMember = new TeamMember();
@@ -105,7 +105,7 @@ public class PartyService {
             teamMember.setTeam(team);
             teamMember.setUser(user);
             teamMember.setCreatedAt(now);
-            teamMemberRepository.save(teamMember);
+            teamMemberRepository.saveAndFlush(teamMember);
 
             partyRepository.save(
                     Party.builder()
