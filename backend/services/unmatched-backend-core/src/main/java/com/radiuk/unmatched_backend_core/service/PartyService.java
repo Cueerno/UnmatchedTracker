@@ -44,6 +44,8 @@ public class PartyService {
                 .sorted(Comparator.comparingInt(UserPartyDto::getMoveOrder))
                 .toList();
 
+        Match.MatchFormat format = match.getFormat();
+
         List<TeamDto> teams = match.getTeams().stream()
                 .map(team -> TeamDto.builder()
                         .name(Optional.ofNullable(team.getName()).orElse("No name"))
@@ -63,6 +65,7 @@ public class PartyService {
 
         return PartyDto.builder()
                 .users(users)
+                .format(format)
                 .teams(teams)
                 .date(match.getPlayedAt())
                 .boardName(boardName)

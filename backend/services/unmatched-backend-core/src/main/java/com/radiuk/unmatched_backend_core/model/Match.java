@@ -33,7 +33,7 @@ public class Match {
     @Enumerated(EnumType.STRING)
     private MatchFormat format;
 
-    private enum MatchFormat {
+    public enum MatchFormat {
         HEADS_UP, TEAMS, FREE_FOR_ALL, COOP_PLAY_FOR_1_4
     }
 }

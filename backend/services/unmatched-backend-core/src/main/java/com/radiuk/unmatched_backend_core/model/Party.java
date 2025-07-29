@@ -1,8 +1,7 @@
 package com.radiuk.unmatched_backend_core.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
@@ -10,6 +9,9 @@ import java.time.OffsetDateTime;
 @Setter
 @Entity
 @Table(name = "parties")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Party {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
