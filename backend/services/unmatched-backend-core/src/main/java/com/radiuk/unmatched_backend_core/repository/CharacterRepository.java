@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Short> {
@@ -23,4 +24,6 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
     order by usage_count desc;
     """)
     List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
+
+    Optional<Character> findByName(String name);
 }
