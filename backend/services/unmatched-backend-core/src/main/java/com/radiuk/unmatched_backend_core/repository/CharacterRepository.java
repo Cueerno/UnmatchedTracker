@@ -1,5 +1,6 @@
 package com.radiuk.unmatched_backend_core.repository;
 
+import com.radiuk.unmatched_backend_core.dto.CharacterRatingDto;
 import com.radiuk.unmatched_backend_core.model.Character;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Short> {
+
+    Optional<Character> findByName(String name);
 
     @Query(nativeQuery = true, value = """
     select
@@ -25,5 +28,13 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
     """)
     List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
 
-    Optional<Character> findByName(String name);
+    @Query("""
+    select new com.radiuk.unmatched_backend_core.dto.CharacterRatingDto(count(p), c.name)
+    from Party p
+    join p.character c
+    where p.isWinner = true
+    group by c.name
+    order by count(p) desc
+    """)
+    List<CharacterRatingDto> getRating();
 }
