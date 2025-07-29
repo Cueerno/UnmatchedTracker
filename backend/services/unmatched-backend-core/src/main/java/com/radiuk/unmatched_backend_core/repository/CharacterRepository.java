@@ -13,11 +13,14 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        c.*
+        c.*,
+        count(*) usage_count
     from parties p
     join users u on p.user_id = u.id
     join characters c on p.character_id = c.id
-    where u.username = :username;
+    where u.username = :username
+    group by c.id, c.set_id, c.name
+    order by usage_count desc;
     """)
     List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
 }
