@@ -18,8 +18,34 @@ export interface PartyPayload {
     winner: string;
 }
 
+export interface Party {
+    matchId: number;
+    format: string;
+    date: string;
+    boardName: string;
+    users: UserPartyDto[];
+    teams: TeamDto[];
+    winner: string;
+}
+
 export async function getPartyByMatchId(matchId: number) {
     const res = await fetch(`http://localhost:8080/api/v1/parties/${matchId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+
+    if (!res.ok) {
+        const text = await res.text()
+        throw new Error(`Error ${res.status}: ${text}`)
+    }
+
+    return res.json()
+}
+
+export async function getUserParties(username: string) {
+    const res = await fetch(`http://localhost:8080/api/v1/users/${username}/parties`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

@@ -74,6 +74,20 @@ public class PartyService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
+    public List<PartyDto> getAllPartiesByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
+        List<Long> numberOfParties = partyRepository.getPartiesByUserId(user.getId());
+
+        List<PartyDto> parties = new ArrayList<>();
+
+        for (long numberOfParty = 0L; numberOfParty < numberOfParties.size(); numberOfParty++) {
+            parties.add(getPartyByMatchId(numberOfParties.get(Math.toIntExact((numberOfParty)))));
+        }
+
+        return parties;
+    }
+
     @Transactional
     public PartyDto createParty(PartyDto partyDto) {
         Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(EntityNotFoundException::new);
