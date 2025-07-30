@@ -13,15 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 public class PartyDto {
 
-    private List<UserPartyDto> users;
-
     private Match.MatchFormat format;
-
-    private List<TeamDto> teams;
 
     private OffsetDateTime date;
 
     private String boardName;
+
+    private List<UserPartyDto> users;
+
+    private List<TeamDto> teams;
 
     private String winner;
 }

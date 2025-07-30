@@ -1,0 +1,159 @@
+/* ===================================================================
+   General styles
+   =================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.create-party {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Заголовок страницы */
+.page-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* ===================================================================
+   Sections
+   =================================================================== */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.25rem;
+}
+
+/* ===================================================================
+   Groups label+input
+   =================================================================== */
+.form-group {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    column-gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    margin: 0;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color .2s;
+}
+
+.form-input:focus {
+    border-color: #0366d6;
+    outline: none;
+}
+
+/* ===================================================================
+    Users and Teams
+   =================================================================== */
+.players-list,
+.teams-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.player-item,
+.team-item {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.player-title,
+.team-item h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ===================================================================
+   Buttons
+   =================================================================== */
+.buttons-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.primary-button {
+    background-color: #0366d6;
+    color: #fff;
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #0255b6;
+}
+
+.primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.secondary-button {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.secondary-button:hover {
+    background-color: #cfcfcf;
+}
+
+/* ===================================================================
+   Error text
+   =================================================================== */
+.error-text {
+    margin-top: 0.5rem;
+    color: #d32f2f;
+    font-size: 0.9rem;
+}
+
+/* ===================================================================
+   Mobile
+   =================================================================== */
+@media (max-width: 600px) {
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+
+    .form-label {
+        margin-bottom: 0.25rem;
+    }
+}
