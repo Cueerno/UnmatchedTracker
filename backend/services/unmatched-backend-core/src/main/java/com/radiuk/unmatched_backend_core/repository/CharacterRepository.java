@@ -28,6 +28,8 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
     """)
     List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
 
+    List<Character> findBySetName(String setName);
+
     @Query("""
     select new com.radiuk.unmatched_backend_core.dto.CharacterRatingDto(count(p), c.name)
     from Party p
