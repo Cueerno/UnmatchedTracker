@@ -64,6 +64,7 @@ public class PartyService {
                 .orElse("-");
 
         return PartyDto.builder()
+                .matchId(matchId)
                 .users(users)
                 .format(format)
                 .teams(teams)

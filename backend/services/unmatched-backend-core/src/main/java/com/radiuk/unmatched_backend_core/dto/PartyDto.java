@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PartyDto {
 
+    private Long matchId;
+
     private Match.MatchFormat format;
 
     private OffsetDateTime date;
