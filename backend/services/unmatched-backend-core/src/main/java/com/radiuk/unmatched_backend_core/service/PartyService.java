@@ -76,11 +76,19 @@ public class PartyService {
     @Transactional
     public PartyDto createParty(PartyDto partyDto) {
         Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(EntityNotFoundException::new);
-        OffsetDateTime now = OffsetDateTime.now();
+        OffsetDateTime date;
+
+        if (partyDto.getDate() == null) {
+            date = OffsetDateTime.now();
+        }
+        else {
+            date = partyDto.getDate();
+        }
+
 
         Match match = new Match();
         match.setFormat(partyDto.getFormat());
-        match.setPlayedAt(now);
+        match.setPlayedAt(date);
         matchRepository.save(match);
 
         Map<String, Team> teamMap = new HashMap<>();
@@ -89,7 +97,7 @@ public class PartyService {
             Team team = new Team();
             team.setName(teamDto.getName());
             team.setMatch(match);
-            team.setCreatedAt(now);
+            team.setCreatedAt(date);
             teamRepository.save(team);
             match.getTeams().add(team);
             teamMap.put(teamDto.getName(), team);
@@ -104,7 +112,7 @@ public class PartyService {
             teamMember.setId(new TeamMemberId(team.getId(), user.getId()));
             teamMember.setTeam(team);
             teamMember.setUser(user);
-            teamMember.setCreatedAt(now);
+            teamMember.setCreatedAt(date);
             teamMemberRepository.saveAndFlush(teamMember);
 
             partyRepository.save(
@@ -117,7 +125,7 @@ public class PartyService {
                             .moveOrder(userPartyDto.getMoveOrder())
                             .finalHp(userPartyDto.getFinalHp())
                             .isWinner(isUserWin(userPartyDto, partyDto))
-                            .createdAt(now)
+                            .createdAt(date)
                             .build()
             );
         }
