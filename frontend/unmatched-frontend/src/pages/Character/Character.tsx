@@ -30,7 +30,12 @@ export function Character() {
                     <h2>{character.name}</h2>
                     <p>HP: {character.hp}</p>
                     <p>Move: {character.move}</p>
-                    <p>Attack Type: {attackTypeLabel(character.attackType)}</p>
+                    <img
+                        src={`/attack_type/${attackTypeLabel(character.attackType)}.png`}
+                        alt={attackTypeLabel(character.attackType)}
+                        width={108}
+                        height={27}
+                    />
 
                     {character.sidekick && (
                         <div
@@ -46,9 +51,12 @@ export function Character() {
                             {character.sidekick?.count > 1 && (<p>Count: {character.sidekick.count}</p>)}
                             <p>HP: {character.sidekick.hp}</p>
                             <p>Move: {character.sidekick.move}</p>
-                            <p>
-                                Attack Type: {attackTypeLabel(character.sidekick.attackType)}
-                            </p>
+                            <img
+                                src={`/attack_type/${attackTypeLabel(character.sidekick.attackType)}.png`}
+                                alt={attackTypeLabel(character.sidekick.attackType)}
+                                width={108}
+                                height={27}
+                            />
                         </div>
                     )}
                 </div>

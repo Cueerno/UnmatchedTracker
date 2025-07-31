@@ -77,7 +77,7 @@ export function Characters() {
             )}
 
             {characters.length > 0 && (
-                <ul style={{listStyleType: 'none', paddingLeft: 0}}>
+                <ul style={{listStyle: 'none', padding: 0}}>
                     {characters.map((ch, idx) => (
                         <li
                             key={`${ch.name}-${idx}`}
@@ -93,11 +93,21 @@ export function Characters() {
                                 to={`/characters/${encodeURIComponent(ch.name)}`}
                                 style={{textDecoration: 'none', color: '#333'}}
                             >
-                                <div>
-                                    {ch.name} | HP: {ch.hp} | Move: {ch.move} | Attack: {attackTypeLabel(ch.attackType)}
+                                <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                    <span>
+                                        {ch.name} | HP: {ch.hp} | Move: {ch.move}
+                                    </span>
+                                    <img
+                                        src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}
+                                        alt={attackTypeLabel(ch.attackType)}
+                                        width={108}
+                                        height={27}
+                                    />
                                 </div>
                                 {ch.sidekick && (
-                                    <div>Sidekick: {ch.sidekick.name}</div>
+                                    <div style={{marginTop: '4px'}}>
+                                        Sidekick: {ch.sidekick.name}
+                                    </div>
                                 )}
                             </Link>
                         </li>
