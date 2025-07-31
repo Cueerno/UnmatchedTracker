@@ -1,7 +1,8 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import { getUserParties, Party } from '../../api/party'
+import {getUserParties} from '../../api/party'
+import {Party} from "../../types/party";
 
 export function Parties() {
     const [username, setUsername] = useState<string>('');

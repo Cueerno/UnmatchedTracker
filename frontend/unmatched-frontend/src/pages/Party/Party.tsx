@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
-import {getPartyByMatchId, PartyPayload} from '../../api/party';
+import {getPartyByMatchId} from '../../api/party';
 import './Party.css';
+import {PartyPayload} from "../../types/party";
 
 export const Party: React.FC = () => {
     const {matchId} = useParams<{ matchId: string }>();

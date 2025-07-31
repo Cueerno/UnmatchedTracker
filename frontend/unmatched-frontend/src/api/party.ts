@@ -1,32 +1,4 @@
-export interface UserPartyDto {
-    username: string;
-    character: string;
-    moveOrder: number;
-    finalHp: number;
-}
-
-export interface TeamDto {
-    name: string;
-}
-
-export interface PartyPayload {
-    format: string;
-    date: string;
-    boardName: string;
-    users: UserPartyDto[];
-    teams: TeamDto[];
-    winner: string;
-}
-
-export interface Party {
-    matchId: number;
-    format: string;
-    date: string;
-    boardName: string;
-    users: UserPartyDto[];
-    teams: TeamDto[];
-    winner: string;
-}
+import {PartyPayload} from "../types/party";
 
 export async function getPartyByMatchId(matchId: number) {
     const res = await fetch(`http://localhost:8080/api/v1/parties/${matchId}`, {
