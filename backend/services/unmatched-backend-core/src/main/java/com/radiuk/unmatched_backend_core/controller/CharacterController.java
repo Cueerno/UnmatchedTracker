@@ -16,8 +16,11 @@ public class CharacterController {
     private final CharacterService characterService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(characterService.getAll());
+    public ResponseEntity<?> getAll(
+            @RequestParam(defaultValue = "name", required = false) String sortBy,
+            @RequestParam(defaultValue = "asc", required = false) String direction
+    ) {
+        return ResponseEntity.ok(characterService.getAll(sortBy, direction));
     }
 
     @GetMapping("/top")

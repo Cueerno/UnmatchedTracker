@@ -6,6 +6,7 @@ import com.radiuk.unmatched_backend_core.mapper.CharacterMapper;
 import com.radiuk.unmatched_backend_core.repository.CharacterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,15 @@ public class CharacterService {
     private final CharacterMapper characterMapper;
 
     @Transactional(readOnly = true)
-    public List<CharacterDto> getAll() {
-        return characterMapper.toDtos(characterRepository.findAll());
+    public List<CharacterDto> getAll(String sortBy, String direction) {
+        String sortField = (sortBy == null || sortBy.isBlank()) ? "name" : sortBy;
+        String dirParam = (direction == null || direction.isBlank()) ? "asc" : direction;
+
+        Sort.Direction dir = Sort.Direction.fromString(dirParam.toLowerCase());
+
+        Sort sort = Sort.by(dir, sortField);
+
+        return characterMapper.toDtos(characterRepository.findAll(sort));
     }
 
     @Transactional(readOnly = true)
