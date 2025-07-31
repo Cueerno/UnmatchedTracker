@@ -20,6 +20,17 @@ public class Character {
 
     private String name;
 
+    private Short hp;
+
+    private Short move;
+
+    @Column(name = "attack_type")
+    @Enumerated(EnumType.STRING)
+    private AttackType attackType;
+
+    @OneToOne(mappedBy = "character")
+    private Sidekick sidekick;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Set set;
 
