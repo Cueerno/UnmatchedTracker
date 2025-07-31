@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Short> {
 
+
+    @EntityGraph(attributePaths = "sidekick")
     Optional<Character> findByName(String name);
 
     @Query(nativeQuery = true, value = """
