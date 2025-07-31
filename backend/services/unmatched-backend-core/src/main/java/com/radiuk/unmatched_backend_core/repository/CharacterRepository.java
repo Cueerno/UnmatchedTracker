@@ -30,13 +30,16 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
 
     List<Character> findBySetName(String setName);
 
-    @Query("""
-    select new com.radiuk.unmatched_backend_core.dto.CharacterRatingDto(count(p), c.name)
-    from Party p
-    join p.character c
-    where p.isWinner = true
+    @Query(nativeQuery = true, value = """
+    select
+        row_number() over (order by count(*) desc) rank,
+        c.name,
+        count(*) win_count
+    from parties p
+    join characters c on p.character_id = c.id
+    where p.is_winner = true
     group by c.name
-    order by count(p) desc
+    order by win_count desc
     """)
-    List<CharacterRatingDto> getRating();
+    List<CharacterRatingDto> getTopByWins();
 }

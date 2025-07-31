@@ -24,8 +24,8 @@ public class CharacterService {
     }
 
     @Transactional(readOnly = true)
-    public List<CharacterRatingDto> getRating() {
-        return characterRepository.getRating();
+    public List<CharacterRatingDto> getTopByWins() {
+        return characterRepository.getTopByWins();
     }
 
     @Transactional(readOnly = true)

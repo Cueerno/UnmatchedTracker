@@ -12,4 +12,6 @@ public class CharacterRatingDto {
     private Long rating;
 
     private String name;
+
+    private Long win_count;
 }

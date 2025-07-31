@@ -21,8 +21,8 @@ public class CharacterController {
     }
 
     @GetMapping("/top")
-    public ResponseEntity<?> getFavoriteCharacters() {
-        return ResponseEntity.ok(characterService.getRating());
+    public ResponseEntity<?> getTopByWins() {
+        return ResponseEntity.ok(characterService.getTopByWins());
     }
 
     @GetMapping("/{name}")
