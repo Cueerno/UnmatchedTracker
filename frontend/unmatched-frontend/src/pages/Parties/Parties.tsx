@@ -14,7 +14,7 @@ export function Parties() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!username.trim()) {
-            setError('Введите имя пользователя');
+            setError('Enter username');
             return;
         }
 
@@ -25,7 +25,7 @@ export function Parties() {
             const data = await getUserParties(username.trim());
             setParties(data);
         } catch (err: any) {
-            setError(err.message || 'Не удалось загрузить данные');
+            setError(err.message || 'Failed to load data');
             setParties([]);
         } finally {
             setLoading(false);
@@ -50,13 +50,13 @@ export function Parties() {
                 + Add Party
             </button>
 
-            <h1>Список партий пользователя</h1>
+            <h1>Party list</h1>
 
             <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
                 <input
                     type="text"
                     value={username}
-                    placeholder="Имя пользователя"
+                    placeholder="Username"
                     onChange={e => setUsername(e.target.value)}
                     style={{ padding: '8px', fontSize: '16px', width: '250px' }}
                 />
@@ -70,7 +70,7 @@ export function Parties() {
                     }}
                     disabled={loading}
                 >
-                    {loading ? 'Загрузка...' : 'Показать'}
+                    {loading ? 'Loading...' : 'Show'}
                 </button>
             </form>
 
@@ -140,7 +140,7 @@ export function Parties() {
             )}
 
             {!loading && parties.length === 0 && !error && (
-                <p>Список партий будет здесь после ввода имени пользователя.</p>
+                <p>List of games will be here after entering the username.</p>
             )}
         </div>
     );

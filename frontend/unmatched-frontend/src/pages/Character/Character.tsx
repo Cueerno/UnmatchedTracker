@@ -54,8 +54,10 @@ export function Character() {
                                 background: '#f9f9f9',
                             }}
                         >
-                            <h3>{character.sidekick.name}</h3>
-                            {character.sidekick?.count > 1 && (<p>Count: {character.sidekick.count}</p>)}
+                            <h3>
+                                {character.sidekick.name}
+                                {character.sidekick?.count > 1 && (<span> x{character.sidekick.count}</span>)}
+                            </h3>
                             <p>HP: {character.sidekick.hp}</p>
                             <p>Move: {character.sidekick.move}</p>
                             <img

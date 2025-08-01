@@ -80,8 +80,8 @@ export const CreateParty: React.FC = () => {
             }
             else {
                 const [p0, p1, p2, p3] = nextPlayers;
-                nextTeams[0].team = p0.name && p1.name ? `${p0.name} & ${p1.name}` : '';
-                nextTeams[1].team = p2.name && p3.name ? `${p2.name} & ${p3.name}` : '';
+                nextTeams[0].team = p0.name && p1.name ? `${p0.name} & ${p2.name}` : '';
+                nextTeams[1].team = p2.name && p3.name ? `${p1.name} & ${p3.name}` : '';
             }
         }
         setPlayers(nextPlayers);
