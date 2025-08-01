@@ -38,6 +38,6 @@ public class CharacterService {
 
     @Transactional(readOnly = true)
     public CharacterDto getByName(String name) {
-        return characterMapper.toDto(characterRepository.findByName(name).orElseThrow(EntityNotFoundException::new));
+        return characterMapper.toDto(characterRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("Character with name " + name + " not found!")));
     }
 }

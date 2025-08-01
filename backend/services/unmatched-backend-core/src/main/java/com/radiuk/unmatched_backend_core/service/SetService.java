@@ -27,7 +27,7 @@ public class SetService {
 
     @Transactional(readOnly = true)
     public SetDto getByName(String setName) {
-        Set set = setRepository.findByName(setName).orElseThrow(EntityNotFoundException::new);
+        Set set = setRepository.findByName(setName).orElseThrow(() -> new EntityNotFoundException("Set with name " + setName + " not found!"));
         List<Character> characters = characterRepository.findBySetName(setName);
         List<Board> boards = boardRepository.findBySetName(setName);
 

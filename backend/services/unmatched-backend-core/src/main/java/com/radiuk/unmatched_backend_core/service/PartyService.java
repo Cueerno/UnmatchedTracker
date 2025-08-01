@@ -7,7 +7,6 @@ import com.radiuk.unmatched_backend_core.model.*;
 import com.radiuk.unmatched_backend_core.model.Character;
 import com.radiuk.unmatched_backend_core.model.id.TeamMemberId;
 import com.radiuk.unmatched_backend_core.repository.*;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class PartyService {
 
     @Transactional(readOnly = true)
     public PartyDto getPartyByMatchId(Long matchId) {
-        Match match = matchRepository.findById(matchId).orElseThrow(EntityExistsException::new); // todo exception
+        Match match = matchRepository.findById(matchId).orElseThrow(() -> new EntityNotFoundException("Party with id " + matchId + " not found!"));
 
         List<Party> parties = partyRepository.findByMatchId(matchId);
 
@@ -76,7 +75,7 @@ public class PartyService {
 
     @Transactional(readOnly = true)
     public List<PartyDto> getAllPartiesByUsername(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with name " + username + " not found!"));
         List<Long> numberOfParties = partyRepository.getPartiesByUserId(user.getId());
 
         List<PartyDto> parties = new ArrayList<>();
@@ -90,7 +89,7 @@ public class PartyService {
 
     @Transactional
     public PartyDto createParty(PartyDto partyDto) {
-        Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(EntityNotFoundException::new);
+        Board board = boardRepository.findByName(partyDto.getBoardName()).orElseThrow(() -> new EntityNotFoundException("Board with name " + partyDto.getBoardName() + " not found!"));
         OffsetDateTime date;
 
         if (partyDto.getDate() == null) {
@@ -119,8 +118,8 @@ public class PartyService {
         }
 
         for (UserPartyDto userPartyDto : partyDto.getUsers()) {
-            User user = userRepository.findByUsername(userPartyDto.getUsername()).orElseThrow(EntityNotFoundException::new);
-            Character character = characterRepository.findByName(userPartyDto.getCharacter()).orElseThrow(EntityNotFoundException::new);
+            User user = userRepository.findByUsername(userPartyDto.getUsername()).orElseThrow(() -> new EntityNotFoundException("User with name " + userPartyDto.getUsername() + " not found!"));
+            Character character = characterRepository.findByName(userPartyDto.getCharacter()).orElseThrow(() -> new EntityNotFoundException("Character with name " + userPartyDto.getCharacter() + " not found!"));
             Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
 
             TeamMember teamMember = new TeamMember();
