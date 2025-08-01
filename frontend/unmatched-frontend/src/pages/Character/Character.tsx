@@ -27,7 +27,14 @@ export function Character() {
             {error && <p style={{color: 'red'}}>{error}</p>}
             {character && (
                 <div style={{marginTop: '16px'}}>
-                    <h2>{character.name}</h2>
+                    <h2>
+                        {character.name}
+                        {character.count > 1 && (
+                            <span style={{ marginLeft: '8px', fontWeight: 'normal' }}>
+                                x{character.count}
+                            </span>
+                        )}
+                    </h2>
                     <p>HP: {character.hp}</p>
                     <p>Move: {character.move}</p>
                     <img

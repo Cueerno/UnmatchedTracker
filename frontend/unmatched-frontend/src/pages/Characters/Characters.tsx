@@ -43,7 +43,7 @@ export function Characters() {
 
             <div style={{marginBottom: '16px'}}>
                 Sort by:
-                {['name', 'hp', 'move', 'attackType'].map(field => (
+                {['name', 'count', 'hp', 'move', 'attackType'].map(field => (
                     <button
                         key={field}
                         onClick={() => loadData(field)}
@@ -95,7 +95,9 @@ export function Characters() {
                             >
                                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                                     <span>
-                                        {ch.name} | HP: {ch.hp} | Move: {ch.move}
+                                        {ch.name}
+                                        {ch.count > 1 && <span style={{marginLeft: '4px'}}>x{ch.count}</span>} |
+                                        HP: {ch.hp} | Move: {ch.move}
                                     </span>
                                     <img
                                         src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}

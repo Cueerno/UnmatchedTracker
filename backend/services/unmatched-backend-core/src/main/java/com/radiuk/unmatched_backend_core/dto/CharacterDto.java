@@ -12,6 +12,8 @@ public class CharacterDto {
 
     private String name;
 
+    private Short count;
+
     private Short hp;
 
     private Short move;

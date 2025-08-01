@@ -20,6 +20,8 @@ public class Character {
 
     private String name;
 
+    private Short count;
+
     private Short hp;
 
     private Short move;

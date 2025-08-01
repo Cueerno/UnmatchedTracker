@@ -8,6 +8,7 @@ export interface Sidekick {
 
 export interface CharacterDto {
     name: string;
+    count: number;
     hp: number;
     move: number;
     attackType: AttackType
