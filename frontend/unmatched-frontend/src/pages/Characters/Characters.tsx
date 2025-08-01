@@ -41,20 +41,6 @@ export function Characters() {
         <div style={{padding: '20px'}}>
             <h1>List of playable characters</h1>
 
-            <div style={{marginBottom: '16px'}}>
-                Sort by:
-                {['name', 'count', 'hp', 'move', 'attackType'].map(field => (
-                    <button
-                        key={field}
-                        onClick={() => loadData(field)}
-                        style={{margin: '0 8px', cursor: 'pointer'}}
-                    >
-                        {field.charAt(0).toUpperCase() + field.slice(1)}
-                        {sortBy === field && (direction === 'asc' ? ' ▲' : ' ▼')}
-                    </button>
-                ))}
-            </div>
-
             <button
                 style={{
                     marginBottom: '20px',
@@ -77,44 +63,71 @@ export function Characters() {
             )}
 
             {characters.length > 0 && (
-                <ul style={{listStyle: 'none', padding: 0}}>
-                    {characters.map((ch, idx) => (
-                        <li
-                            key={`${ch.name}-${idx}`}
-                            style={{
-                                padding: '8px',
-                                marginBottom: '6px',
-                                backgroundColor: '#f8f8f8',
-                                border: '1px solid #ccc',
-                                borderRadius: '4px',
-                            }}
+                <table style={{width: '100%', borderCollapse: 'collapse', marginTop: '16px'}}>
+                    <thead>
+                    <tr style={{background: '#f0f0f0'}}>
+                        <th
+                            onClick={() => loadData('name')}
+                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
                         >
-                            <Link
-                                to={`/characters/${encodeURIComponent(ch.name)}`}
-                                style={{textDecoration: 'none', color: '#333'}}
-                            >
-                                <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-                                    <span>
-                                        {ch.name}
-                                        {ch.count > 1 && <span style={{marginLeft: '4px'}}>x{ch.count}</span>} |
-                                        HP: {ch.hp} | Move: {ch.move}
-                                    </span>
-                                    <img
-                                        src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}
-                                        alt={attackTypeLabel(ch.attackType)}
-                                        width={108}
-                                        height={27}
-                                    />
-                                </div>
-                                {ch.sidekick && (
-                                    <div style={{marginTop: '4px'}}>
-                                        Sidekick: {ch.sidekick.name}
-                                    </div>
-                                )}
-                            </Link>
-                        </li>
+                            Name{sortBy === 'name' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                        </th>
+                        <th
+                            onClick={() => loadData('count')}
+                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
+                        >
+                            Count{sortBy === 'count' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                        </th>
+                        <th
+                            onClick={() => loadData('hp')}
+                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
+                        >
+                            HP{sortBy === 'hp' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                        </th>
+                        <th
+                            onClick={() => loadData('move')}
+                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
+                        >
+                            Move{sortBy === 'move' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                        </th>
+                        <th
+                            onClick={() => loadData('attackType')}
+                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
+                        >
+                            Attack{sortBy === 'attackType' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                        </th>
+                        <th style={{padding: '8px', textAlign: 'left'}}>Sidekick</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {characters.map((ch, idx) => (
+                        <tr key={`${ch.name}-${idx}`}>
+                            <td style={{padding: '8px'}}>
+                                <Link
+                                    to={`/characters/${encodeURIComponent(ch.name)}`}
+                                    style={{textDecoration: 'none', color: '#333'}}
+                                >
+                                    {ch.name}
+                                </Link>
+                            </td>
+                            <td style={{padding: '8px'}}>
+                                {ch.count > 1 && <span>x{ch.count}</span>}
+                            </td>
+                            <td style={{padding: '8px'}}>{ch.hp}</td>
+                            <td style={{padding: '8px'}}>{ch.move}</td>
+                            <td style={{padding: '8px'}}>
+                                <img
+                                    src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}
+                                    alt={attackTypeLabel(ch.attackType)}
+                                    width={108}
+                                    height={27}
+                                />
+                            </td>
+                            <td style={{padding: '8px'}}>{ch.sidekick?.name ?? ''}</td>
+                        </tr>
                     ))}
-                </ul>
+                    </tbody>
+                </table>
             )}
         </div>
     );
