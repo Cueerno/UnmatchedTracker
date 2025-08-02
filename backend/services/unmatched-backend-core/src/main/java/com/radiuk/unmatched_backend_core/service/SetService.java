@@ -9,6 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static com.radiuk.unmatched_backend_core.util.SortUtil.getSort;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +20,11 @@ public class SetService {
 
     private final SetRepository setRepository;
     private final SetMapper setMapper;
+
+    @Transactional(readOnly = true)
+    public List<SetDto> getAll(String sortBy, String direction) {
+        return setMapper.toDtos(setRepository.findAll(getSort(sortBy, direction)));
+    }
 
     @Transactional(readOnly = true)
     public SetDto getByName(String setName) {
