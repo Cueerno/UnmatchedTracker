@@ -1,4 +1,4 @@
-export interface Sidekick {
+export interface SidekickDto {
     "name": string,
     count: number,
     hp: number,
@@ -12,7 +12,7 @@ export interface CharacterDto {
     hp: number;
     move: number;
     attackType: AttackType
-    sidekick: Sidekick | null;
+    sidekick: SidekickDto | null;
 }
 
 export enum AttackType {
