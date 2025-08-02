@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 @Getter
 @Setter
@@ -14,6 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@NamedEntityGraph(
+        name = "Set.withAll",
+        attributeNodes = {
+                @NamedAttributeNode("boards"),
+                @NamedAttributeNode(value = "characters", subgraph = "character-sidekick")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "character-sidekick",
+                        attributeNodes = @NamedAttributeNode("sidekick")
+                )
+        }
+)
 public class Set {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +39,9 @@ public class Set {
     private OffsetDateTime releaseDate;
 
     @OneToMany(mappedBy = "set")
-    private List<Board> boards = new ArrayList<>();
+    private java.util.Set<Board> boards = new HashSet<>();
 
     @OneToMany(mappedBy = "set")
-    private List<Character> characters = new ArrayList<>();
+    private java.util.Set<Character> characters = new HashSet<>();
 
 }
