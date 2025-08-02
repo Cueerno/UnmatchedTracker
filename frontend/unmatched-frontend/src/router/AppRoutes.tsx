@@ -8,6 +8,7 @@ import {Characters} from "../pages/Characters/Characters";
 import {Character} from "../pages/Character/Character";
 import {CharactersTop} from "../pages/CharactersTop/CharactersTop";
 import {Sets} from "../pages/Sets/Sets";
+import {Boards} from "../pages/Boards/Boards";
 
 export default function AppRoutes() {
     return (
@@ -25,6 +26,8 @@ export default function AppRoutes() {
                 <Route path="/characters" element={<Characters/>}/>
                 <Route path="/characters/:name" element={<Character/>}/>
                 <Route path="/characters/top" element={<CharactersTop/>}/>
+
+                <Route path="/boards" element={<Boards/>}/>
             </Route>
         </Routes>
     );
