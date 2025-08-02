@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {getAll} from '../../api/character';
 import {Link, useNavigate} from 'react-router-dom';
 import {AttackType, CharacterDto} from '../../types/character';
@@ -7,48 +7,63 @@ export function Characters() {
     const [characters, setCharacters] = useState<CharacterDto[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [sortBy, setSortBy] = useState<string>('name');
-    const [direction, setDirection] = useState<'asc' | 'desc'>('asc');
+
+    const [sortBy, setSortBy] = useState<string>('');
+    const [direction, setDirection] = useState<'asc' | 'desc' | ''>('');
+
+    const didFetchOnce = useRef(false);
     const navigate = useNavigate();
 
-    const loadData = (field: string, dirOverride?: 'asc' | 'desc') => {
-        const newDir =
-            dirOverride ??
-            (field === sortBy
-                ? direction === 'asc'
-                    ? 'desc'
-                    : 'asc'
-                : 'asc');
+    const loadData = (field?: string, dirOverride?: 'asc' | 'desc') => {
+        let paramsField = '';
+        let paramsDir = '';
 
-        setSortBy(field);
-        setDirection(newDir);
+        if (field) {
+            const newDir = dirOverride
+                ?? (field === sortBy
+                    ? (direction === 'asc' ? 'desc' : 'asc')
+                    : 'asc');
+
+            setSortBy(field);
+            setDirection(newDir);
+
+            paramsField = field;
+            paramsDir = newDir;
+        } else {
+            setSortBy('');
+            setDirection('');
+        }
+
         setLoading(true);
         setError(null);
 
-        getAll(field, newDir)
-            .then(data => setCharacters(data))
+        getAll(paramsField || undefined, paramsDir || undefined)
+            .then(setCharacters)
             .catch(err => setError(err.message || 'Loading error'))
             .finally(() => setLoading(false));
     };
 
     useEffect(() => {
-        loadData('name', 'asc');
+        if (!didFetchOnce.current) {
+            didFetchOnce.current = true;
+            loadData();
+        }
     }, []);
 
-    const attackTypeLabel = (type: AttackType) => type.toLowerCase();
+    const attackTypeLabel = (t: AttackType) => t.toLowerCase();
+    const renderArrow = (field: string) => sortBy === field
+        ? (direction === 'asc' ? ' ▲' : ' ▼')
+        : null;
 
     return (
-        <div style={{padding: '20px'}}>
+        <div style={{padding: 20}}>
             <h1>List of playable characters</h1>
 
             <button
                 style={{
-                    marginBottom: '20px',
-                    padding: '10px 16px',
-                    backgroundColor: '#007bff',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
+                    marginBottom: 20, padding: '10px 16px',
+                    backgroundColor: '#007bff', color: '#fff',
+                    border: 'none', borderRadius: 4,
                     cursor: 'pointer',
                 }}
                 onClick={() => navigate('/characters/top')}
@@ -63,46 +78,26 @@ export function Characters() {
             )}
 
             {characters.length > 0 && (
-                <table style={{width: '100%', borderCollapse: 'collapse', marginTop: '16px'}}>
+                <table style={{width: '100%', borderCollapse: 'collapse', marginTop: 16}}>
                     <thead>
                     <tr style={{background: '#f0f0f0'}}>
-                        <th
-                            onClick={() => loadData('name')}
-                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
-                        >
-                            Name{sortBy === 'name' && (direction === 'asc' ? ' ▲' : ' ▼')}
-                        </th>
-                        <th
-                            onClick={() => loadData('count')}
-                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
-                        >
-                            Count{sortBy === 'count' && (direction === 'asc' ? ' ▲' : ' ▼')}
-                        </th>
-                        <th
-                            onClick={() => loadData('hp')}
-                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
-                        >
-                            HP{sortBy === 'hp' && (direction === 'asc' ? ' ▲' : ' ▼')}
-                        </th>
-                        <th
-                            onClick={() => loadData('move')}
-                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
-                        >
-                            Move{sortBy === 'move' && (direction === 'asc' ? ' ▲' : ' ▼')}
-                        </th>
-                        <th
-                            onClick={() => loadData('attackType')}
-                            style={{padding: '8px', textAlign: 'left', cursor: 'pointer'}}
-                        >
-                            Attack{sortBy === 'attackType' && (direction === 'asc' ? ' ▲' : ' ▼')}
-                        </th>
-                        <th style={{padding: '8px', textAlign: 'left'}}>Sidekick</th>
+                        {['name', 'count', 'hp', 'move', 'attackType'].map(col => (
+                            <th
+                                key={col}
+                                onClick={() => loadData(col)}
+                                style={{padding: 8, textAlign: 'left', cursor: 'pointer'}}
+                            >
+                                {col === 'attackType' ? 'Attack' : col.charAt(0).toUpperCase() + col.slice(1)}
+                                {renderArrow(col)}
+                            </th>
+                        ))}
+                        <th style={{padding: 8, textAlign: 'left'}}>Sidekick</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {characters.map((ch, idx) => (
-                        <tr key={`${ch.name}-${idx}`}>
-                            <td style={{padding: '8px'}}>
+                    {characters.map((ch, i) => (
+                        <tr key={`${ch.name}-${i}`}>
+                            <td style={{padding: 8}}>
                                 <Link
                                     to={`/characters/${encodeURIComponent(ch.name)}`}
                                     style={{textDecoration: 'none', color: '#333'}}
@@ -110,12 +105,12 @@ export function Characters() {
                                     {ch.name}
                                 </Link>
                             </td>
-                            <td style={{padding: '8px'}}>
+                            <td style={{padding: 8}}>
                                 {ch.count > 1 && <span>x{ch.count}</span>}
                             </td>
-                            <td style={{padding: '8px'}}>{ch.hp}</td>
-                            <td style={{padding: '8px'}}>{ch.move}</td>
-                            <td style={{padding: '8px'}}>
+                            <td style={{padding: 8}}>{ch.hp}</td>
+                            <td style={{padding: 8}}>{ch.move}</td>
+                            <td style={{padding: 8}}>
                                 <img
                                     src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}
                                     alt={attackTypeLabel(ch.attackType)}
@@ -123,7 +118,9 @@ export function Characters() {
                                     height={27}
                                 />
                             </td>
-                            <td style={{padding: '8px'}}>{ch.sidekick?.name ?? ''}</td>
+                            <td style={{padding: 8}}>
+                                {ch.sidekick?.name || ''}
+                            </td>
                         </tr>
                     ))}
                     </tbody>

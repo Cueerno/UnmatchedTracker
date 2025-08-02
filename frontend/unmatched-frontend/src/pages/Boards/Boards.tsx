@@ -1,43 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { getAll } from '../../api/board';
-import { BoardDto } from '../../types/board';
+import React, {useEffect, useRef, useState} from 'react';
+import {getAll} from '../../api/board';
+import {BoardDto} from '../../types/board';
 
 export function Boards() {
     const [boards, setBoards] = useState<BoardDto[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const [sortBy, setSortBy]     = useState<string>('name');
-    const [direction, setDirection] = useState<'asc' | 'desc'>('asc');
+    const [sortBy, setSortBy] = useState<string>('');
+    const [direction, setDirection] = useState<'asc' | 'desc' | ''>('');
 
-    const loadData = (field: string, dirOverride?: 'asc' | 'desc') => {
-        const newDir =
-            dirOverride ??
-            (field === sortBy
-                ? direction === 'asc' ? 'desc' : 'asc'
-                : 'asc');
+    const didFetchOnce = useRef(false);
 
-        setSortBy(field);
-        setDirection(newDir);
+    const loadData = (field?: string, dirOverride?: 'asc' | 'desc'
+    ) => {
+        let paramsField = '';
+        let paramsDir = '';
+
+        if (field) {
+            const newDir =
+                dirOverride ??
+                (field === sortBy
+                    ? (direction === 'asc' ? 'desc' : 'asc')
+                    : 'asc');
+
+            setSortBy(field);
+            setDirection(newDir);
+
+            paramsField = field;
+            paramsDir = newDir;
+        } else {
+            setSortBy('');
+            setDirection('');
+        }
+
         setLoading(true);
         setError(null);
 
-        getAll(field, newDir)
+        getAll(paramsField || undefined, paramsDir || undefined)
             .then(data => setBoards(data))
             .catch(err => setError(err.message || 'Loading error'))
             .finally(() => setLoading(false));
     };
 
     useEffect(() => {
-        loadData('name', 'asc');
+        if (!didFetchOnce.current) {
+            didFetchOnce.current = true;
+            loadData();
+        }
     }, []);
 
+    const renderArrow = (field: string) => {
+        if (sortBy !== field) return null;
+        return direction === 'asc' ? ' ▲' : ' ▼';
+    };
+
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>Boards</h1>
+        <div style={{padding: 20}}>
+            <h1>List of Boards</h1>
 
             {loading && <p>Loading...</p>}
-            {error   && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
             {!loading && !error && boards.length === 0 && <p>No boards available.</p>}
 
             {boards.length > 0 && (
@@ -45,76 +68,125 @@ export function Boards() {
                     style={{
                         width: '100%',
                         borderCollapse: 'collapse',
-                        marginTop: '16px',
+                        marginTop: 16,
                     }}
                 >
                     <thead>
-                    <tr style={{ background: '#f0f0f0' }}>
-                        <th style={{ padding: '8px', textAlign: 'left' }}>Image</th>
+                    <tr style={{background: '#f0f0f0'}}>
+                        <th style={{padding: 8, textAlign: 'left'}}>Image</th>
+
                         <th
                             onClick={() => loadData('name')}
-                            style={{ padding: '8px', textAlign: 'left', cursor: 'pointer' }}
+                            style={{
+                                padding: 8,
+                                textAlign: 'left',
+                                cursor: 'pointer',
+                            }}
                         >
-                            Name{sortBy === 'name' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                            Name{renderArrow('name')}
                         </th>
 
                         <th
                             onClick={() => loadData('maxPlayers')}
-                            style={{ padding: '8px', textAlign: 'left', cursor: 'pointer' }}
+                            style={{
+                                padding: 8,
+                                textAlign: 'left',
+                                cursor: 'pointer',
+                            }}
                         >
-                            Max. players{sortBy === 'maxPlayers' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                            Max. players{renderArrow('maxPlayers')}
                         </th>
 
                         <th
                             onClick={() => loadData('spaces')}
-                            style={{ padding: '8px', textAlign: 'left', cursor: 'pointer' }}
+                            style={{
+                                padding: 8,
+                                textAlign: 'left',
+                                cursor: 'pointer',
+                            }}
                         >
-                            Spaces{sortBy === 'spaces' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                            Spaces{renderArrow('spaces')}
                         </th>
 
                         <th
                             onClick={() => loadData('zones')}
-                            style={{ padding: '8px', textAlign: 'left', cursor: 'pointer' }}
+                            style={{
+                                padding: 8,
+                                textAlign: 'left',
+                                cursor: 'pointer',
+                            }}
                         >
-                            Zones{sortBy === 'zones' && (direction === 'asc' ? ' ▲' : ' ▼')}
+                            Zones{renderArrow('zones')}
                         </th>
 
-                        <th style={{ padding: '8px', textAlign: 'left' }}>Feature</th>
+                        <th style={{padding: 8, textAlign: 'left'}}>Feature</th>
                     </tr>
                     </thead>
 
                     <tbody>
                     {boards.map((b, idx) => (
                         <tr key={`${b.name}-${idx}`}>
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.imageUrl && (
                                     <img
                                         src={b.imageUrl}
                                         alt={b.name}
                                         style={{
-                                            width: '260px',
-                                            height: '162.5px' }}
+                                            width: 260,
+                                            height: 162.5,
+                                            objectFit: 'cover',
+                                        }}
                                     />
                                 )}
                             </td>
 
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.name}
                             </td>
 
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.maxPlayers}
                             </td>
 
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.spaces}
                             </td>
 
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.zones}
                             </td>
 
-                            <td style={{ padding: '8px', borderBottom: '1px solid #ccc' }}>
+                            <td
+                                style={{
+                                    padding: 8,
+                                    borderBottom: '1px solid #ccc',
+                                }}
+                            >
                                 {b.feature}
                             </td>
                         </tr>
