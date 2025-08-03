@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {FaHome, FaBoxOpen, FaHatWizard, FaUsers, FaChessBoard} from 'react-icons/fa';
+import {FaHome, FaBoxOpen, FaHatWizard, FaUsers, FaChessBoard, FaUser, FaPlus} from 'react-icons/fa';
 import './Header.css';
 
 export default function Header() {
@@ -11,6 +11,14 @@ export default function Header() {
                     <span className="nav-link-inner">
                         <FaHome/>
                         <span>Home</span>
+                    </span>
+                </Link>
+
+                <Link to="/user/create" className="nav-link">
+                    <span className="nav-link-inner">
+                        <FaPlus/>
+                        <FaUser/>
+                        <span>User</span>
                     </span>
                 </Link>
 

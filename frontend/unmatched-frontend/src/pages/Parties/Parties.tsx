@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import {getUserParties} from '../../api/party'
+import {getUserParties} from '../../api/user'
 import {Party} from "../../types/party";
 
 export function Parties() {

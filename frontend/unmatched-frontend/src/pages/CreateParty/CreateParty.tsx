@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { createParty } from '../../api/party';
 import './CreateParty.css';
 
@@ -181,6 +181,7 @@ export const CreateParty: React.FC = () => {
 
                 <div className="form-section">
                     <h2 className="section-title">Players (add according to the order of moves in the game)</h2>
+                    <p>(Please make sure the player is already registered) if not - <Link to={"/user/create"}>create</Link></p>
                     <div className="players-list">
                         {players.map((p, idx) => (
                             <div key={idx} className="player-item">

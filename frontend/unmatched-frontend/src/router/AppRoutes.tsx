@@ -10,6 +10,7 @@ import {CharactersTop} from "../pages/CharactersTop/CharactersTop";
 import {Sets} from "../pages/Sets/Sets";
 import {Set} from "../pages/Set/Set";
 import {Boards} from "../pages/Boards/Boards";
+import {CreateUser} from "../pages/CreateUser/CreateUser";
 
 export default function AppRoutes() {
     return (
@@ -17,6 +18,8 @@ export default function AppRoutes() {
             <Route path="/" element={<Layout/>}>
 
                 <Route path="/" element={<Home/>}/>
+
+                <Route path="/user/create" element={<CreateUser/>}/>
 
                 <Route path="/parties" element={<Parties/>}/>
                 <Route path="/parties/:matchId" element={<Party/>}/>
