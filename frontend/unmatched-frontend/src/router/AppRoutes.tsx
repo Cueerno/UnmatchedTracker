@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import {Parties} from '../pages/Parties/Parties'
 import {Home} from '../pages/Home/Home';
 import {CreateParty} from "../pages/CreateParty/CreateParty";

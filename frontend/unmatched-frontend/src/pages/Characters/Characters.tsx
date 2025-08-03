@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {DataTable, Column} from '../../components/DataTable/DataTable'
+import {Column, DataTable} from '../../components/DataTable/DataTable'
 import {useServerTable} from '../../hooks/useServerTable/useServerTable'
 import {getAll} from '../../api/character'
-import {CharacterDto, AttackType} from '../../types/character'
+import {AttackType, CharacterDto} from '../../types/character'
 
 function attackTypeLabel(type: AttackType) {
     return type.toLowerCase()

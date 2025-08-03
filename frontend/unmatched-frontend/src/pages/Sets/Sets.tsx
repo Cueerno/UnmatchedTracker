@@ -13,7 +13,16 @@ export function Sets() {
             key: 'name',
             label: 'Name',
             sortable: true,
-            render: set => set.name,
+            render: set => (
+                <React.Fragment key={set.name}>
+                    <Link
+                        to={`/sets/${encodeURIComponent(set.name)}`}
+                        style={{textDecoration: 'none', color: '#333'}}
+                    >
+                        {set.name}
+                    </Link>
+                </React.Fragment>
+            ),
         },
         {
             key: 'characters',
@@ -21,7 +30,10 @@ export function Sets() {
             render: set =>
                 set.characters.map((ch, idx) => (
                     <React.Fragment key={ch.name}>
-                        <Link to={`/characters/${encodeURIComponent(ch.name)}`}>
+                        <Link
+                            to={`/characters/${encodeURIComponent(ch.name)}`}
+                            style={{textDecoration: 'none', color: '#333'}}
+                        >
                             {ch.name}
                         </Link>
                         {idx < set.characters.length - 1 && ', '}
