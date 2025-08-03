@@ -8,6 +8,7 @@ import {Characters} from "../pages/Characters/Characters";
 import {Character} from "../pages/Character/Character";
 import {CharactersTop} from "../pages/CharactersTop/CharactersTop";
 import {Sets} from "../pages/Sets/Sets";
+import {Set} from "../pages/Set/Set";
 import {Boards} from "../pages/Boards/Boards";
 
 export default function AppRoutes() {
@@ -22,6 +23,7 @@ export default function AppRoutes() {
                 <Route path="/parties/new" element={<CreateParty/>}/>
 
                 <Route path="/sets" element={<Sets/>}/>
+                <Route path="/sets/:name" element={<Set/>}/>
 
                 <Route path="/characters" element={<Characters/>}/>
                 <Route path="/characters/:name" element={<Character/>}/>
