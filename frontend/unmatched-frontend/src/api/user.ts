@@ -29,4 +29,6 @@ export async function createUser(user: UserDto) {
         const text = await res.text()
         throw new Error(`Error ${res.status}: ${text}`)
     }
+
+    return res.json()
 }
