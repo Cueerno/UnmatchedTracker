@@ -1,5 +1,6 @@
 import React from 'react';
 import {SortState} from "../../hooks/useServerTable/useServerTable";
+import './DataTable.css'
 
 export interface Column<T> {
     key: string;
@@ -25,40 +26,41 @@ export function DataTable<T>({
         colKey === sortBy ? (direction === 'asc' ? ' ▲' : ' ▼') : '';
 
     return (
-        <table style={{width: '100%', borderCollapse: 'collapse', marginTop: 16}}>
-            <thead>
-            <tr style={{background: '#f0f0f0'}}>
-                {columns.map(col => (
-                    <th
-                        key={col.key}
-                        style={{
-                            padding: 8,
-                            textAlign: 'left',
-                            cursor: col.sortable ? 'pointer' : 'default',
-                        }}
-                        onClick={() => col.sortable && onSort(col.key)}
-                    >
-                        {col.label}
-                        {col.sortable && renderArrow(col.key)}
-                    </th>
-                ))}
-            </tr>
-            </thead>
+        <div className="data-table-container">
+            <div className="scrollable">
+                <div className="mask">
+                    <table>
+                        <thead>
+                        <tr>
+                            {columns.map(col => (
+                                <th
+                                    key={col.key}
+                                    onClick={() => col.sortable && onSort(col.key)}
+                                >
+                                    {col.label}
+                                    {col.sortable && renderArrow(col.key)}
+                                </th>
+                            ))}
+                        </tr>
+                        </thead>
 
-            <tbody>
-            {data.map((item, rowIndex) => (
-                <tr key={rowIndex}>
-                    {columns.map(col => (
-                        <td
-                            key={col.key}
-                            style={{padding: 8, borderBottom: '1px solid #ccc'}}
-                        >
-                            {col.render(item)}
-                        </td>
-                    ))}
-                </tr>
-            ))}
-            </tbody>
-        </table>
+                        <tbody>
+                        {data.map((item, rowIndex) => (
+                            <tr key={rowIndex}>
+                                {columns.map(col => (
+                                    <td
+                                        key={col.key}
+                                        data-label={col.label}
+                                    >
+                                        {col.render(item)}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     );
 }
