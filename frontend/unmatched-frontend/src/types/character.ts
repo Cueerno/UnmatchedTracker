@@ -19,3 +19,9 @@ export enum AttackType {
     MELEE  = 'MELEE',
     RANGED = 'RANGED',
 }
+
+export interface CharacterTopItem {
+    rating: number;
+    name: string;
+    win_count: number;
+}

@@ -1,55 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { getTopByWins } from '../../api/character';
-
-interface CharacterTopItem {
-    rating: number;
-    name: string;
-    win_count: number;
-}
+import {getTopByWins} from '../../api/character';
+import {Column, DataTable} from "../../components/DataTable/DataTable";
+import {CharacterTopItem} from "../../types/character";
+import {useServerTable} from "../../hooks/useServerTable/useServerTable";
+import React from "react";
+import {Link} from "react-router-dom";
 
 export function CharactersTop() {
-    const [list, setList] = useState<CharacterTopItem[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const {
+        data: characters,
+        loading,
+        error,
+        sortState,
+        load,
+    } = useServerTable<CharacterTopItem>(getTopByWins)
 
-    useEffect(() => {
-        setLoading(true);
-        getTopByWins()
-            .then(data => setList(data))
-            .catch(err => setError(err.message || 'Loading error'))
-            .finally(() => setLoading(false));
-    }, []);
+    const columns: Column<CharacterTopItem>[] = [
+        {
+            key: 'rating',
+            label: '#',
+            sortable: false,
+            render: ch => ch.rating
+        },
+        {
+            key: 'character',
+            label: 'Character',
+            sortable: false,
+            render: ch => (
+                <Link
+                    to={`/characters/${encodeURIComponent(ch.name)}`}
+                    style={{textDecoration: 'none', color: '#333'}}
+                >
+                    {ch.name}
+                </Link>)
+        },
+        {
+            key: 'win_count',
+            label: 'Wins',
+            sortable: false,
+            render: ch => ch.win_count
+        },
+    ];
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{padding: '20px'}}>
             <h1>Character Ranking by Wins</h1>
 
             {loading && <p> Loading...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
 
-            {list.length > 0 && (
-                <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '16px' }}>
-                    <thead>
-                    <tr style={{ background: '#f0f0f0' }}>
-                        <th style={{ padding: '8px', textAlign: 'left' }}>#</th>
-                        <th style={{ padding: '8px', textAlign: 'left' }}>Character</th>
-                        <th style={{ padding: '8px', textAlign: 'left' }}>Wins</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {list.map(item => (
-                        <tr key={item.rating}>
-                            <td style={{ padding: '8px' }}>{item.rating}</td>
-                            <td style={{ padding: '8px' }}>{item.name}</td>
-                            <td style={{ padding: '8px' }}>{item.win_count}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+            {!loading && characters.length === 0 && !error && (
+                <p>No data.</p>
             )}
 
-            {!loading && list.length === 0 && !error && (
-                <p>No data.</p>
+            {characters.length > 0 && (
+                <DataTable
+                    columns={columns}
+                    data={characters}
+                    sortState={sortState}
+                    onSort={load}
+                />
             )}
         </div>
     );
