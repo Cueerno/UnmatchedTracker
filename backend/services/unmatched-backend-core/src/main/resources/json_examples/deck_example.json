@@ -1,0 +1,86 @@
+{
+  "name": "deck name",
+  "frontImageUrl": "",
+  "backImageUrl": "",
+  "hero": {
+    "name": "hero name",
+    "attackType": "melee",
+    "hp": 1,
+    "move": 1,
+    "quantity": 1,
+    "specialAbility": "ability"
+  },
+  "sidekick": {
+    "name": "sidekick name",
+    "attackType": "melee",
+    "hp": 1,
+    "move": 1,
+    "quantity": 1,
+    "quote": ""
+  },
+  "cards": [
+    {
+      "title": "card title",
+      "type": "scheme",
+      "characterName": "name",
+      "value": 1,
+      "boost": 1,
+      "basicText": "text",
+      "immediateText": "",
+      "duringText": "",
+      "afterText": "",
+      "imageUrl": "",
+      "quantity": 1
+    },
+    {
+      "title": "card title",
+      "type": "attack",
+      "characterName": "name",
+      "value": 1,
+      "boost": 1,
+      "basicText": "text",
+      "immediateText": "",
+      "duringText": "",
+      "afterText": "",
+      "imageUrl": "",
+      "quantity": 1
+    },
+    {
+      "title": "card title",
+      "type": "defense",
+      "characterName": "name",
+      "value": 1,
+      "boost": 1,
+      "basicText": "text",
+      "immediateText": "",
+      "duringText": "",
+      "afterText": "",
+      "imageUrl": "",
+      "quantity": 1
+    }
+  ],
+  "ruleCards": [
+    {
+      "content": "",
+      "title": ""
+    },
+    {
+      "content": "",
+      "title": ""
+    }
+  ],
+  "extraCharacters": [
+    {
+      "name": "hero name",
+      "attackType": "melee",
+      "hp": 1,
+      "move": 1
+    },
+    {
+      "name": "hero name",
+      "attackType": "melee",
+      "hp": 1,
+      "move": 1
+    }
+  ]
+}
