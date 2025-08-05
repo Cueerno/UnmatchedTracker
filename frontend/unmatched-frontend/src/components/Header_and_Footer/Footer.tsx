@@ -5,6 +5,7 @@ export default function Footer() {
     return (
         <footer className="footer">
             <p>© {new Date().getFullYear()} Unmatched Tracker by Vyacheslav Radiuk</p>
+            <p>This project was made for educational purposes.</p>
             <div className="footer-icons">
                 <a href="mailto:vyacheslavradiuk@gmail.com" title="Email">
                     <FaEnvelope />
