@@ -5,10 +5,12 @@ import {SetDto} from '../../types/set'
 import {AttackType} from '../../types/character'
 
 function formatMonthYear(iso: string) {
-    return new Date(iso).toLocaleDateString('en-EN', {
-        month: 'long',
-        year: 'numeric',
-    })
+    return new Date(iso).getFullYear() > new Date().getFullYear()
+        ? 'Unknown'
+        : new Date(iso).toLocaleDateString('en-EN', {
+            month: 'long',
+            year: 'numeric',
+        })
 }
 
 function attackTypeLabel(type: AttackType) {

@@ -50,8 +50,12 @@ export function Sets() {
             label: 'Release Date',
             sortable: true,
             render: set =>
-                new Date(set.releaseDate)
-                    .toLocaleDateString('en-EN', {month: 'long', year: 'numeric'}),
+                new Date(set.releaseDate).getFullYear() > new Date().getFullYear()
+                    ? 'Unknown'
+                    : new Date(set.releaseDate).toLocaleDateString('en-EN', {
+                        month: 'long',
+                        year: 'numeric',
+                    })
         },
     ];
 

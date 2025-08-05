@@ -35,8 +35,6 @@ public interface CharacterRepository extends JpaRepository<Character, Short> {
     """)
     List<Character> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
 
-    List<Character> findBySetName(String setName);
-
     @Query(nativeQuery = true, value = """
     select
         row_number() over (order by count(*) desc) rank,
