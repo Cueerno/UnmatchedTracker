@@ -1,6 +1,6 @@
 import React from 'react';
-import {SortState} from "../../hooks/useServerTable/useServerTable";
-import './DataTable.css'
+import type {SortState} from '../../hooks/useClientTable/useClientTable';
+import './DataTable.css';
 
 export interface Column<T> {
     key: string;
@@ -35,6 +35,7 @@ export function DataTable<T>({
                             {columns.map(col => (
                                 <th
                                     key={col.key}
+                                    className={col.sortable ? 'sortable' : ''}
                                     onClick={() => col.sortable && onSort(col.key)}
                                 >
                                     {col.label}
@@ -48,10 +49,7 @@ export function DataTable<T>({
                         {data.map((item, rowIndex) => (
                             <tr key={rowIndex}>
                                 {columns.map(col => (
-                                    <td
-                                        key={col.key}
-                                        data-label={col.label}
-                                    >
+                                    <td key={col.key} data-label={col.label}>
                                         {col.render(item)}
                                     </td>
                                 ))}

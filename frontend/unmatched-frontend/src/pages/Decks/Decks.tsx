@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {Column, DataTable} from '../../components/DataTable/DataTable'
-import {useServerTable} from '../../hooks/useServerTable/useServerTable'
+import {useClientTable} from '../../hooks/useClientTable/useClientTable'
 import {AttackType, DeckDto} from '../../types/deck'
 import {getAll} from '../../api/deck'
 
@@ -11,8 +11,13 @@ function attackTypeLabel(type: AttackType) {
 
 export function Decks() {
     const navigate = useNavigate()
-    const {data: decks, loading, error, sortState, load} =
-        useServerTable<DeckDto>(getAll)
+    const {
+        data: decks,
+        loading,
+        error,
+        sortState,
+        onSort,
+    } = useClientTable<DeckDto>(getAll)
 
     const columns: Column<DeckDto>[] = [
         {
@@ -29,32 +34,31 @@ export function Decks() {
             ),
         },
         {
-            key: 'heroName',
+            key: 'hero.name',
             label: 'Hero name',
             sortable: true,
             render: deck => deck.hero.name,
         },
         {
-            key: 'heroQuantity',
+            key: 'hero.quantity',
             label: 'Quantity',
             sortable: true,
-            render: deck =>
-                deck.hero.quantity > 1 ? `x${deck.hero.quantity}` : null,
+            render: deck => (deck.hero.quantity > 1 ? `x${deck.hero.quantity}` : null),
         },
         {
-            key: 'heroHp',
+            key: 'hero.hp',
             label: 'Hp',
             sortable: true,
             render: deck => deck.hero.hp,
         },
         {
-            key: 'heroMove',
+            key: 'hero.move',
             label: 'Move',
             sortable: true,
             render: deck => deck.hero.move,
         },
         {
-            key: 'heroAttackType',
+            key: 'hero.attackType',
             label: 'Attack',
             sortable: true,
             render: deck => (
@@ -67,7 +71,7 @@ export function Decks() {
             ),
         },
         {
-            key: 'sidekickName',
+            key: 'sidekick.name',
             label: 'Sidekick name',
             sortable: true,
             render: deck => deck.sidekick?.name ?? null,
@@ -77,24 +81,24 @@ export function Decks() {
             label: 'Quantity',
             sortable: true,
             render: deck =>
-                deck.sidekick?.quantity > 1
+                deck.sidekick?.quantity && deck.sidekick.quantity > 1
                     ? `x${deck.sidekick.quantity}`
                     : null,
         },
         {
-            key: 'sidekickHp',
+            key: 'sidekick.hp',
             label: 'Hp',
             sortable: true,
             render: deck => deck.sidekick?.hp ?? null,
         },
         {
-            key: 'sidekickMove',
+            key: 'sidekick.move',
             label: 'Move',
             sortable: true,
             render: deck => deck.sidekick?.move ?? null,
         },
         {
-            key: 'sidekickAttackType',
+            key: 'sidekick.attackType',
             label: 'Attack',
             sortable: true,
             render: deck =>
@@ -130,16 +134,14 @@ export function Decks() {
 
             {loading && <p>Loading decks…</p>}
             {error && <p style={{color: 'red'}}>{error}</p>}
-            {!loading && !error && decks.length === 0 && (
-                <p>No decks available.</p>
-            )}
+            {!loading && !error && decks.length === 0 && <p>No decks available.</p>}
 
             {decks.length > 0 && (
                 <DataTable
                     columns={columns}
                     data={decks}
                     sortState={sortState}
-                    onSort={load}
+                    onSort={onSort}
                 />
             )}
         </div>

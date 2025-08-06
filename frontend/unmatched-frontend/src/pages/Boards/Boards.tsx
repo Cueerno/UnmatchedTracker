@@ -1,12 +1,17 @@
-import React from 'react'
-import {DataTable, Column} from '../../components/DataTable/DataTable'
-import {useServerTable} from '../../hooks/useServerTable/useServerTable'
-import {getAll} from '../../api/board'
-import {BoardDto} from '../../types/board'
+import React from 'react';
+import {Column, DataTable} from '../../components/DataTable/DataTable';
+import {useClientTable} from '../../hooks/useClientTable/useClientTable';
+import {getAll} from '../../api/board';
+import {BoardDto} from '../../types/board';
 
 export function Boards() {
-    const {data: boards, loading, error, sortState, load} =
-        useServerTable<BoardDto>(getAll)
+    const {
+        data: boards,
+        loading,
+        error,
+        sortState,
+        onSort,
+    } = useClientTable<BoardDto>(getAll);
 
     const columns: Column<BoardDto>[] = [
         {
@@ -50,7 +55,7 @@ export function Boards() {
             label: 'Feature',
             render: board => board.feature,
         },
-    ]
+    ];
 
     return (
         <div style={{padding: 20}}>
@@ -65,9 +70,9 @@ export function Boards() {
                     columns={columns}
                     data={boards}
                     sortState={sortState}
-                    onSort={load}
+                    onSort={onSort}
                 />
             )}
         </div>
-    )
+    );
 }

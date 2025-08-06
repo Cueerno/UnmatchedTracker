@@ -1,12 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {Column, DataTable} from '../../components/DataTable/DataTable';
+import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {getAll} from '../../api/set';
 import {SetDto} from '../../types/set';
-import {useServerTable} from "../../hooks/useServerTable/useServerTable";
-import {Column, DataTable} from "../../components/DataTable/DataTable";
 
 export function Sets() {
-    const {data: sets, loading, error, sortState, load} = useServerTable<SetDto>(getAll);
+    const {
+        data: sets,
+        loading,
+        error,
+        sortState,
+        onSort,
+    } = useClientTable<SetDto>(getAll);
 
     const columns: Column<SetDto>[] = [
         {
@@ -14,14 +20,12 @@ export function Sets() {
             label: 'Name',
             sortable: true,
             render: set => (
-                <React.Fragment key={set.name}>
-                    <Link
-                        to={`/sets/${encodeURIComponent(set.name)}`}
-                        style={{textDecoration: 'none', color: '#333'}}
-                    >
-                        {set.name}
-                    </Link>
-                </React.Fragment>
+                <Link
+                    to={`/sets/${encodeURIComponent(set.name)}`}
+                    style={{textDecoration: 'none', color: '#333'}}
+                >
+                    {set.name}
+                </Link>
             ),
         },
         {
@@ -49,13 +53,16 @@ export function Sets() {
             key: 'releaseDate',
             label: 'Release Date',
             sortable: true,
-            render: set =>
-                new Date(set.releaseDate).getFullYear() > new Date().getFullYear()
-                    ? 'Unknown'
-                    : new Date(set.releaseDate).toLocaleDateString('en-EN', {
-                        month: 'long',
-                        year: 'numeric',
-                    })
+            render: set => {
+                const year = new Date(set.releaseDate).getFullYear();
+                if (year > new Date().getFullYear()) {
+                    return 'Unknown';
+                }
+                return new Date(set.releaseDate).toLocaleDateString('en-EN', {
+                    month: 'long',
+                    year: 'numeric',
+                });
+            },
         },
     ];
 
@@ -71,7 +78,7 @@ export function Sets() {
                     columns={columns}
                     data={sets}
                     sortState={sortState}
-                    onSort={load}
+                    onSort={onSort}
                 />
             )}
         </div>
