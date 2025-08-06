@@ -19,6 +19,7 @@ export interface DeckRatingDto {
 }
 
 export interface DeckDto {
+    setName: string;
     name: string;
     frontImageUrl: string;
     backImageUrl: string;

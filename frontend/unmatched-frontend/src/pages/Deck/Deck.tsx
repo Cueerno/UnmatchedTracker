@@ -27,9 +27,15 @@ export function Deck() {
             {error && <p style={{color: 'red'}}>{error}</p>}
             {deck && (
                 <div style={{marginTop: '16px'}}>
-                    <h1>{deck.name}</h1>
+                    <h1>
+                        {deck.name}
+                        <span style={{
+                            fontWeight: 400
+                        }}>
+                            <> from {deck.setName}</>
+                        </span>
+                    </h1>
                     <h2>
-
                         {deck.hero.name}
                         {deck.hero.quantity > 1 && (
                             <span style={{marginLeft: '8px', fontWeight: 'normal'}}>
