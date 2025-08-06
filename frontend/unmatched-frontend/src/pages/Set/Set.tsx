@@ -3,6 +3,7 @@ import {Link, useParams} from 'react-router-dom'
 import {getByName} from '../../api/set'
 import {SetDto} from '../../types/set'
 import {AttackType} from '../../types/deck'
+import {Column, DataTable} from '../../components/DataTable/DataTable'
 
 function formatMonthYear(iso: string) {
     return new Date(iso).getFullYear() > new Date().getFullYear()
@@ -36,6 +37,90 @@ export function Set() {
     if (error) return <p style={{color: 'red'}}>{error}</p>
     if (!set) return null
 
+    type Deck = typeof set.decks[0]
+
+    const deckColumns: Column<Deck>[] = [
+        {
+            key: 'name',
+            label: 'Name',
+            render: deck => (
+                <Link
+                    to={`/decks/${encodeURIComponent(deck.name)}`}
+                    style={{textDecoration: 'none', color: '#333'}}
+                >
+                    {deck.name}
+                    {deck.hero.quantity > 1 && <> x{deck.hero.quantity}</>}
+                </Link>
+            ),
+        },
+        {
+            key: 'hp',
+            label: 'HP',
+            render: deck => deck.hero.hp,
+        },
+        {
+            key: 'move',
+            label: 'Move',
+            render: deck => deck.hero.move,
+        },
+        {
+            key: 'attack',
+            label: 'Attack',
+            render: deck => (
+                <img
+                    src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
+                    alt={attackTypeLabel(deck.hero.attackType)}
+                    width={108}
+                    height={27}
+                />
+            ),
+        },
+        {
+            key: 'sidekickName',
+            label: 'Sidekick',
+            render: deck =>
+                deck.sidekick ? (
+                    <>
+                        {deck.sidekick.name}
+                        {deck.sidekick.quantity > 1 && <> x{deck.sidekick.quantity}</>}
+                    </>
+                ) : null
+        },
+        {
+            key: 'sidekickHp',
+            label: 'HP',
+            render: deck =>
+                deck.sidekick ? (
+                    <>
+                        {deck.sidekick.hp}
+                    </>
+                ) : null
+        },
+        {
+            key: 'sidekickMove',
+            label: 'Move',
+            render: deck =>
+                deck.sidekick ? (
+                    <>
+                        {deck.sidekick.move}
+                    </>
+                ) : null
+        },
+        {
+            key: 'sidekickAttackType',
+            label: 'Move',
+            render: deck =>
+                deck.sidekick ? (
+                    <img
+                        src={`/attack_type/${attackTypeLabel(deck.sidekick.attackType)}.png`}
+                        alt={attackTypeLabel(deck.hero.attackType)}
+                        width={108}
+                        height={27}
+                    />
+                ) : null
+        },
+    ]
+
     return (
         <div style={{padding: 20}}>
             <h1>{set.name}</h1>
@@ -49,62 +134,13 @@ export function Set() {
             )}
 
             <h2 style={{marginTop: 24}}>Characters</h2>
-            <table
-                style={{
-                    width: '100%',
-                    borderCollapse: 'collapse',
-                    marginTop: 8,
+            <DataTable
+                columns={deckColumns}
+                data={set.decks}
+                sortState={{}}
+                onSort={() => {
                 }}
-            >
-                <thead>
-                <tr style={{background: '#f0f0f0'}}>
-                    <th style={{padding: 8, textAlign: 'left'}}>Name</th>
-                    <th style={{padding: 8, textAlign: 'left'}}>HP</th>
-                    <th style={{padding: 8, textAlign: 'left'}}>Move</th>
-                    <th style={{padding: 8, textAlign: 'left'}}>Attack</th>
-                    <th style={{padding: 8, textAlign: 'left'}}>Sidekick</th>
-                </tr>
-                </thead>
-                <tbody>
-                {set.decks.map((deck, i) => (
-                    <tr key={`${deck.name}-${i}`}>
-                        <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            <Link
-                                to={`/decks/${encodeURIComponent(deck.name)}`}
-                                style={{textDecoration: 'none', color: '#333'}}
-                            >
-                                {deck.name}
-                                {(deck.hero.quantity > 1 ? <> x{deck.hero.quantity}</> : null)}
-                            </Link>
-                        </td>
-                        <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {deck.hero.hp}
-                        </td>
-                        <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {deck.hero.move}
-                        </td>
-                        <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            <img
-                                src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
-                                alt={attackTypeLabel(deck.hero.attackType)}
-                                width={108}
-                                height={27}
-                            />
-                        </td>
-                        <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {deck.sidekick ? (
-                                <>
-                                    {deck.sidekick.name}
-                                    {deck.sidekick.quantity > 1 && <> x{deck.sidekick.quantity}</>}
-                                </>
-                            ) : (
-                                '-'
-                            )}
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            />
 
             <h2 style={{marginTop: 32}}>Boards</h2>
             <div
