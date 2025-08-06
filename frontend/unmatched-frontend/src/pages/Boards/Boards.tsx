@@ -53,6 +53,7 @@ export function Boards() {
         {
             key: 'feature',
             label: 'Feature',
+            sortable: true,
             render: board => board.feature,
         },
     ];
