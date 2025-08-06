@@ -1,6 +1,6 @@
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
-    const params = new URLSearchParams({ sortBy, direction });
-    const res = await fetch(`http://localhost:8080/api/v1/characters/all?${params}`, {
+    const params = new URLSearchParams({sortBy, direction});
+    const res = await fetch(`http://localhost:8080/api/v1/decks/all?${params}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export async function getAll(sortBy: string = 'name', direction: string = 'asc')
 }
 
 export async function getByName(name: string) {
-    const res = await fetch(`http://localhost:8080/api/v1/characters/${name}`, {
+    const res = await fetch(`http://localhost:8080/api/v1/decks/${name}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export async function getByName(name: string) {
 }
 
 export async function getTopByWins() {
-    const res = await fetch(`http://localhost:8080/api/v1/characters/top`, {
+    const res = await fetch(`http://localhost:8080/api/v1/decks/top`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

@@ -1,8 +1,8 @@
 package com.radiuk.unmatched_backend_core.service;
 
-import com.radiuk.unmatched_backend_core.dto.CharacterDto;
+import com.radiuk.unmatched_backend_core.dto.DeckDto;
 import com.radiuk.unmatched_backend_core.dto.UserDto;
-import com.radiuk.unmatched_backend_core.mapper.CharacterMapper;
+import com.radiuk.unmatched_backend_core.mapper.DeckMapper;
 import com.radiuk.unmatched_backend_core.mapper.UserMapper;
 import com.radiuk.unmatched_backend_core.model.User;
 import com.radiuk.unmatched_backend_core.repository.*;
@@ -20,14 +20,14 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final CharacterRepository characterRepository;
-    private final CharacterMapper characterMapper;
+    private final DeckRepository deckRepository;
+    private final DeckMapper deckMapper;
     private final UserMapper userMapper;
 
     @Transactional(readOnly = true)
-    public List<CharacterDto> getFavoriteCharactersByUsername(String usernmame) {
+    public List<DeckDto> getFavoriteCharactersByUsername(String usernmame) {
         Pageable pageable = PageRequest.of(0, 3);
-        return characterMapper.toDtos(characterRepository.findFavoriteCharactersByUserUsername(usernmame, pageable));
+        return deckMapper.toDtos(deckRepository.findFavoriteCharactersByUserUsername(usernmame, pageable));
     }
 
     @Transactional

@@ -7,13 +7,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "sidekicks")
-public class Sidekick {
+@Table(name = "extra_characters")
+public class ExtraCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deck_id")
+    private Deck deck;
+
     private String name;
+
+    @Column(name = "special_ability")
+    private String specialAbility;
 
     private Short quantity;
 
@@ -22,14 +29,9 @@ public class Sidekick {
     private Short move;
 
     @Column(name = "attack_type")
-    @Enumerated(EnumType.STRING)
-    private AttackType attackType;
+    private String attackType;
 
     @Column(name = "image_url")
     private String imageUrl;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "deck_id", nullable = false)
-    private Deck deck;
 
 }

@@ -1,6 +1,6 @@
 export interface UserPartyDto {
     username: string;
-    character: string;
+    deck: string;
     moveOrder: number;
     finalHp: number;
 }

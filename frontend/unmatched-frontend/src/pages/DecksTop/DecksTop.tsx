@@ -1,43 +1,43 @@
-import {getTopByWins} from '../../api/character';
+import {getTopByWins} from '../../api/deck';
 import {Column, DataTable} from "../../components/DataTable/DataTable";
-import {CharacterTopItem} from "../../types/character";
+import {DeckRatingDto} from "../../types/deck";
 import {useServerTable} from "../../hooks/useServerTable/useServerTable";
 import React from "react";
 import {Link} from "react-router-dom";
 
-export function CharactersTop() {
+export function DecksTop() {
     const {
         data: characters,
         loading,
         error,
         sortState,
         load,
-    } = useServerTable<CharacterTopItem>(getTopByWins)
+    } = useServerTable<DeckRatingDto>(getTopByWins)
 
-    const columns: Column<CharacterTopItem>[] = [
+    const columns: Column<DeckRatingDto>[] = [
         {
             key: 'rating',
             label: '#',
             sortable: false,
-            render: ch => ch.rating
+            render: deck => deck.rating
         },
         {
-            key: 'character',
-            label: 'Character',
+            key: 'deck',
+            label: 'Deck',
             sortable: false,
-            render: ch => (
+            render: deck => (
                 <Link
-                    to={`/characters/${encodeURIComponent(ch.name)}`}
+                    to={`/decks/${encodeURIComponent(deck.name)}`}
                     style={{textDecoration: 'none', color: '#333'}}
                 >
-                    {ch.name}
+                    {deck.name}
                 </Link>)
         },
         {
             key: 'win_count',
             label: 'Wins',
             sortable: false,
-            render: ch => ch.win_count
+            render: deck => deck.win_count
         },
     ];
 

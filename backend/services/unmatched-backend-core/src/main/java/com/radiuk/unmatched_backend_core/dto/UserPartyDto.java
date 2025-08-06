@@ -10,7 +10,7 @@ import lombok.*;
 public class UserPartyDto {
 
     private String username;
-    private String character;
+    private String deck;
     private Short moveOrder;
     private Short finalHp;
 }

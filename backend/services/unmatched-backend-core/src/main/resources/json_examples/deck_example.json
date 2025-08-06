@@ -2,6 +2,7 @@
   "name": "deck name",
   "frontImageUrl": "",
   "backImageUrl": "",
+  "notes": "",
   "hero": {
     "name": "hero name",
     "attackType": "melee",

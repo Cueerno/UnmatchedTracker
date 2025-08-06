@@ -25,18 +25,18 @@ export function Sets() {
             ),
         },
         {
-            key: 'characters',
-            label: 'Characters',
+            key: 'decks',
+            label: 'Decks',
             render: set =>
-                set.characters.map((ch, idx) => (
-                    <React.Fragment key={ch.name}>
+                set.decks.map((deck, idx) => (
+                    <React.Fragment key={deck.name}>
                         <Link
-                            to={`/characters/${encodeURIComponent(ch.name)}`}
+                            to={`/decks/${encodeURIComponent(deck.name)}`}
                             style={{textDecoration: 'none', color: '#333'}}
                         >
-                            {ch.name}
+                            {deck.name}
                         </Link>
-                        {idx < set.characters.length - 1 && ', '}
+                        {idx < set.decks.length - 1 && ', '}
                     </React.Fragment>
                 )),
         },

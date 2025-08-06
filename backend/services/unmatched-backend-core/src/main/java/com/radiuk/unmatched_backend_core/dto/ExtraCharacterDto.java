@@ -1,6 +1,5 @@
 package com.radiuk.unmatched_backend_core.dto;
 
-import com.radiuk.unmatched_backend_core.model.AttackType;
 import lombok.*;
 
 @Getter
@@ -8,9 +7,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SidekickDto {
+public class ExtraCharacterDto {
 
     private String name;
+
+    private String specialAbility;
 
     private Short quantity;
 
@@ -18,7 +19,7 @@ public class SidekickDto {
 
     private Short move;
 
-    private AttackType attackType;
+    private String attackType;
 
     private String imageUrl;
 }

@@ -21,7 +21,7 @@ public class Match {
 
     private String note;
 
-    @Column(name = "played_at")
+    @Column(name = "created_at")
     private OffsetDateTime playedAt;
 
     @OneToMany(mappedBy = "match")

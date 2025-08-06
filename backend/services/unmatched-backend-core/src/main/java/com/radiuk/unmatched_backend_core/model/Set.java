@@ -17,12 +17,18 @@ import java.util.HashSet;
         name = "Set.withAll",
         attributeNodes = {
                 @NamedAttributeNode("boards"),
-                @NamedAttributeNode(value = "characters", subgraph = "character-sidekick")
+                @NamedAttributeNode(value = "decks", subgraph = "decks.withAll")
         },
         subgraphs = {
                 @NamedSubgraph(
-                        name = "character-sidekick",
-                        attributeNodes = @NamedAttributeNode("sidekick")
+                        name = "decks.withAll",
+                        attributeNodes = {
+                                @NamedAttributeNode("hero"),
+                                @NamedAttributeNode("sidekick"),
+                                @NamedAttributeNode("cards"),
+                                @NamedAttributeNode("ruleCards"),
+                                @NamedAttributeNode("extraCharacters")
+                        }
                 )
         }
 )
@@ -41,7 +47,6 @@ public class Set {
     @OneToMany(mappedBy = "set")
     private java.util.Set<Board> boards = new HashSet<>();
 
-    @OneToMany(mappedBy = "set")
-    private java.util.Set<Character> characters = new HashSet<>();
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "set")
+    private java.util.Set<Deck> decks = new HashSet<>();
 }

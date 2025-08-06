@@ -1,9 +1,9 @@
-import {CharacterDto} from "./character";
+import {DeckDto} from "./deck";
 import {BoardDto} from "./board";
 
 export interface SetDto {
     name: string;
-    characters: CharacterDto[];
+    decks: DeckDto[];
     description: string;
     boards: BoardDto[];
     releaseDate: string;

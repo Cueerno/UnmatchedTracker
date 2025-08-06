@@ -42,8 +42,8 @@ public class Party {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "character_id")
-    private Character character;
+    @JoinColumn(name = "deck_id", nullable = false)
+    private Deck deck;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "board_id")

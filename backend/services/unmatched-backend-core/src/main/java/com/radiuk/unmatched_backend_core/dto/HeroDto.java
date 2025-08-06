@@ -8,11 +8,13 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CharacterDto {
+public class HeroDto {
 
     private String name;
 
-    private Short count;
+    private String specialAbility;
+
+    private Short quantity;
 
     private Short hp;
 
@@ -20,5 +22,5 @@ public class CharacterDto {
 
     private AttackType attackType;
 
-    private SidekickDto sidekick;
+    private String imageUrl;
 }

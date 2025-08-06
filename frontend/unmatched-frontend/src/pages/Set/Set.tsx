@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {getByName} from '../../api/set'
 import {SetDto} from '../../types/set'
-import {AttackType} from '../../types/character'
+import {AttackType} from '../../types/deck'
 
 function formatMonthYear(iso: string) {
     return new Date(iso).getFullYear() > new Date().getFullYear()
@@ -66,36 +66,36 @@ export function Set() {
                 </tr>
                 </thead>
                 <tbody>
-                {set.characters.map((ch, i) => (
-                    <tr key={`${ch.name}-${i}`}>
+                {set.decks.map((deck, i) => (
+                    <tr key={`${deck.name}-${i}`}>
                         <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
                             <Link
-                                to={`/characters/${encodeURIComponent(ch.name)}`}
+                                to={`/decks/${encodeURIComponent(deck.name)}`}
                                 style={{textDecoration: 'none', color: '#333'}}
                             >
-                                {ch.name}
-                                {(ch.count > 1 ? <> x{ch.count}</> : null)}
+                                {deck.name}
+                                {(deck.hero.quantity > 1 ? <> x{deck.hero.quantity}</> : null)}
                             </Link>
                         </td>
                         <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {ch.hp}
+                            {deck.hero.hp}
                         </td>
                         <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {ch.move}
+                            {deck.hero.move}
                         </td>
                         <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
                             <img
-                                src={`/attack_type/${attackTypeLabel(ch.attackType)}.png`}
-                                alt={attackTypeLabel(ch.attackType)}
+                                src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
+                                alt={attackTypeLabel(deck.hero.attackType)}
                                 width={108}
                                 height={27}
                             />
                         </td>
                         <td style={{padding: 8, borderBottom: '1px solid #ccc'}}>
-                            {ch.sidekick ? (
+                            {deck.sidekick ? (
                                 <>
-                                    {ch.sidekick.name}
-                                    {ch.sidekick.count > 1 && <> x{ch.sidekick.count}</>}
+                                    {deck.sidekick.name}
+                                    {deck.sidekick.quantity > 1 && <> x{deck.sidekick.quantity}</>}
                                 </>
                             ) : (
                                 '-'

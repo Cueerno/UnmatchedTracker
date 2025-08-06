@@ -78,8 +78,8 @@ export const Party: React.FC = () => {
                                 <span className="detail-value">{u.username}</span>
                             </div>
                             <div className="detail-group">
-                                <span className="detail-label">Character</span>
-                                <span className="detail-value">{u.character}</span>
+                                <span className="detail-label">Deck</span>
+                                <span className="detail-value">{u.deck}</span>
                             </div>
                             <div className="detail-group">
                                 <span className="detail-label">Move Order</span>

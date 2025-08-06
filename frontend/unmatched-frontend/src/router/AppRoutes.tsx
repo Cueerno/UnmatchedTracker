@@ -4,9 +4,9 @@ import {Home} from '../pages/Home/Home';
 import {CreateParty} from "../pages/CreateParty/CreateParty";
 import {Party} from "../pages/Party/Party";
 import Layout from "../components/Layout/Layout";
-import {Characters} from "../pages/Characters/Characters";
-import {Character} from "../pages/Character/Character";
-import {CharactersTop} from "../pages/CharactersTop/CharactersTop";
+import {Decks} from "../pages/Decks/Decks";
+import {Deck} from "../pages/Deck/Deck";
+import {DecksTop} from "../pages/DecksTop/DecksTop";
 import {Sets} from "../pages/Sets/Sets";
 import {Set} from "../pages/Set/Set";
 import {Boards} from "../pages/Boards/Boards";
@@ -28,9 +28,9 @@ export default function AppRoutes() {
                 <Route path="/sets" element={<Sets/>}/>
                 <Route path="/sets/:name" element={<Set/>}/>
 
-                <Route path="/characters" element={<Characters/>}/>
-                <Route path="/characters/:name" element={<Character/>}/>
-                <Route path="/characters/top" element={<CharactersTop/>}/>
+                <Route path="/decks" element={<Decks/>}/>
+                <Route path="/decks/:name" element={<Deck/>}/>
+                <Route path="/decks/top" element={<DecksTop/>}/>
 
                 <Route path="/boards" element={<Boards/>}/>
             </Route>

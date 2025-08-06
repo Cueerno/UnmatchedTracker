@@ -14,7 +14,7 @@ public class SetDto {
 
     private String name;
 
-    private List<CharacterDto> characters;
+    private List<DeckDto> decks;
 
     private String description;
 

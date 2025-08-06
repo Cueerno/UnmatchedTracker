@@ -1,6 +1,5 @@
-import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
-import {useNavigate} from 'react-router-dom';
+import React, {FormEvent, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {getUserParties} from '../../api/user'
 import {Party} from "../../types/party";
 
@@ -33,7 +32,7 @@ export function Parties() {
     };
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{padding: '20px'}}>
             <h1>Add new party</h1>
             <button
                 onClick={() => navigate('/parties/new')}
@@ -52,13 +51,13 @@ export function Parties() {
 
             <h1>Party list</h1>
 
-            <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+            <form onSubmit={handleSubmit} style={{marginBottom: '20px'}}>
                 <input
                     type="text"
                     value={username}
                     placeholder="Username"
                     onChange={e => setUsername(e.target.value)}
-                    style={{ padding: '8px', fontSize: '16px', width: '250px' }}
+                    style={{padding: '8px', fontSize: '16px', width: '250px'}}
                 />
                 <button
                     type="submit"
@@ -75,13 +74,13 @@ export function Parties() {
             </form>
 
             {error && (
-                <div style={{ color: 'red', marginBottom: '20px' }}>
+                <div style={{color: 'red', marginBottom: '20px'}}>
                     {error}
                 </div>
             )}
 
             {parties.length > 0 && (
-                <ul style={{ listStyle: 'none', padding: 0 }}>
+                <ul style={{listStyle: 'none', padding: 0}}>
                     {parties.map(party => (
                         <li
                             key={party.matchId}
@@ -112,8 +111,8 @@ export function Parties() {
                                             <span className="detail-value">{u.username}</span>
                                         </div>
                                         <div className="detail-group">
-                                            <span className="detail-label">Character</span>
-                                            <span className="detail-value">{u.character}</span>
+                                            <span className="detail-label">Deck</span>
+                                            <span className="detail-value">{u.deck}</span>
                                         </div>
                                     </div>
                                 ))}

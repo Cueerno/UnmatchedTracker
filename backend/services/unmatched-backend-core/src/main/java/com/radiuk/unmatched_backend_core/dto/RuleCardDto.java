@@ -7,11 +7,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CharacterRatingDto {
+public class RuleCardDto {
 
-    private Long rating;
+    private String title;
 
-    private String name;
+    private String text;
 
-    private Long win_count;
+    private String imageUrl;
 }
