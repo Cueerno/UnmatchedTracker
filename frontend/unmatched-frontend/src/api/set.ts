@@ -1,6 +1,8 @@
+const backUrl = 'http://localhost:8080/api/v1/umdb';
+
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
     const params = new URLSearchParams({sortBy, direction});
-    const res = await fetch(`http://localhost:8080/api/v1/sets/all?${params}`, {
+    const res = await fetch(`${backUrl}/sets/all?${params}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +18,7 @@ export async function getAll(sortBy: string = 'name', direction: string = 'asc')
 }
 
 export async function getByName(name: string) {
-    const res = await fetch(`http://localhost:8080/api/v1/sets/${name}`, {
+    const res = await fetch(`${backUrl}/sets/${name}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

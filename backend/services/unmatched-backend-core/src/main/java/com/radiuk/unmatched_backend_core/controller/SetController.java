@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/sets")
+@RequestMapping("/api/v1/umdb/sets")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class SetController {
