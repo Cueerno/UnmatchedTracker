@@ -1,3 +1,5 @@
+import {BoardDto} from "../types/board";
+
 const backUrl = 'http://localhost:8080/api/v1/umdb';
 
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
@@ -15,4 +17,10 @@ export async function getAll(sortBy: string = 'name', direction: string = 'asc')
     }
 
     return res.json()
+}
+
+
+export async function getNames(): Promise<string[]> {
+    const boards:BoardDto[] = await getAll('name', 'asc');
+    return boards.map(b => b.name);
 }

@@ -1,7 +1,10 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {createParty} from '../../api/party';
+import {getNames as getBoardNames} from '../../api/board';
+import {getNames as getDecksNames} from '../../api/deck';
 import './CreateParty.css';
+import {AutocompleteInput} from "../../components/AutocompleteInput/AutocompleteInput";
 
 type PartyType = 'HEADS_UP' | 'TEAMS' | 'FREE_FOR_ALL';
 
@@ -191,11 +194,11 @@ export const CreateParty: React.FC = () => {
                     </div>
                     <div className="form-group">
                         <label className="form-label">Board name</label>
-                        <input
-                            className="form-input"
-                            type="text"
+                        <AutocompleteInput
                             value={boardName}
-                            onChange={e => setBoardName(e.target.value)}
+                            onChange={setBoardName}
+                            fetchOptions={getBoardNames}
+                            placeholder="Enter board name"
                         />
                     </div>
                 </div>
@@ -213,12 +216,21 @@ export const CreateParty: React.FC = () => {
                                         <label className="form-label">
                                             {field === 'finalHp' ? 'Final HP' : field === 'name' ? 'Username' : 'Deck'}
                                         </label>
-                                        <input
-                                            className="form-input"
-                                            type={field === 'finalHp' ? 'text' : 'text'}
-                                            value={p[field]}
-                                            onChange={e => updatePlayer(idx, field, e.target.value)}
-                                        />
+                                        {field === 'deck' ? (
+                                            <AutocompleteInput
+                                                value={p.deck}
+                                                onChange={val => updatePlayer(idx, 'deck', val)}
+                                                fetchOptions={getDecksNames}
+                                                placeholder={"Enter deck name"}
+                                            />
+                                        ) : (
+                                            <input
+                                                className="form-input"
+                                                type="text"
+                                                value={p[field]}
+                                                onChange={e => updatePlayer(idx, field, e.target.value)}
+                                            />
+                                        )}
                                     </div>
                                 ))}
                             </div>

@@ -1,3 +1,5 @@
+import {DeckDto} from "../types/deck";
+
 const backUrl = 'http://localhost:8080/api/v1/umdb';
 
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
@@ -31,6 +33,11 @@ export async function getByName(name: string) {
     }
 
     return res.json()
+}
+
+export async function getNames(): Promise<string[]> {
+    const decks: DeckDto[] = await getAll();
+    return decks.map(d => d.name);
 }
 
 export async function getTopByWins() {
