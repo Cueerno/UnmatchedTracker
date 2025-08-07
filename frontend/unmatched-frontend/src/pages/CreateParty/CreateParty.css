@@ -99,6 +99,17 @@
     font-weight: 600;
 }
 
+.team-name {
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 2.4rem;
+}
+
+
 /* ===================================================================
    Buttons
    =================================================================== */

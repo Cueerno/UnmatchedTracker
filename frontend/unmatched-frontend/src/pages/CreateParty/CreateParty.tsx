@@ -63,25 +63,47 @@ export const CreateParty: React.FC = () => {
         setWinner('');
     }, [partyType]);
 
+    const isFormValid = React.useMemo(() => {
+        if (!boardName.trim()) {
+            return false;
+        }
+
+        for (const p of players) {
+            if (!p.name.trim() || !p.deck.trim() || !p.finalHp.trim()) {
+                return false;
+            }
+        }
+
+        if (partyType === 'TEAMS') {
+            for (const t of teams) {
+                if (!t.team.trim()) {
+                    return false;
+                }
+            }
+        }
+
+        return winner.trim();
+    }, [boardName, players, teams, winner, partyType]);
+
     const updatePlayer = (
         idx: number,
         field: keyof Omit<Player, 'moveOrder'>,
         value: string,
     ) => {
-        const nextPlayers = [...players];
+        const nextPlayers = [...players]
+        nextPlayers[idx][field] = value
 
-        nextPlayers[idx][field] = value;
+        const nextTeams = [...teams]
 
-        const nextTeams = [...teams];
-
-        if (field === 'name') {
-            if (partyType !== 'TEAMS') {
-                nextTeams[idx].team = value;
-            } else {
-                const [p0, p1, p2, p3] = nextPlayers;
-                nextTeams[0].team = p0.name && p1.name ? `${p0.name} & ${p2.name}` : '';
-                nextTeams[1].team = p2.name && p3.name ? `${p1.name} & ${p3.name}` : '';
+        if (field === 'name' && partyType === 'TEAMS') {
+            const [p0, p1, p2, p3] = nextPlayers
+            const makeLabel = (a: string, b: string) => {
+                if (!a || !b) return ''
+                return a === b ? a : `${a} & ${b}`
             }
+
+            nextTeams[0].team = makeLabel(p0.name.trim(), p2.name.trim())
+            nextTeams[1].team = makeLabel(p1.name.trim(), p3.name.trim())
         }
         setPlayers(nextPlayers);
         setTeams(nextTeams)
@@ -221,12 +243,7 @@ export const CreateParty: React.FC = () => {
                             {teams.map((t, idx) => (
                                 <div key={idx} className="team-item form-group">
                                     <label className="form-label">Team {idx + 1}</label>
-                                    <input
-                                        className="form-input"
-                                        type="text"
-                                        value={t.team}
-                                        readOnly
-                                    />
+                                    <div className="team-name">{t.team}</div>
                                 </div>
                             ))}
                         </div>
@@ -252,7 +269,10 @@ export const CreateParty: React.FC = () => {
                 </div>
 
                 <div className="form-section">
-                    <button type="submit" className="primary-button" disabled={isLoading}>
+                    <button
+                        type="submit"
+                        className="primary-button"
+                        disabled={isLoading || !isFormValid}>
                         {isLoading ? 'Saving...' : 'Save'}
                     </button>
                     {error && <p className="error-text">{error}</p>}
