@@ -142,9 +142,9 @@ export const CreateParty: React.FC = () => {
                 moveOrder: p.moveOrder,
                 finalHp: Number(p.finalHp),
             })),
-            teams: teams.map(t => ({
-                name: t.team
-            })),
+            teams: partyType === 'TEAMS'
+                ? teams.map(t => ({name: t.team}))
+                : players.map(p => ({name: p.name})),
             winner: winner,
         };
         try {
