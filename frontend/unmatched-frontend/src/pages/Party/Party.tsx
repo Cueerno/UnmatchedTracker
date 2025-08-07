@@ -43,6 +43,10 @@ export const Party: React.FC = () => {
 
     if (!party) return null;
 
+    const winnerList = party.format === 'TEAMS'
+        ? party.winner.split(/\s*&\s*/).map(name => name.trim())
+        : [party.winner];
+
     return (
         <div className="party-page">
             <h1 className="page-title">Party Details</h1>
@@ -71,26 +75,34 @@ export const Party: React.FC = () => {
             <div className="detail-section">
                 <h2 className="section-title">Players</h2>
                 <div className="list">
-                    {party.users.map((u, i) => (
-                        <div key={i} className="list-item">
-                            <div className="detail-group">
-                                <span className="detail-label">Username</span>
-                                <span className="detail-value">{u.username}</span>
-                            </div>
-                            <div className="detail-group">
-                                <span className="detail-label">Deck</span>
-                                <span className="detail-value">{u.deck}</span>
-                            </div>
-                            <div className="detail-group">
-                                <span className="detail-label">Move Order</span>
-                                <span className="detail-value">{u.moveOrder}</span>
-                            </div>
-                            <div className="detail-group">
-                                <span className="detail-label">Final HP</span>
-                                <span className="detail-value">{u.finalHp}</span>
-                            </div>
-                        </div>
-                    ))}
+
+                    {party.users.map((u, i) => {
+                            const isWinner = winnerList.includes(u.username);
+                            return (
+                                <div
+                                    key={i}
+                                    className={`list-item ${isWinner ? 'winner-card' : 'loser-card'}`}
+                                >
+                                    <div className="detail-group">
+                                        <span className="detail-label">Username</span>
+                                        <span className="detail-value">{u.username}</span>
+                                    </div>
+                                    <div className="detail-group">
+                                        <span className="detail-label">Deck</span>
+                                        <span className="detail-value">{u.deck}</span>
+                                    </div>
+                                    <div className="detail-group">
+                                        <span className="detail-label">Move Order</span>
+                                        <span className="detail-value">{u.moveOrder}</span>
+                                    </div>
+                                    <div className="detail-group">
+                                        <span className="detail-label">Final HP</span>
+                                        <span className="detail-value">{u.finalHp}</span>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    )}
                 </div>
             </div>
 

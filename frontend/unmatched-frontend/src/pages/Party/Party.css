@@ -52,6 +52,14 @@
     padding: 16px;
 }
 
+.list-item.winner-card {
+    background-color: #fff9c4;
+}
+
+.list-item.loser-card {
+    background-color: #f5f5f5;
+}
+
 .secondary-button {
     padding: 8px 16px;
     font-size: 14px;
