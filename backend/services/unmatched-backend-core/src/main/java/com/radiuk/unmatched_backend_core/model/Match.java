@@ -34,6 +34,6 @@ public class Match {
     private MatchFormat format;
 
     public enum MatchFormat {
-        HEADS_UP, TEAMS, FREE_FOR_ALL, COOP_PLAY_FOR_1_4
+        HEADS_UP, TEAMS, FREE_FOR_ALL, COOP_PLAY
     }
 }

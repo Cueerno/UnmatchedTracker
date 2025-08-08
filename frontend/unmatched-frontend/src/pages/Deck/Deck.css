@@ -2,18 +2,14 @@
 
     display: grid;
 
-    /* минимум под карту + отступ, но можно расширяться */
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 
-    /* пространство между карточками */
     gap: 24px;
 
     padding: 24px;
 }
 
 .card-item {
-
-    /* гарантируем, что контейнер ровно под размер карты */
     width: 250px;
 
     display: flex;
@@ -33,12 +29,9 @@
 }
 
 .card-image {
-
-    /* точные размеры оригинала */
     width: 250px;
     height: 349px;
 
-    /* сохраняем соотношение сторон и не обрезаем */
     object-fit: contain;
 
     border-radius: 4px;
