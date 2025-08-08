@@ -27,14 +27,38 @@ export function Deck() {
             {error && <p style={{color: 'red'}}>{error}</p>}
             {deck && (
                 <div style={{marginTop: '16px'}}>
-                    <h1>
-                        {deck.name}
-                        <span style={{
-                            fontWeight: 400
-                        }}>
-                            <> from {deck.setName}</>
-                        </span>
-                    </h1>
+                    <div style={{display: 'flex', alignItems: 'flex-start', gap: '24px'}}>
+                        <div style={{flex: 1}}>
+                            <h1 style={{marginBottom: 8}}>
+                                {deck.name}
+                                <span style={{fontWeight: 400, marginLeft: 8}}>
+                                    from {deck.setName}
+                                </span>
+                            </h1>
+                        </div>
+
+                        <div style={{display: 'flex', gap: '12px'}}>
+                            {deck.frontImageUrl && (
+                                <img
+                                    src={deck.frontImageUrl}
+                                    alt="Front"
+                                    width={260}
+                                    height={350}
+                                    style={{objectFit: 'cover', borderRadius: 4}}
+                                />
+                            )}
+                            {deck.backImageUrl && (
+                                <img
+                                    src={deck.backImageUrl}
+                                    alt="Back"
+                                    width={260}
+                                    height={350}
+                                    style={{objectFit: 'cover', borderRadius: 4}}
+                                />
+                            )}
+                        </div>
+                    </div>
+
                     <h2>
                         {deck.hero.name}
                         {deck.hero.quantity > 1 && (
@@ -51,11 +75,12 @@ export function Deck() {
                         width={108}
                         height={27}
                     />
+                    <p>{deck.hero.specialAbility}</p>
 
                     {deck.extraCharacters && (
                         <div>
                             {deck.extraCharacters.map(extra => (
-                                <div>
+                                <div key={extra.name}>
                                     <h2>
                                         {extra.name}
                                         {extra.quantity > 1 && (
@@ -89,7 +114,9 @@ export function Deck() {
                         >
                             <h3>
                                 {deck.sidekick.name}
-                                {deck.sidekick?.quantity > 1 && (<span> x{deck.sidekick.quantity}</span>)}
+                                {deck.sidekick?.quantity > 1 && (
+                                    <span> x{deck.sidekick.quantity}</span>
+                                )}
                             </h3>
                             <p>HP: {deck.sidekick.hp}</p>
                             <p>Move: {deck.sidekick.move}</p>
@@ -99,6 +126,28 @@ export function Deck() {
                                 width={108}
                                 height={27}
                             />
+                        </div>
+                    )}
+
+                    {deck.cards && deck.cards.length > 0 && (
+                        <div className="cards-container">
+                            {deck.cards.map(card => (
+                                <div className="card-item" key={card.title}>
+                                    <h4 className="card-title">
+                                        {card.title} <> x{card.quantity}</>
+                                    </h4>
+
+                                    <img
+                                        className="card-image"
+                                        src={card.imageUrl}
+                                        alt={card.title}
+                                        onError={e => {
+                                            ;(e.currentTarget as HTMLImageElement).src =
+                                                '/placeholder.png'
+                                        }}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
