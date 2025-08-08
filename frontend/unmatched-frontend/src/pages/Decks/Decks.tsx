@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {Column, DataTable} from '../../components/DataTable/DataTable'
 import {useClientTable} from '../../hooks/useClientTable/useClientTable'
 import {AttackType, DeckDto} from '../../types/deck'
@@ -10,7 +10,6 @@ function attackTypeLabel(type: AttackType) {
 }
 
 export function Decks() {
-    const navigate = useNavigate()
     const {
         data: decks,
         loading,
@@ -116,21 +115,6 @@ export function Decks() {
     return (
         <div style={{padding: 20}}>
             <h1>Decks</h1>
-
-            <button
-                style={{
-                    marginBottom: 20,
-                    padding: '10px 16px',
-                    backgroundColor: '#007bff',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 4,
-                    cursor: 'pointer',
-                }}
-                onClick={() => navigate('/decks/top')}
-            >
-                Decks top
-            </button>
 
             {loading && <p>Loading decks…</p>}
             {error && <p style={{color: 'red'}}>{error}</p>}
