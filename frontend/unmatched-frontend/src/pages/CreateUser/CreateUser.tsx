@@ -35,6 +35,7 @@ export function CreateUser() {
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                         required
+                        placeholder="Enter username"
                         style={{
                             width: '100%',
                             padding: 8,

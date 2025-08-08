@@ -160,10 +160,10 @@ export const CreateParty: React.FC = () => {
 
     const winnerOptions =
         partyType === 'TEAMS'
-            ? teams.map((t, i) => ({value: t.team, label: t.team || `Команда ${i + 1}`}))
+            ? teams.map((t, i) => ({value: t.team, label: t.team || `Team ${i + 1}`}))
             : players.map((p, i) => ({
                 value: p.name,
-                label: p.name || `Игрок ${i + 1}`,
+                label: p.name || `Player ${i + 1}`,
             }));
 
     return (
@@ -227,6 +227,11 @@ export const CreateParty: React.FC = () => {
                                             <input
                                                 className="form-input"
                                                 type="text"
+                                                placeholder={
+                                                    field === 'name'
+                                                        ? 'Enter username'
+                                                        : 'Enter final HP'
+                                                }
                                                 value={p[field]}
                                                 onChange={e => updatePlayer(idx, field, e.target.value)}
                                             />
