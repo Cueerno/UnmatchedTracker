@@ -1,5 +1,6 @@
 package com.radiuk.unmatched_backend_core.controller;
 
+import com.radiuk.unmatched_backend_core.model.Match;
 import com.radiuk.unmatched_backend_core.service.DeckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,13 @@ public class DeckController {
         return ResponseEntity.ok(deckService.getAll(sortBy, direction));
     }
 
-    @GetMapping("/top")
-    public ResponseEntity<?> getTopByWins() {
-        return ResponseEntity.ok(deckService.getTopByWins());
-    }
-
     @GetMapping("/{name}")
     public ResponseEntity<?> getByName(@PathVariable String name) {
         return ResponseEntity.ok(deckService.getByName(name));
+    }
+
+    @GetMapping("/top")
+    public ResponseEntity<?> getTop(@RequestParam(name = "format", required = false) Match.MatchFormat format) {
+        return ResponseEntity.ok(deckService.getTop(format));
     }
 }

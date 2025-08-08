@@ -1,4 +1,4 @@
-import {DeckDto} from "../types/deck";
+import {DeckDto, DeckRatingDto} from "../types/deck";
 
 const backUrl = 'http://localhost:8080/api/v1/umdb';
 
@@ -40,8 +40,14 @@ export async function getNames(): Promise<string[]> {
     return decks.map(d => d.name);
 }
 
-export async function getTopByWins() {
-    const res = await fetch(`${backUrl}/decks/top`, {
+export async function getTop(format: string | undefined) {
+    const url = new URL(`${backUrl}/decks/top`);
+
+    if (format) {
+        url.searchParams.set('format', format);
+    }
+
+    const res = await fetch(url.toString(), {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -53,5 +59,5 @@ export async function getTopByWins() {
         throw new Error(`Error ${res.status}: ${text}`)
     }
 
-    return res.json()
+    return await res.json() as Promise<DeckRatingDto[]>
 }

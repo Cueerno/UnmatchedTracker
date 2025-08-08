@@ -1,62 +1,63 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Column, DataTable} from '../../components/DataTable/DataTable'
-import {useClientTable} from '../../hooks/useClientTable/useClientTable'
-import {getTopByWins} from '../../api/deck'
-import {DeckRatingDto} from '../../types/deck'
+import React, {useState} from 'react'
+import {useSearchParams} from 'react-router-dom'
+import {DeckTopTable} from "../../components/DeckTopTable/DeckTopTable";
+import './DecksTop.css'
+
+const FORMATS: { label: string; value?: string }[] = [
+    {label: 'All', value: undefined},
+    {label: '1v1', value: 'HEADS_UP'},
+    {label: 'Teams', value: 'TEAMS'},
+    {label: 'Free-for-all', value: 'FREE_FOR_ALL'}
+]
 
 export function DecksTop() {
-    const {
-        data: deckRatings,
-        loading,
-        error,
-        sortState,
-        onSort,
-    } = useClientTable<DeckRatingDto>(getTopByWins)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const initialFormat = searchParams.get('format') ?? undefined
 
-    const columns: Column<DeckRatingDto>[] = [
-        {
-            key: 'rating',
-            label: '#',
-            sortable: true,
-            render: deck => deck.rating,
-        },
-        {
-            key: 'name',
-            label: 'Deck name',
-            render: deck => (
-                <Link
-                    to={`/decks/${encodeURIComponent(deck.name)}`}
-                    style={{textDecoration: 'none', color: '#333'}}
-                >
-                    {deck.name}
-                </Link>
-            ),
-        },
-        {
-            key: 'win_count',
-            label: 'Wins',
-            sortable: true,
-            render: deck => deck.win_count,
-        },
-    ]
+    const [selectedFormat, setSelectedFormat] =
+        useState<string | undefined>(initialFormat)
+
+    const [appliedFormat, setAppliedFormat] =
+        useState<string | undefined>(initialFormat)
+
+    const applyFormat = () => {
+        const newParams = new URLSearchParams(searchParams)
+
+        if (selectedFormat) newParams.set('format', selectedFormat)
+        else newParams.delete('format')
+
+        setSearchParams(newParams)
+        setAppliedFormat(selectedFormat)
+    }
 
     return (
-        <div style={{padding: '20px'}}>
+        <div className="decks-top-container">
             <h1>Decks Ranking by Wins</h1>
 
-            {loading && <p>Loading...</p>}
-            {error && <p style={{color: 'red'}}>{error}</p>}
-            {!loading && !error && deckRatings.length === 0 && <p>No data.</p>}
+            <div className="format-tabs">
+                {FORMATS.map(f => (
+                    <button
+                        key={f.label}
+                        className={selectedFormat === f.value ? 'active' : ''}
+                        onClick={() => setSelectedFormat(f.value)}
+                    >
+                        {f.label}
+                    </button>
+                ))}
+            </div>
 
-            {deckRatings.length > 0 && (
-                <DataTable
-                    columns={columns}
-                    data={deckRatings}
-                    sortState={sortState}
-                    onSort={onSort}
-                />
-            )}
+            <button
+                className="apply-button"
+                onClick={applyFormat}
+            >
+                Apply
+            </button>
+
+            <DeckTopTable
+                key={appliedFormat ?? 'all'}
+                format={appliedFormat}
+            />
         </div>
     )
 }
+

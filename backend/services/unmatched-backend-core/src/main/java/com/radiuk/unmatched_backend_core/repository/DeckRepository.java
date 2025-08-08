@@ -51,9 +51,10 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
         count(*) win_count
     from parties p
     join decks d on p.deck_id = d.id
-    where p.is_winner = true
+    join matches m on p.match_id = m.id
+    where p.is_winner = true and m.format like :formatName
     group by d.name
     order by win_count desc
     """)
-    List<DeckRatingDto> getTopByWins();
+    List<DeckRatingDto> getTop(String formatName);
 }
