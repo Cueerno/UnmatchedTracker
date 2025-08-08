@@ -25,6 +25,7 @@ public class PartyService {
     private final TeamMemberRepository teamMemberRepository;
     private final DeckRepository deckRepository;
     private final BoardRepository boardRepository;
+    private final DeckCacheService deckCacheService;
 
     @Transactional(readOnly = true)
     public PartyDto getPartyByMatchId(Long matchId) {
@@ -141,6 +142,8 @@ public class PartyService {
                             .build()
             );
         }
+
+        deckCacheService.evictTopFromCache();
 
         return getPartyByMatchId(match.getId());
     }
