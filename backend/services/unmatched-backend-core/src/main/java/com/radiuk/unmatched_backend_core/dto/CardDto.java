@@ -1,6 +1,6 @@
 package com.radiuk.unmatched_backend_core.dto;
 
-import com.radiuk.unmatched_backend_core.model.Card;
+import com.radiuk.unmatched_backend_core.model.types.CardType;
 import lombok.*;
 
 @Getter
@@ -12,7 +12,7 @@ public class CardDto {
 
     private String title;
 
-    private Card.CardType type;
+    private CardType type;
 
     private String characterName;
 

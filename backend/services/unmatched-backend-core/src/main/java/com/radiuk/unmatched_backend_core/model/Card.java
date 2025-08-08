@@ -1,5 +1,6 @@
 package com.radiuk.unmatched_backend_core.model;
 
+import com.radiuk.unmatched_backend_core.model.types.CardType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,11 +48,4 @@ public class Card {
 
     @Column(name = "image_url")
     private String imageUrl;
-
-    public enum CardType {
-        ATTACK,
-        ATTACK_DEFENSE,
-        DEFENSE,
-        SCHEME
-    }
 }

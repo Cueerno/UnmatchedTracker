@@ -1,6 +1,6 @@
 package com.radiuk.unmatched_backend_core.dto;
 
-import com.radiuk.unmatched_backend_core.model.AttackType;
+import com.radiuk.unmatched_backend_core.model.types.AttackType;
 import lombok.*;
 
 @Getter

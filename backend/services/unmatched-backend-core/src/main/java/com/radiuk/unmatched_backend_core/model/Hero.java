@@ -1,5 +1,6 @@
 package com.radiuk.unmatched_backend_core.model;
 
+import com.radiuk.unmatched_backend_core.model.types.AttackType;
 import jakarta.persistence.*;
 import lombok.*;
 
