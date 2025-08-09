@@ -26,65 +26,15 @@ public class PartyService {
     private final DeckRepository deckRepository;
     private final BoardRepository boardRepository;
     private final DeckCacheService deckCacheService;
+    private final PartyCacheService partyCacheService;
 
-    @Transactional(readOnly = true)
     public PartyDto getPartyByMatchId(Long matchId) {
-        Match match = matchRepository.findById(matchId).orElseThrow(() -> new EntityNotFoundException("Party with id " + matchId + " not found!"));
-
-        List<Party> parties = partyRepository.findByMatchId(matchId);
-
-        List<UserPartyDto> users = parties.stream()
-                .map(party -> UserPartyDto.builder()
-                        .username(party.getUser().getUsername())
-                        .deck(party.getDeck().getName())
-                        .moveOrder(Optional.ofNullable(party.getMoveOrder()).orElse((short) 0))
-                        .finalHp(Optional.ofNullable(party.getFinalHp()).orElse((short) 0))
-                        .build())
-                .sorted(Comparator.comparingInt(UserPartyDto::getMoveOrder))
-                .toList();
-
-        Match.MatchFormat format = match.getFormat();
-
-        List<TeamDto> teams = match.getTeams().stream()
-                .map(team -> TeamDto.builder()
-                        .name(Optional.ofNullable(team.getName()).orElse("No name"))
-                        .build())
-                .toList();
-
-        String boardName = parties.stream()
-                .map(p -> p.getBoard().getName())
-                .findFirst()
-                .orElse("-");
-
-        String winningTeam = parties.stream()
-                .filter(Party::getIsWinner)
-                .map(p -> p.getTeam().getName())
-                .findFirst()
-                .orElse("-");
-
-        return PartyDto.builder()
-                .matchId(matchId)
-                .users(users)
-                .format(format)
-                .teams(teams)
-                .date(match.getPlayedAt())
-                .boardName(boardName)
-                .winner(winningTeam)
-                .build();
+        return partyCacheService.getFromCache(matchId);
     }
 
     @Transactional(readOnly = true)
     public List<PartyDto> getAllPartiesByUsername(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with name " + username + " not found!"));
-        List<Long> numberOfParties = partyRepository.getPartiesByUserId(user.getId());
-
-        List<PartyDto> parties = new ArrayList<>();
-
-        for (long numberOfParty = 0L; numberOfParty < numberOfParties.size(); numberOfParty++) {
-            parties.add(getPartyByMatchId(numberOfParties.get(Math.toIntExact((numberOfParty)))));
-        }
-
-        return parties;
+        return partyCacheService.getAllFromCache(username);
     }
 
     @Transactional
