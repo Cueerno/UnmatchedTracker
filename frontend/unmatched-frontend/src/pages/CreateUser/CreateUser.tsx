@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {createUser} from '../../api/user'
+import './CreateUser.css'
 
 export function CreateUser() {
     const [username, setUsername] = useState('')
@@ -24,44 +25,28 @@ export function CreateUser() {
     }
 
     return (
-        <div style={{maxWidth: 400, margin: '40px auto'}}>
-            <h1>Create User</h1>
+        <div className="create-container">
+            <h1 className="create-title">Create User</h1>
 
-            <form onSubmit={handleSubmit}>
-                <label style={{display: 'block', marginBottom: 12}}>
+            <form className="create-form" onSubmit={handleSubmit}>
+                <label className="form-label">
                     Username
                     <input
+                        className="form-input"
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                         required
                         placeholder="Enter username"
-                        style={{
-                            width: '100%',
-                            padding: 8,
-                            marginTop: 4,
-                            boxSizing: 'border-box',
-                        }}
                     />
                 </label>
 
-                {error && (
-                    <p style={{color: 'red', marginBottom: 12}}>
-                        {error}
-                    </p>
-                )}
+                {error && <p className="form-error">{error}</p>}
 
                 <button
+                    className="form-button"
                     type="submit"
                     disabled={loading}
-                    style={{
-                        padding: '10px 16px',
-                        backgroundColor: '#007bff',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: 4,
-                        cursor: loading ? 'not-allowed' : 'pointer',
-                    }}
                 >
                     {loading ? 'Creating...' : 'Create'}
                 </button>

@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {getUserParties} from '../../api/user'
 import {Party} from "../../types/party";
+import './Parties.css'
 
 export function Parties() {
     const [username, setUsername] = useState<string>('');
@@ -32,46 +33,36 @@ export function Parties() {
     };
 
     return (
-        <div style={{padding: '20px'}}>
-            <h1>Add new party</h1>
-            <button
-                onClick={() => navigate('/parties/new')}
-                style={{
-                    background: '#007bff',
-                    color: '#fff',
-                    border: 'none',
-                    padding: '0.6rem 1.2rem',
-                    borderRadius: '6px',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                }}
-            >
-                + Add Party
-            </button>
+        <div>
+            <div className="parties-header">
+                <h1 className="parties-title">Add new party</h1>
 
-            <h1>Party list</h1>
-
-            <form onSubmit={handleSubmit} style={{marginBottom: '20px'}}>
-                <input
-                    type="text"
-                    value={username}
-                    placeholder="Username"
-                    onChange={e => setUsername(e.target.value)}
-                    style={{padding: '8px', fontSize: '16px', width: '250px'}}
-                />
                 <button
-                    type="submit"
-                    style={{
-                        marginLeft: '10px',
-                        padding: '8px 12px',
-                        fontSize: '16px',
-                        cursor: 'pointer'
-                    }}
-                    disabled={loading}
+                    className="add-party-button"
+                    onClick={() => navigate('/parties/new')}
                 >
-                    {loading ? 'Loading...' : 'Show'}
+                    + Add Party
                 </button>
-            </form>
+
+                <h1 className="parties-title">Party list</h1>
+
+                <form className="parties-form" onSubmit={handleSubmit}>
+                    <input
+                        className="parties-input"
+                        type="text"
+                        value={username}
+                        placeholder="Username"
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <button
+                        type="submit"
+                        className="parties-submit"
+                        disabled={loading}
+                    >
+                        {loading ? 'Loading...' : 'Show'}
+                    </button>
+                </form>
+            </div>
 
             {error && (
                 <div style={{color: 'red', marginBottom: '20px'}}>
@@ -120,7 +111,7 @@ export function Parties() {
                                 {party.teams.map((t, i) => (
                                     <div key={i} className="list-item">
                                         <div className="detail-group">
-                                            <span className="detail-label">Team</span>
+                                            <span className="detail-label">Team {i + 1}</span>
                                             <span className="detail-value">{t.name}</span>
                                         </div>
                                     </div>
@@ -139,7 +130,7 @@ export function Parties() {
             )}
 
             {!loading && parties.length === 0 && !error && (
-                <p>List of games will be here after entering the username.</p>
+                <p className="empty-list">List of games will be here after entering the username.</p>
             )}
         </div>
     );

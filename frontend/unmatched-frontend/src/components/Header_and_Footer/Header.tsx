@@ -5,7 +5,6 @@ import {
     FaBoxOpen,
     FaChartBar,
     FaChessBoard,
-    FaHome,
     FaLayerGroup,
     FaTimes,
     FaUser,

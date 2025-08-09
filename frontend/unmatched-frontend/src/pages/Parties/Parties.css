@@ -1,0 +1,53 @@
+.empty-list, .parties-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.parties-title {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+}
+
+.add-party-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.parties-form {
+    display: flex;
+    gap: 10px;
+}
+
+.parties-input {
+    padding: 8px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.parties-submit {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.parties-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

@@ -1,28 +1,114 @@
-.cards-container {
+.deck-container {
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    display: grid;
-
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-
+.deck-header {
+    display: flex;
+    align-items: flex-start;
     gap: 24px;
+    margin-bottom: 24px;
+}
 
-    padding: 24px;
+.deck-info {
+    flex: 1;
+}
+
+.deck-title {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+}
+
+.deck-set {
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.deck-images {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.deck-card-image {
+    width: 260px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.deck-stats {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.hero-name {
+    margin: 0 0 8px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.hero-qty {
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+.hero-detail {
+    margin: 4px 0;
+    color: #555;
+}
+
+.attack-icon {
+    width: 108px;
+    height: 27px;
+    object-fit: contain;
+    margin: 8px 0;
+}
+
+.hero-ability {
+    margin-top: 8px;
+    color: #444;
+}
+
+.extra-characters {
+    margin-bottom: 24px;
+}
+
+.extra-char {
+    margin-bottom: 16px;
+}
+
+.sidekick {
+    margin-bottom: 24px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f9f9f9;
+}
+
+.sidekick-title {
+    margin: 0 0 12px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+    padding: 24px 0;
 }
 
 .card-item {
-    width: 250px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
+    background: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 12px;
 }
 
 .card-title {
-
     margin: 0 0 12px;
     font-size: 1rem;
     text-align: center;
@@ -31,23 +117,60 @@
 .card-image {
     width: 250px;
     height: 349px;
-
     object-fit: contain;
-
     border-radius: 4px;
     background-color: #f5f5f5;
-    display: block;
 }
 
 .card-noimage {
-
     width: 250px;
     height: 349px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #eeeeee;
-    color: #888888;
+    background: #eee;
+    color: #888;
     border-radius: 4px;
     font-size: 0.9rem;
+}
+
+.deck-loading,
+.deck-error {
+    text-align: center;
+    color: #333;
+    margin: 40px 0;
+}
+
+.deck-error {
+    color: red;
+}
+
+@media (max-width: 740px) {
+    .deck-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .deck-card-image {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .card-image,
+    .card-noimage {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .attack-icon {
+        width: 80px;
+        height: auto;
+    }
 }

@@ -1,3 +1,27 @@
+.decks-top-container {
+    text-align: center;
+}
+
+.format-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    justify-content: center;
+}
+
+.apply-button {
+    display: block;
+    margin: 0 auto 16px;
+    padding: 6px 14px;
+    background: #0984e3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 .format-tabs {
     display: flex;
     gap: 8px;
