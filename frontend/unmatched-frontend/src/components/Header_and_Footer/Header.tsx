@@ -1,109 +1,160 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {ReactNode, useEffect, useMemo, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {
+    FaBars,
     FaBoxOpen,
-    FaCaretDown,
     FaChartBar,
     FaChessBoard,
     FaHome,
     FaLayerGroup,
-    FaPlus,
+    FaTimes,
     FaUser,
     FaUsers
 } from 'react-icons/fa';
 import './Header.css';
 
+interface NavLink {
+    to: string;
+    icon: ReactNode;
+    label: string;
+}
+
+interface NavDropdown {
+    icon: ReactNode;
+    label: string;
+    submenu: NavLink[];
+}
+
+type NavItem = NavLink | NavDropdown;
+
 export default function Header() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [mobileOpen, setMobileOpen]     = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const mobileRef   = useRef<HTMLDivElement>(null);
+
+    const links: NavItem[] = [
+        {to: '/user/create', icon: <FaUser/>, label: 'Add user'},
+        {to: '/parties', icon: <FaUsers/>, label: 'Parties'},
+        {
+            icon: <FaLayerGroup/>,
+            label: 'UmDb',
+            submenu: [
+                {to: '/sets', icon: <FaBoxOpen/>, label: 'Sets'},
+                {to: '/decks', icon: <FaLayerGroup/>, label: 'Decks'},
+                {to: '/boards', icon: <FaChessBoard/>, label: 'Boards'},
+            ]
+        },
+        {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'}
+    ];
+
+    const mobileItems = useMemo(() => {
+        type Mi = NavLink & { indent: boolean };
+        return links.reduce<Mi[]>((acc, item) => {
+            if ('submenu' in item) {
+                item.submenu.forEach(sub => acc.push({...sub, indent: true}));
+            } else {
+                acc.push({...item, indent: false});
+            }
+            return acc;
+        }, []);
+    }, [links]);
 
     useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(e.target as Node)
-            ) {
+        const onClickOutside = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
                 setDropdownOpen(false);
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', onClickOutside);
+        return () => document.removeEventListener('mousedown', onClickOutside);
     }, []);
 
     return (
         <header className="header">
-            <h2>Unmatched Tracker</h2>
+
+            <Link to={"/"} className={"logo"}>
+                <img
+                    src={"achilles_white.png"}
+                    alt={"Achilles logo"}
+                    className="logo-icon"
+                />
+                <span className="logo-text">Unmatched Tracker</span>
+            </Link>
+
             <nav className="nav-links">
-                <Link to="/" className="nav-link">
-                    <span className="nav-link-inner">
-                        <FaHome/>
-                        <span>Home</span>
-                    </span>
-                </Link>
+                {links.map(item => {
+                    if ('submenu' in item) {
+                        return (
+                            <div
+                                key={item.label}
+                                className="nav-link dropdown"
+                                onClick={() => setDropdownOpen(o => !o)}
+                                ref={dropdownRef}
+                            >
+                                <span className="nav-link-inner">
+                                    {item.icon}
+                                    <span>{item.label}</span>
+                                </span>
 
-                <Link to="/user/create" className="nav-link">
-                    <span className="nav-link-inner">
-                        <FaPlus/>
-                        <FaUser/>
-                        <span>User</span>
-                    </span>
-                </Link>
+                                {dropdownOpen && (
+                                    <ul className="dropdown-menu">
+                                        {item.submenu.map(sub => (
+                                            <li key={sub.to}>
+                                                <Link to={sub.to} className="dropdown-item">
+                                                    <span className="nav-link-inner">
+                                                        {sub.icon}
+                                                        <span>{sub.label}</span>
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        );
+                    }
 
-                <Link to="/parties" className="nav-link">
-                    <span className="nav-link-inner">
-                        <FaUsers/>
-                        <span>Parties</span>
-                    </span>
-                </Link>
-
-                <div
-                    className="nav-link dropdown"
-                    ref={dropdownRef}
-                    onClick={() => setDropdownOpen(open => !open)}
-                >
-                    <span className="nav-link-inner">
-                        <span>UmDb</span>
-                        <FaCaretDown/>
-                    </span>
-
-                    {dropdownOpen && (
-                        <ul className="dropdown-menu">
-                            <li>
-                                <Link to="/sets" className="dropdown-item">
-                                    <span className="nav-link-inner">
-                                        <FaBoxOpen/>
-                                        <span>Sets</span>
-                                    </span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/decks" className="dropdown-item">
-                                    <span className="nav-link-inner">
-                                        <FaLayerGroup/>
-                                        <span>Decks</span>
-                                    </span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/boards" className="dropdown-item">
-                                    <span className="nav-link-inner">
-                                        <FaChessBoard/>
-                                        <span>Boards</span>
-                                    </span>
-                                </Link>
-                            </li>
-                        </ul>
-                    )}
-                </div>
-
-                <Link to="/decks/top" className="nav-link">
-                    <span className="nav-link-inner">
-                        <FaChartBar/>
-                        <span>Top</span>
-                    </span>
-                </Link>
-
+                    return (
+                        <Link key={item.to} to={item.to} className="nav-link">
+                            <span className="nav-link-inner">
+                                {item.icon}
+                                <span>{item.label}</span>
+                            </span>
+                        </Link>
+                    );
+                })}
             </nav>
+
+            {/* mobile */}
+            <div className="mobile-menu" ref={mobileRef}>
+                <button
+                    className="menu-toggle"
+                    onClick={() => setMobileOpen(o => !o)}
+                    aria-label="Toggle menu"
+                >
+                    {mobileOpen ? <FaTimes/> : <FaBars/>}
+                </button>
+
+                {mobileOpen && (
+                    <ul className="mobile-dropdown">
+                        {mobileItems.map(item => (
+                            <li key={item.to}>
+                                <Link
+                                    to={item.to}
+                                    className={`dropdown-item${item.indent ? ' indent' : ''}`}
+                                    onClick={() => setMobileOpen(false)}
+                                >
+                                    <span className="nav-link-inner">
+                                        {item.icon}
+                                        <span>{item.label}</span>
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </header>
     );
 }

@@ -1,20 +1,36 @@
 .header {
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
     background-color: #1e1e1e;
     color: #fff;
-    text-align: center;
 }
 
-.header h2 {
-    margin-bottom: 0.5rem;
-    padding-left: 1rem;
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    width: clamp(24px, 8vw, 48px);
+    height: auto;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    line-height: 1;
 }
 
 .nav-links {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    padding-left: 1rem;
 }
 
 .nav-link,
@@ -25,9 +41,9 @@
     background-color: #333;
     border-radius: 4px;
     font-size: 16px;
-    transition: background-color 0.2s ease;
     position: relative;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .nav-link-inner {
@@ -47,9 +63,9 @@
     margin-top: 4px;
     background-color: #333;
     border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    list-style: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     padding: 4px 0;
+    list-style: none;
     min-width: 160px;
     z-index: 10;
     text-align: left;
@@ -57,10 +73,10 @@
 
 .dropdown-item {
     display: block;
+    padding: 8px 16px;
     color: #fff;
     text-decoration: none;
-    padding: 8px 16px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 .dropdown-item + .dropdown-item {
@@ -71,6 +87,56 @@
     background-color: #555;
 }
 
-.dropdown-item .nav-link-inner {
-    justify-content: flex-start;
+.mobile-menu {
+    display: none;
+    position: relative;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    background-color: #333;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    list-style: none;
+    padding: 4px 0;
+    min-width: 180px;
+    z-index: 1000;
+}
+
+.mobile-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.mobile-dropdown .dropdown-item:hover {
+    background-color: #555;
+}
+
+.mobile-dropdown .dropdown-item.indent {
+    padding-left: 32px;
+}
+
+@media (max-width: 740px) {
+    .nav-links {
+        display: none;
+    }
+    .mobile-menu {
+        display: block;
+    }
 }
