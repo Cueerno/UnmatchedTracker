@@ -10,6 +10,7 @@ export interface SidekickDto {
 export enum AttackType {
     MELEE = 'MELEE',
     RANGED = 'RANGED',
+    UNKNOWN = 'UNKNOWN'
 }
 
 export interface DeckRatingDto {

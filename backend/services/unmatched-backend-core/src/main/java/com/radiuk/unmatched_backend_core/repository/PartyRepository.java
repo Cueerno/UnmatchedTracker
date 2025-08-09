@@ -16,7 +16,8 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     select
         p.match_id
     from parties p
-    where p.user_id = :userId;
+    where p.user_id = :userId
+    order by p.match_id desc;
     """)
     List<Long> getPartiesByUserId(Long userId);
 }
