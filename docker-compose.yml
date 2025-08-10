@@ -1,7 +1,8 @@
+version: "3.8"
+
 services:
   postgres:
     image: postgres:16.8-alpine3.20
-    container_name: postgres
     env_file:
       - .env
     environment:
@@ -15,11 +16,47 @@ services:
 
   redis:
     image: redis:7.0.8-alpine
-    container_name: redis
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     volumes:
       - redis_data:/data
+
+  app:
+    build:
+      context: "./backend/services/unmatched-backend-core"
+      dockerfile: "Dockerfile"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
+
+    restart: always
+
+  frontend:
+    build:
+      context: "./frontend/unmatched-frontend"
+      dockerfile: "Dockerfile"
+    ports:
+      - '3000:80'
+    depends_on:
+      - app
 
 volumes:
   postgres_data:
