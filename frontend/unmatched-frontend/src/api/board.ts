@@ -1,10 +1,11 @@
 import {BoardDto} from "../types/board";
+import {API_BASE_URL} from "./config";
 
-const backUrl = 'http://localhost:8080/api/v1/umdb';
+const backUrl = `${API_BASE_URL}/umdb/boards`;
 
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
     const params = new URLSearchParams({ sortBy, direction });
-    const res = await fetch(`${backUrl}/boards/all?${params}`, {
+    const res = await fetch(`${backUrl}/all?${params}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

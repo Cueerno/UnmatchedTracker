@@ -1,7 +1,10 @@
 import {UserDto} from "../types/user";
+import {API_BASE_URL} from "./config";
+
+const backUrl = `${API_BASE_URL}/users`;
 
 export async function getUserParties(username: string) {
-    const res = await fetch(`http://localhost:8080/api/v1/users/${username}/parties`, {
+    const res = await fetch(`${backUrl}/${username}/parties`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +20,7 @@ export async function getUserParties(username: string) {
 }
 
 export async function createUser(user: UserDto) {
-    const res = await fetch('http://localhost:8080/api/v1/users', {
+    const res = await fetch(`${backUrl}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

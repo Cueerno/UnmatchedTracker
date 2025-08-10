@@ -1,7 +1,10 @@
 import {PartyPayload} from "../types/party";
+import {API_BASE_URL} from "./config";
+
+const backUrl = `${API_BASE_URL}/parties`;
 
 export async function getPartyByMatchId(matchId: number) {
-    const res = await fetch(`http://localhost:8080/api/v1/parties/${matchId}`, {
+    const res = await fetch(`${backUrl}/${matchId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +20,7 @@ export async function getPartyByMatchId(matchId: number) {
 }
 
 export async function createParty(party: PartyPayload) {
-    const res = await fetch(`http://localhost:8080/api/v1/parties`, {
+    const res = await fetch(`${backUrl}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
