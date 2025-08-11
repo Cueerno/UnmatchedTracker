@@ -16,7 +16,9 @@ export enum AttackType {
 export interface DeckRatingDto {
     rating: number;
     name: string;
-    win_count: number;
+    winCount: number;
+    totalCount: number;
+    winRatePercent: number;
 }
 
 export interface DeckDto {

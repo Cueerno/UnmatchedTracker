@@ -38,10 +38,22 @@ export function DeckTopTable({ format }: Props) {
             ),
         },
         {
-            key: 'win_count',
+            key: 'winCount',
             label: 'Wins',
             sortable: true,
-            render: d => d.win_count,
+            render: d => d.winCount,
+        },
+        {
+            key: 'totalCount',
+            label: 'Total',
+            sortable: true,
+            render: d => d.totalCount,
+        },
+        {
+            key: 'winRatePercent',
+            label: 'Wins %',
+            sortable: true,
+            render: d => d.winRatePercent,
         },
     ]
 

@@ -46,15 +46,24 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        row_number() over (order by count(*) desc) rank,
-        d.name,
-        count(*) win_count
-    from parties p
-    join decks d on p.deck_id = d.id
-    join matches m on p.match_id = m.id
-    where p.is_winner = true and m.format like :formatName
-    group by d.name
-    order by win_count desc
+        row_number() over (order by stats.win_count desc) rank,
+        stats.name,
+        stats.win_count,
+        stats.total_count,
+        round(100.0 * stats.win_count / nullif(stats.total_count, 0)) win_rate_pct
+    from (
+        select
+            d.name,
+            count(*) filter (where p.is_winner) win_count,
+            count(*) total_count
+        from parties p
+        join decks d on p.deck_id = d.id
+        join matches m on m.id = p.match_id
+        where m.format like :formatName
+        group by d.name
+        ) stats
+    where stats.win_count <> 0
+    order by rank;
     """)
     List<DeckRatingDto> getTop(String formatName);
 }
