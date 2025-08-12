@@ -2,7 +2,7 @@ import {API_BASE_URL} from "./config";
 
 const backUrl = `${API_BASE_URL}/umdb/sets`;
 
-export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
+export async function getAll(sortBy: string = 'releaseDate', direction: string = 'asc') {
     const params = new URLSearchParams({sortBy, direction});
     const res = await fetch(`${backUrl}/all?${params}`, {
         method: 'GET',
