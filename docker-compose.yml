@@ -26,27 +26,19 @@ services:
     volumes:
       - redis_data:/data
 
-  app:
+  backend:
     build:
       context: "./backend/services/unmatched-backend-core"
       dockerfile: "Dockerfile"
     ports:
       - "8080:8080"
-    depends_on:
-      postgres:
-        condition: service_started
-      redis:
-        condition: service_healthy
     env_file:
       - .env
     environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
-
-      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
-      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
-
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+      - redis
     restart: always
 
   frontend:
@@ -54,9 +46,9 @@ services:
       context: "./frontend/unmatched-frontend"
       dockerfile: "Dockerfile"
     ports:
-      - '3000:80'
+      - '3000:3000'
     depends_on:
-      - app
+      - backend
 
 volumes:
   postgres_data:
