@@ -1,5 +1,6 @@
 networks:
-  dev:
+  default:
+    name: dev
 
 services:
   postgres:
