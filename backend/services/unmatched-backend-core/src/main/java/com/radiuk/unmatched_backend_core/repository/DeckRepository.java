@@ -46,7 +46,7 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        row_number() over (order by stats.win_count desc) rank,
+        dense_rank() over (order by stats.win_count desc) rank,
         stats.name,
         stats.win_count,
         stats.total_count,
