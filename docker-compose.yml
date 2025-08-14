@@ -1,3 +1,5 @@
+version: "3.8"
+
 networks:
   default:
     name: dev
@@ -55,7 +57,7 @@ services:
     env_file:
       - .env
     ports:
-      - '3000:3000'
+      - '3000:80'
     depends_on:
       - backend
 
