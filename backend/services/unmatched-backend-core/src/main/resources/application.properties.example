@@ -5,11 +5,16 @@ server.port=
 
 # Data Source
 spring.datasource.driver-class-name=
-spring.datasource.url=jdbc:postgresql://localhost:5432/
+spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
 
+# Redis
+spring.data.redis.port=
+spring.data.redis.host=
+spring.cache.type=redis
+
 # Hibernate
 spring.jpa.properties.hibernate.dialect=
-spring.jpa.properties.hibernate.show_sql=
-spring.jpa.properties.hibernate.format_sql=
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.format_sql=true
