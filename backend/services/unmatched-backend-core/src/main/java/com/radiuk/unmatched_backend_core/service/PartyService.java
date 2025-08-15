@@ -76,7 +76,7 @@ public class PartyService {
             teamMember.setTeam(team);
             teamMember.setUser(user);
             teamMember.setCreatedAt(date);
-            teamMemberRepository.saveAndFlush(teamMember);
+            teamMemberRepository.save(teamMember);
 
             partyRepository.save(
                     Party.builder()

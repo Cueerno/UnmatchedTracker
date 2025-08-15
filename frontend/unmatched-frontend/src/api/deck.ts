@@ -44,8 +44,6 @@ export async function getNames(): Promise<string[]> {
 export async function getTop(format: string | undefined) {
     const url = new URL(`${backUrl}/top`);
 
-    console.log(url);
-
     if (format) {
         url.searchParams.set('format', format);
     }
