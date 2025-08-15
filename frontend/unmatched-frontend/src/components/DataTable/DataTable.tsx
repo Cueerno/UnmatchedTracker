@@ -22,8 +22,16 @@ export function DataTable<T>({
                                  sortState: {sortBy, direction},
                                  onSort,
                              }: DataTableProps<T>) {
-    const renderArrow = (colKey: string) =>
-        colKey === sortBy ? (direction === 'asc' ? ' ▲' : ' ▼') : '';
+    const renderArrows = (colKey: string, sortable?: boolean) => {
+        if (!sortable) return null;
+        const isActive = colKey === sortBy;
+        return (
+            <span className="sort-arrows">
+        <span className={`arrow up ${isActive && direction === 'asc' ? 'active' : ''}`}>▲</span>
+        <span className={`arrow down ${isActive && direction === 'desc' ? 'active' : ''}`}>▼</span>
+      </span>
+        );
+    };
 
     return (
         <div className="data-table-container">
@@ -38,8 +46,10 @@ export function DataTable<T>({
                                     className={col.sortable ? 'sortable' : ''}
                                     onClick={() => col.sortable && onSort(col.key)}
                                 >
-                                    {col.label}
-                                    {col.sortable && renderArrow(col.key)}
+                                    <div className="header-content">
+                                        <span className="label">{col.label}</span>
+                                        {renderArrows(col.key, col.sortable)}
+                                    </div>
                                 </th>
                             ))}
                         </tr>

@@ -1,3 +1,37 @@
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sortable .header-content {
+    cursor: pointer;
+}
+
+.sort-arrows {
+    margin-left: 0.5rem;
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.sort-arrows .arrow {
+    display: block;
+    opacity: 0.3;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+th.sortable:hover .arrow {
+    opacity: 0.6;
+}
+
+.sort-arrows .active {
+    opacity: 1;
+    color: #ffffff;
+}
+
+
 .data-table-container {
     padding: 0 1rem;
     margin: 0 auto;
