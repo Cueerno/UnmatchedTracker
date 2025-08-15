@@ -27,7 +27,4 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Party> parties = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<TeamMember> teamMembers = new ArrayList<>();
-
 }

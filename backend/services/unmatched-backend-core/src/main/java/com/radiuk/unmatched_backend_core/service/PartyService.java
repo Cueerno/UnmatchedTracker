@@ -4,7 +4,6 @@ import com.radiuk.unmatched_backend_core.dto.PartyDto;
 import com.radiuk.unmatched_backend_core.dto.TeamDto;
 import com.radiuk.unmatched_backend_core.dto.UserPartyDto;
 import com.radiuk.unmatched_backend_core.model.*;
-import com.radiuk.unmatched_backend_core.model.id.TeamMemberId;
 import com.radiuk.unmatched_backend_core.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ public class PartyService {
     private final MatchRepository matchRepository;
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-    private final TeamMemberRepository teamMemberRepository;
     private final DeckRepository deckRepository;
     private final BoardRepository boardRepository;
     private final DeckCacheService deckCacheService;
@@ -70,13 +68,6 @@ public class PartyService {
             User user = userRepository.findByUsername(userPartyDto.getUsername()).orElseThrow(() -> new EntityNotFoundException("User with name " + userPartyDto.getUsername() + " not found!"));
             Deck deck = deckRepository.findByName(userPartyDto.getDeck()).orElseThrow(() -> new EntityNotFoundException("Deck with name " + userPartyDto.getDeck() + " not found!"));
             Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
-
-            TeamMember teamMember = new TeamMember();
-            teamMember.setId(new TeamMemberId(team.getId(), user.getId()));
-            teamMember.setTeam(team);
-            teamMember.setUser(user);
-            teamMember.setCreatedAt(date);
-            teamMemberRepository.save(teamMember);
 
             partyRepository.save(
                     Party.builder()

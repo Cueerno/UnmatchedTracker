@@ -15,7 +15,6 @@ import java.util.HashSet;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Short id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,6 +24,11 @@ public class Deck {
     private String name;
 
     private String notes;
+
+    private String quote;
+
+    @Column(name = "art_image_url")
+    private String artImageUrl;
 
     @Column(name = "front_image_url")
     private String frontImageUrl;

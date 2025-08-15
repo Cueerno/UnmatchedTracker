@@ -15,11 +15,15 @@ public class DeckDto {
 
     private String name;
 
+    private String notes;
+
+    private String quote;
+
+    private String artImageUrl;
+
     private String frontImageUrl;
 
     private String backImageUrl;
-
-    private String notes;
 
     private HeroDto hero;
 

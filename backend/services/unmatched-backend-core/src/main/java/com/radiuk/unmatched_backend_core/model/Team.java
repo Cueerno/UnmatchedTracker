@@ -5,9 +5,7 @@ import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -29,9 +27,6 @@ public class Team {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "match_id")
     private Match match;
-
-    @OneToMany(mappedBy = "team")
-    private Set<TeamMember> members = new HashSet<>();
 
     @OneToMany(mappedBy = "team")
     private List<Party> parties = new ArrayList<>();

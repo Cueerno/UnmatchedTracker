@@ -23,9 +23,11 @@ export interface DeckRatingDto {
 export interface DeckDto {
     setName: string;
     name: string;
+    notes: string;
+    quote: string;
+    artImageUrl: string;
     frontImageUrl: string;
     backImageUrl: string;
-    notes: string;
     hero: HeroDto;
     sidekick: SidekickDto;
     cards: CardDto[];
