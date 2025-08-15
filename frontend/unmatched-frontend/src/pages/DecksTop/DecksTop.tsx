@@ -37,7 +37,7 @@ export function DecksTop() {
 
     return (
         <div className="decks-top-container">
-            <h1>Decks Ranking by Wins</h1>
+            <h1>Deck top</h1>
 
             <div className="format-tabs">
                 {FORMATS.map((f) => (

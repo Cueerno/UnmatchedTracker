@@ -18,12 +18,17 @@ export function DeckTopTable({ format }: Props) {
         onSort,
     } = useClientTable<DeckRatingDto>(() => getTop(format))
 
-    const columns: Column<DeckRatingDto>[] = [
+    const indexedData = deckRatings.map((d, idx) => ({
+        ...d,
+        position: idx + 1,
+    }));
+
+    const columns: Column<DeckRatingDto & { position: number }>[] = [
         {
-            key: 'rating',
+            key: 'position',
             label: '#',
             sortable: true,
-            render: d => d.rating,
+            render: d => d.position,
         },
         {
             key: 'name',
@@ -64,7 +69,7 @@ export function DeckTopTable({ format }: Props) {
     return (
         <DataTable
             columns={columns}
-            data={deckRatings}
+            data={indexedData}
             sortState={sortState}
             onSort={onSort}
         />

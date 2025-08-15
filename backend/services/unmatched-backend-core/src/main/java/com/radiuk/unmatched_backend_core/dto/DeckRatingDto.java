@@ -11,8 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class DeckRatingDto {
 
-    private Long rating;
-
     private String name;
 
     private Long winCount;

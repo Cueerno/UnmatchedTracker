@@ -46,7 +46,6 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        dense_rank() over (order by stats.win_count desc) rank,
         stats.name,
         stats.win_count,
         stats.total_count,
@@ -62,8 +61,7 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
         where m.format like :formatName
         group by d.name
         ) stats
-    where stats.win_count <> 0
-    order by rank;
+    order by stats.win_count desc;
     """)
     List<DeckRatingDto> getTop(String formatName);
 }
