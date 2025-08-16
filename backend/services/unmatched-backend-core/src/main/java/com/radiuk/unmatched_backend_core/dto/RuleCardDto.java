@@ -13,5 +13,7 @@ public class RuleCardDto {
 
     private String text;
 
+    private String quote;
+
     private String imageUrl;
 }

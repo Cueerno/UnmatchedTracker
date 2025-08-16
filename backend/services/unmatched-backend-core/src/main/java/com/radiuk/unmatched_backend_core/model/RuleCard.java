@@ -21,6 +21,8 @@ public class RuleCard {
 
     private String text;
 
+    private String quote;
+
     @Column(name = "image_url")
     private String imageUrl;
 }
