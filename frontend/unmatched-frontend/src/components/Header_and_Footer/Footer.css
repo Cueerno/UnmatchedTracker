@@ -21,6 +21,26 @@
     margin: 0 0 0.75rem 0;
 }
 
+.dp-footer-handwritten {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.2rem;
+    color: #71590d;
+    display: inline-block;
+    transform: rotate(-2deg) scale(1.05);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    margin-left: 9px;
+    user-select: none;
+}
+
+.dp-footer-handwritten .dp-footer-logo {
+    width: 1em;
+    height: 1em;
+    transform: translateY(-0.1em)
+    rotate(-5deg);
+    fill: currentColor;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
 .footer-icons {
     display: flex;
     align-items: center;

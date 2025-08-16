@@ -1,4 +1,5 @@
 import { FaEnvelope, FaTelegramPlane, FaGithub } from 'react-icons/fa';
+import {ReactComponent as Heart} from '../../assets/heart.svg';
 import './Footer.css';
 
 export default function Footer() {
@@ -7,6 +8,9 @@ export default function Footer() {
             <div className="footer-text">
                 <p>
                     © {new Date().getFullYear()} Unmatched Tracker by Vyacheslav Radiuk
+                    <span className="dp-footer-handwritten">
+                        and Deadpool <Heart className="dp-footer-logo"/>
+                    </span>
                 </p>
 
                 <p>
