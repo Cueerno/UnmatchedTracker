@@ -1,4 +1,5 @@
 import React, {ReactNode, useEffect, useMemo, useRef, useState} from 'react';
+import {ReactComponent as Achilles} from "../../assets/achilles.svg";
 import {Link} from 'react-router-dom';
 import {
     FaBars,
@@ -73,11 +74,9 @@ export default function Header() {
         <header className="header">
 
             <Link to={"/"} className={"logo"}>
-                <img
-                    src={"achilles_white.png"}
-                    alt={"Achilles logo"}
-                    className="logo-icon"
-                />
+                <div className="logo-icon">
+                    <Achilles />
+                </div>
                 <span className="logo-text">Unmatched Tracker</span>
             </Link>
 
