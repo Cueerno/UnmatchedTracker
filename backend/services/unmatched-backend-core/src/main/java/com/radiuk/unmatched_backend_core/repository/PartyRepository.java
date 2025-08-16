@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface PartyRepository extends JpaRepository<Party, Long> {
@@ -19,5 +20,5 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     where p.user_id = :userId
     order by p.match_id desc;
     """)
-    List<Long> getPartiesByUserId(Long userId);
+    Set<Long> getPartiesByUserId(Long userId);
 }

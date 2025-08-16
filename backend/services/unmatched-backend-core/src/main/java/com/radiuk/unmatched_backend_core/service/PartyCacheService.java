@@ -15,10 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -33,12 +30,12 @@ public class PartyCacheService {
     @Transactional(readOnly = true)
     public List<PartyDto> getAllFromCache(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with name " + username + " not found!"));
-        List<Long> numberOfParties = partyRepository.getPartiesByUserId(user.getId());
+        Set<Long> numberOfParties = partyRepository.getPartiesByUserId(user.getId());
 
         List<PartyDto> parties = new ArrayList<>();
 
         for (long numberOfParty = 0L; numberOfParty < numberOfParties.size(); numberOfParty++) {
-            parties.add(getFromCache(numberOfParties.get(Math.toIntExact((numberOfParty)))));
+            parties.add(getFromCache(numberOfParties.stream().skip(numberOfParty).findFirst().orElse(null)));
         }
 
         return parties;
