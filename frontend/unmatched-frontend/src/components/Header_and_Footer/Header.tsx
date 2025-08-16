@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useMemo, useRef, useState} from 'react';
+import React, {ReactNode, useRef, useState} from 'react';
 import {ReactComponent as Achilles} from "../../assets/achilles.svg";
 import {Link} from 'react-router-dom';
 import {
@@ -7,19 +7,21 @@ import {
     FaChartBar,
     FaChessBoard,
     FaLayerGroup,
+    FaPlus,
     FaTimes,
     FaUser,
     FaUsers
 } from 'react-icons/fa';
+import Dropdown from '../Dropdown/Dropdown';
 import './Header.css';
 
-interface NavLink {
+export interface NavLink {
     to: string;
     icon: ReactNode;
     label: string;
 }
 
-interface NavDropdown {
+export interface NavDropdown {
     icon: ReactNode;
     label: string;
     submenu: NavLink[];
@@ -28,14 +30,19 @@ interface NavDropdown {
 type NavItem = NavLink | NavDropdown;
 
 export default function Header() {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [mobileOpen, setMobileOpen]     = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-    const mobileRef   = useRef<HTMLDivElement>(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const mobileRef = useRef<HTMLDivElement>(null);
 
     const links: NavItem[] = [
         {to: '/user/create', icon: <FaUser/>, label: 'Add user'},
-        {to: '/parties', icon: <FaUsers/>, label: 'Parties'},
+        {
+            icon: <FaUsers/>,
+            label: 'Parties',
+            submenu: [
+                {to: '/parties', icon: <FaUsers/>, label: 'Party list'},
+                {to: '/parties/new', icon: <FaPlus/>, label: 'Add Party'},
+            ],
+        },
         {
             icon: <FaLayerGroup/>,
             label: 'UmDb',
@@ -43,39 +50,16 @@ export default function Header() {
                 {to: '/sets', icon: <FaBoxOpen/>, label: 'Sets'},
                 {to: '/decks', icon: <FaLayerGroup/>, label: 'Decks'},
                 {to: '/boards', icon: <FaChessBoard/>, label: 'Boards'},
-            ]
+            ],
         },
-        {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'}
+        {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'},
     ];
-
-    const mobileItems = useMemo(() => {
-        type Mi = NavLink & { indent: boolean };
-        return links.reduce<Mi[]>((acc, item) => {
-            if ('submenu' in item) {
-                item.submenu.forEach(sub => acc.push({...sub, indent: true}));
-            } else {
-                acc.push({...item, indent: false});
-            }
-            return acc;
-        }, []);
-    }, [links]);
-
-    useEffect(() => {
-        const onClickOutside = (e: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setDropdownOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', onClickOutside);
-        return () => document.removeEventListener('mousedown', onClickOutside);
-    }, []);
 
     return (
         <header className="header">
-
-            <Link to={"/"} className={"logo"}>
+            <Link to="/" className="logo">
                 <div className="logo-icon">
-                    <Achilles />
+                    <Achilles/>
                 </div>
                 <span className="logo-text">Unmatched Tracker</span>
             </Link>
@@ -84,32 +68,12 @@ export default function Header() {
                 {links.map(item => {
                     if ('submenu' in item) {
                         return (
-                            <div
+                            <Dropdown
                                 key={item.label}
-                                className="nav-link dropdown"
-                                onClick={() => setDropdownOpen(o => !o)}
-                                ref={dropdownRef}
-                            >
-                                <span className="nav-link-inner">
-                                    {item.icon}
-                                    <span>{item.label}</span>
-                                </span>
-
-                                {dropdownOpen && (
-                                    <ul className="dropdown-menu">
-                                        {item.submenu.map(sub => (
-                                            <li key={sub.to}>
-                                                <Link to={sub.to} className="dropdown-item">
-                                                    <span className="nav-link-inner">
-                                                        {sub.icon}
-                                                        <span>{sub.label}</span>
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                                icon={item.icon}
+                                label={item.label}
+                                submenu={item.submenu}
+                            />
                         );
                     }
 
@@ -124,7 +88,6 @@ export default function Header() {
                 })}
             </nav>
 
-            {/* mobile */}
             <div className="mobile-menu" ref={mobileRef}>
                 <button
                     className="menu-toggle"
@@ -136,20 +99,49 @@ export default function Header() {
 
                 {mobileOpen && (
                     <ul className="mobile-dropdown">
-                        {mobileItems.map(item => (
-                            <li key={item.to}>
-                                <Link
-                                    to={item.to}
-                                    className={`dropdown-item${item.indent ? ' indent' : ''}`}
-                                    onClick={() => setMobileOpen(false)}
-                                >
-                                    <span className="nav-link-inner">
-                                        {item.icon}
-                                        <span>{item.label}</span>
-                                    </span>
-                                </Link>
-                            </li>
-                        ))}
+                        {links.map(item => {
+                            if ('submenu' in item) {
+                                return (
+                                    <React.Fragment key={item.label}>
+                                        <li className="mobile-dropdown-heading">
+                                            <span className="nav-link-inner">
+                                                {item.icon}
+                                                <span>{item.label}</span>
+                                            </span>
+                                        </li>
+                                        {item.submenu.map(sub => (
+                                            <li key={sub.to}>
+                                                <Link
+                                                    to={sub.to}
+                                                    className="dropdown-item indent"
+                                                    onClick={() => setMobileOpen(false)}
+                                                >
+                                                    <span className="nav-link-inner">
+                                                        {sub.icon}
+                                                        <span>{sub.label}</span>
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </React.Fragment>
+                                );
+                            }
+
+                            return (
+                                <li key={item.to}>
+                                    <Link
+                                        to={item.to}
+                                        className="dropdown-item"
+                                        onClick={() => setMobileOpen(false)}
+                                    >
+                                        <span className="nav-link-inner">
+                                            {item.icon}
+                                            <span>{item.label}</span>
+                                        </span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 )}
             </div>

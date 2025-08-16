@@ -138,6 +138,19 @@
     padding-left: 32px;
 }
 
+.mobile-dropdown-heading {
+    padding: 8px 16px;
+    color: #494641;
+    font-weight: bold;
+    font-size: 0.95rem;
+    background-color: #232121;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: default;
+}
+
 @media (max-width: 740px) {
     .nav-links {
         display: none;
