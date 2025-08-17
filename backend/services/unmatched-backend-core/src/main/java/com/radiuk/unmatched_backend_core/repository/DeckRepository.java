@@ -1,5 +1,6 @@
 package com.radiuk.unmatched_backend_core.repository;
 
+import com.radiuk.unmatched_backend_core.dto.DashboardDeckDto;
 import com.radiuk.unmatched_backend_core.dto.DeckRatingDto;
 import com.radiuk.unmatched_backend_core.model.Deck;
 import org.springframework.data.domain.Pageable;
@@ -64,4 +65,26 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     order by stats.win_count desc;
     """)
     List<DeckRatingDto> getTop(String formatName);
+
+    @Query(nativeQuery = true, value = """
+    select
+         d.name, d.art_image_url
+    from parties p
+    join decks d on p.deck_id = d.id
+    group by d.name, d.art_image_url
+    order by count(*) filter (where p.is_winner) desc
+    limit 1;
+    """)
+    DashboardDeckDto getTheStrongest();
+
+    @Query(nativeQuery = true, value = """
+    select
+        d.name, d.art_image_url
+    from parties p
+    join decks d on p.deck_id = d.id
+    group by d.name, d.art_image_url
+    order by count(*) desc
+    limit 1;
+    """)
+    DashboardDeckDto getTheMostPopular();
 }
