@@ -7,4 +7,5 @@ export interface SetDto {
     description: string;
     boards: BoardDto[];
     releaseDate: string;
+    imageUrl: string;
 }

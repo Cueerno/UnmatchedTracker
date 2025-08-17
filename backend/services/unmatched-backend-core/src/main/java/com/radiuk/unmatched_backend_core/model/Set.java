@@ -41,6 +41,9 @@ public class Set {
 
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "release_date")
     private OffsetDateTime releaseDate;
 
