@@ -27,6 +27,7 @@ public class SetCacheService {
     }
 
     @Cacheable(value = "set", key = "#setName")
+    @Transactional(readOnly = true)
     public SetDto getFromCache(String setName) {
         return setMapper.toDto(setRepository.findByName(setName).orElseThrow(() -> new EntityNotFoundException("Set with name " + setName + " not found!")));
     }

@@ -30,7 +30,6 @@ public class PartyService {
         return partyCacheService.getFromCache(matchId);
     }
 
-    @Transactional(readOnly = true)
     public List<PartyDto> getAllPartiesByUsername(String username) {
         return partyCacheService.getAllFromCache(username);
     }

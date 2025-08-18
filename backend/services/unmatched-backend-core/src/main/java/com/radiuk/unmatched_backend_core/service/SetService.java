@@ -3,7 +3,6 @@ package com.radiuk.unmatched_backend_core.service;
 import com.radiuk.unmatched_backend_core.dto.SetDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ public class SetService {
         return setCacheService.getAllFromCache(sortBy, direction);
     }
 
-    @Transactional(readOnly = true)
     public SetDto getByName(String setName) {
         return setCacheService.getFromCache(setName);
     }

@@ -27,6 +27,7 @@ public class BoardCacheService {
     }
 
     @Cacheable(value = "board", key = "#name")
+    @Transactional(readOnly = true)
     public BoardDto getFromCache(String name) {
         return boardMapper.toDto(boardRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("Board with name " + name + " not found!")));
     }
