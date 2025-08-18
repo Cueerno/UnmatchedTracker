@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ReactComponent as DeadpoolMask} from '../../assets/deadpool-logo.svg';
-import {ReactComponent as UnmatchedLogo} from '../../assets/pic4886156.svg';
+import {ReactComponent as UnmatchedLogo} from '../../assets/unmatched-logo.svg';
 import {getDashboard} from '../../api/dashboard';
 import './Home.css';
 import './HomeCards.css';

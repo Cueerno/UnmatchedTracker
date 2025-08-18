@@ -230,30 +230,45 @@
 
 @media (max-width: 740px) {
     .dp-title {
-        font-size: 2.6rem;
+        font-size: 1.7rem;
     }
 
     .hc-hero {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .hc-hero-right {
         order: -1;
+        justify-content: center;
     }
 
     .hc-hero-mask {
-        transform: translate(0, 0) rotate(-6deg);
         width: 140px;
         height: 140px;
     }
 
     .dp-deadpool-tag {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
     }
+
 }
 
 @media (max-width: 480px) {
-    .dp-title {
-        font-size: 2.2rem;
+    .hc-hero-left {
+        text-align: center;
+    }
+
+    .hc-hero-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .hc-hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hc-hero-sub {
+        font-size: 0.95rem;
     }
 }
