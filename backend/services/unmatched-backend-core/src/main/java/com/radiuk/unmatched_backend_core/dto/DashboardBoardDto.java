@@ -11,11 +11,11 @@ public class DashboardBoardDto {
 
     private String name;
 
-    private Short max_players;
+    private Short maxPlayers;
 
     private Short spaces;
 
     private Short zones;
 
-    private String image_url;
+    private String imageUrl;
 }
