@@ -69,20 +69,20 @@ public class RedisCacheConfig {
         GenericJackson2JsonRedisSerializer listSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
 
         Map<String, RedisCacheConfiguration> configs = Map.of(
-                "userPartyList", createConfig.apply(new CacheConfigEntry(Duration.ofHours(1), listSerializer)),
-                "party", createConfig.apply(new CacheConfigEntry(Duration.ofHours(1), partySerializer)),
+                "userPartyList", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), listSerializer)),
+                "party",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), partySerializer)),
 
-                "setList", createConfig.apply(new CacheConfigEntry(Duration.ofHours(1), listSerializer)),
-                "set", createConfig.apply(new CacheConfigEntry(Duration.ofHours(1), setSerializer)),
+                "setList",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
+                "set",           createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), setSerializer)),
 
-                "deckList", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
-                "deck", createConfig.apply(new CacheConfigEntry(Duration.ofHours(1), deckSerializer)),
-                "deckTop", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
+                "deckList",      createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
+                "deck",          createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), deckSerializer)),
+                "deckTop",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
 
-                "boardList", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
-                "board", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), boardSerializer)),
+                "boardList",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
+                "board",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), boardSerializer)),
 
-                "dashboard", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(30), dashboardSerializer))
+                "dashboard",    createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), dashboardSerializer))
         );
 
         return RedisCacheManager.builder(factory)
