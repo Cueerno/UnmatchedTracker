@@ -13,3 +13,9 @@ spring.cache.type=redis
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
+
+# Logging
+logging.level.root=INFO
+logging.level.org.springframework.web=DEBUG
+logging.level.com.radiuk.unmatched_backend_core=DEBUG
+logging.file.name=backend/services/unmatched-backend-core/logs
