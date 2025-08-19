@@ -16,7 +16,7 @@ export function CreateUser() {
 
         try {
             await createUser({username})
-            navigate('/')
+            navigate('/parties')
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error')
         } finally {

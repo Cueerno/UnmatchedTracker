@@ -150,7 +150,7 @@ export const CreateParty: React.FC = () => {
         try {
             const result = await createParty(payload);
             console.log('Party created:', result);
-            navigate('/', {replace: true})
+            navigate('/parties', {replace: true})
         } catch (err: any) {
             setError(err.message);
         } finally {
