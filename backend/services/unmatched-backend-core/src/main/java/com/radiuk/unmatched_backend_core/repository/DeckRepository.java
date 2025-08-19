@@ -16,11 +16,11 @@ import java.util.Optional;
 @Repository
 public interface DeckRepository extends JpaRepository<Deck, Short> {
 
-    @EntityGraph(attributePaths = {"hero", "sidekick", "ruleCards", "extraCharacters", "cards"})
+    @EntityGraph("Deck.withAll")
     @Override
     List<Deck> findAll(Sort sort);
 
-    @EntityGraph(attributePaths = {"hero", "sidekick", "ruleCards", "extraCharacters", "cards"})
+    @EntityGraph("Deck.withAll")
     Optional<Deck> findByName(String name);
 
     @Query(nativeQuery = true, value = """

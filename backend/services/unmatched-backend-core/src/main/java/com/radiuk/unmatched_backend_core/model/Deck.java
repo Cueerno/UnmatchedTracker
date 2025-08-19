@@ -12,6 +12,16 @@ import java.util.HashSet;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@NamedEntityGraph(
+        name = "Deck.withAll",
+        attributeNodes = {
+                @NamedAttributeNode("hero"),
+                @NamedAttributeNode("sidekick"),
+                @NamedAttributeNode("cards"),
+                @NamedAttributeNode("ruleCards"),
+                @NamedAttributeNode("extraCharacters")
+        }
+)
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
