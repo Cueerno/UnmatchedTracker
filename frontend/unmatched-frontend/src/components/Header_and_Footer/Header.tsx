@@ -10,6 +10,7 @@ import {
     FaPlus,
     FaRandom,
     FaTimes,
+    FaTools,
     FaUser,
     FaUsers
 } from 'react-icons/fa';
@@ -51,10 +52,16 @@ export default function Header() {
                 {to: '/sets', icon: <FaBoxOpen/>, label: 'Sets'},
                 {to: '/decks', icon: <FaLayerGroup/>, label: 'Decks'},
                 {to: '/boards', icon: <FaChessBoard/>, label: 'Boards'},
-                {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'},
             ],
         },
-        {to: '/decks/random', icon: <FaRandom/>, label: 'Random'},
+        {
+            icon: <FaTools/>,
+            label: 'Tools',
+            submenu: [
+                {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'},
+                {to: '/decks/random', icon: <FaRandom/>, label: 'Random'},
+            ],
+        },
     ];
 
     return (
