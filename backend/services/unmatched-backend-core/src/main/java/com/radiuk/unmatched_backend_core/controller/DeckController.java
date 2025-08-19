@@ -31,4 +31,9 @@ public class DeckController {
     public ResponseEntity<?> getTop(@RequestParam(name = "format", required = false) Match.MatchFormat format) {
         return ResponseEntity.ok(deckService.getTop(format));
     }
+
+    @GetMapping("/random")
+    public ResponseEntity<?> getRandom(@RequestParam Short quantity) {
+        return ResponseEntity.ok(deckService.getRandom(quantity));
+    }
 }

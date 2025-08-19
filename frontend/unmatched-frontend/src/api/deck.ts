@@ -62,3 +62,19 @@ export async function getTop(format: string | undefined) {
 
     return await res.json() as Promise<DeckRatingDto[]>
 }
+
+export async function getRandom(quantity: number) {
+    const res = await fetch(`${backUrl}/random?quantity=${quantity}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Error ${res.status}: ${text}`);
+    }
+
+    return res.json();
+}

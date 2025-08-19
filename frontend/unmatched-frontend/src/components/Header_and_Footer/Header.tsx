@@ -8,6 +8,7 @@ import {
     FaChessBoard,
     FaLayerGroup,
     FaPlus,
+    FaRandom,
     FaTimes,
     FaUser,
     FaUsers
@@ -50,9 +51,10 @@ export default function Header() {
                 {to: '/sets', icon: <FaBoxOpen/>, label: 'Sets'},
                 {to: '/decks', icon: <FaLayerGroup/>, label: 'Decks'},
                 {to: '/boards', icon: <FaChessBoard/>, label: 'Boards'},
+                {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'},
             ],
         },
-        {to: '/decks/top', icon: <FaChartBar/>, label: 'Top'},
+        {to: '/decks/random', icon: <FaRandom/>, label: 'Random'},
     ];
 
     return (

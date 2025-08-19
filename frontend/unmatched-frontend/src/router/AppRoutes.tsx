@@ -12,6 +12,7 @@ import {Set} from "../pages/Set/Set";
 import {Boards} from "../pages/Boards/Boards";
 import {CreateUser} from "../pages/CreateUser/CreateUser";
 import NotFound from "../pages/NotFound/NotFound";
+import RandomDeck from "../pages/RandomDeck/RandomDeck";
 
 export default function AppRoutes() {
     return (
@@ -32,6 +33,7 @@ export default function AppRoutes() {
                 <Route path="/decks" element={<Decks/>}/>
                 <Route path="/decks/:name" element={<Deck/>}/>
                 <Route path="/decks/top" element={<DecksTop/>}/>
+                <Route path="/decks/random" element={<RandomDeck/>}/>
 
                 <Route path="/boards" element={<Boards/>}/>
 

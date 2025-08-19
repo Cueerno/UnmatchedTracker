@@ -87,4 +87,13 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     limit 1;
     """)
     DashboardDeckDto getTheMostPopular();
+
+    @EntityGraph("Deck.withAll")
+    @Query(value = """
+    select
+        d
+    from Deck d
+    order by function('random')
+    """)
+    List<Deck> getRandom(Pageable pageable);
 }
