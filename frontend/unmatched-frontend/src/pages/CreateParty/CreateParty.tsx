@@ -286,12 +286,23 @@ export default function CreateParty() {
                 </div>
 
                 <div className="form-section">
-                    <button
-                        type="submit"
-                        className="primary-button"
-                        disabled={isLoading || !isFormValid}>
-                        {isLoading ? 'Saving...' : 'Save'}
-                    </button>
+                    <div className="form-actions">
+                        <div className="form-actions-left">
+                            <button
+                                type="submit"
+                                className="primary-button"
+                                disabled={isLoading || !isFormValid}>
+                                {isLoading ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
+
+                        <div className="form-actions-right">
+                            <span className="footer-note">
+                                I love Hulk ❤ <br/> © Captain America (not Deadpool)
+                            </span>
+                        </div>
+                    </div>
+
                     {error && <p className="error-text">{error}</p>}
                 </div>
             </form>

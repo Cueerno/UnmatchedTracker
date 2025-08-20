@@ -152,6 +152,37 @@
     background-color: #cfcfcf;
 }
 
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-actions-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.form-actions-right {
+    display: flex;
+    align-items: center;
+}
+
+.footer-note {
+    font-family: "Rookie Punk", cursive;
+    font-style: italic;
+    font-weight: 700;
+    color: #71590d;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    transform: rotate(2deg) skewX(2deg);
+    opacity: 0.9;
+}
+
+
 /* ===================================================================
    Error text
    =================================================================== */
