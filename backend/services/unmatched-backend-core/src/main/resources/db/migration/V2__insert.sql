@@ -24,16 +24,17 @@ values ('Cuerno', '2023-01-22 00:01:00.111000 +03:00'),
        ('Pasha''s cousin 1', '2023-01-24 17:00:00.111000 +00:00'),
        ('Pasha''s cousin 2', '2023-01-24 17:00:00.111000 +00:00'),
 
-       ('Gaduka', '2025-08-10 17:00:00.111000 +00:00');
+       ('Gaduka', '2025-08-10 17:00:00.111000 +00:00'),
+       ('Danik (web)', '2023-01-24 17:00:00.111000 +00:00');
 
 insert into sets(name, release_date, image_url)
-values ('Battle of Legends', '2019-09-01 00:00:00.111000 +00:00',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
+values ('Battle of Legends, Volume One', '2019-09-01 00:00:00.111000 +00:00',
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755427791/Battle_of_Legends_Volume_One_s2nnys.webp'),
        ('Robin Hood vs. Bigfoot', '2019-10-01 00:00:00.111000 +00:00',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755427791/Robin_Hood_vs_Bigfoot_j5lxjy.webp'),
        ('Bruce Lee old', '2019-10-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
-       ('Jurassic Park - Ingen vs. Rapptors', '2020-04-01 00:00:00.111000 +00:00',
+       ('Jurassic Park - Ingen vs. Raptors', '2020-04-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Cobble & Fog', '2020-07-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
@@ -41,7 +42,7 @@ values ('Battle of Legends', '2019-09-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Little Red Riding Hood vs. Beowulf', '2020-10-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
-       ('Deadpool', '2021-07-01 00:00:00.111000 +00:00',
+       ('Deadp😎😎l', '2021-07-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Battle of Legends, Volume Two', '2022-01-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
@@ -49,7 +50,7 @@ values ('Battle of Legends', '2019-09-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Hell''s Kitchen', '2022-05-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
-       ('JJurassic Park - Sattler vs. T-Rex', '2022-05-01 00:00:00.111000 +00:00',
+       ('Jurassic Park - Sattler vs. T-Rex', '2022-05-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Houdini vs. The Genie', '2022-12-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
@@ -60,7 +61,7 @@ values ('Battle of Legends', '2019-09-01 00:00:00.111000 +00:00',
        ('Brains and Brawn', '2023-07-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Adventures - Tales to Amaze', '2023-08-01 00:00:00.111000 +00:00',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755427792/Adventures_Tales_to_Amaze_sgvxuh.webp'),
        ('Sun''s Origin', '2024-01-01 00:00:00.111000 +00:00',
         'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754399275/UM-BoL-Vol-R-Release-News-1_gjx4jw.jpg'),
        ('Slings & Arrows', '2024-05-01 00:00:00.111000 +00:00',
@@ -82,29 +83,29 @@ values ('Battle of Legends', '2019-09-01 00:00:00.111000 +00:00',
 
 insert into boards(set_id, name, max_players, spaces, zones, feature, image_url)
 values (1, 'Marmoreal', 4, 31, 8, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164152/marmoreal_hsmsub.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428109/Marmoreal_k08bzi.webp'),
        (1, 'Sarpedon', 4, 38, 6, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164189/sarpedon_sox31r.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428109/Sarpedon_uyn939.webp'),
        (2, 'Sherwood Forest', 2, 30, 7, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164203/sherwood-forest_vgnrp4.jpg'),
-       (2, 'Yukon', 2, 31, 7, '', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164289/yukon_ipzj9t.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428110/Sherwood_Forest_rigkye.webp'),
+       (2, 'Yukon', 2, 31, 7, '', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428107/Yukon_skd26j.webp'),
        (4, 'Raptor Paddock', 2, 28, 6,
         'Has one-way arrows that only allow fighters to move in one direction. Fighters can still make attacks between those spaces.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164179/raptor-paddock_zalqmu.jpg'),
-       (5, 'SoHo', 4, 29, 7, '', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164208/soho_ztxqkl.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428106/Raptor_Paddock_ayokig.webp'),
+       (5, 'SoHo', 4, 29, 7, '', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428109/Soho_itnjy6.webp'),
        (5, 'Baskerville Manor', 4, 32, 7,
         'Has secret passages which connect distant parts of the map for movement, but not for attacks.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164091/baskerville-manor_z9npep.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428103/Baskerville_Manor_yr6g6i.webp'),
        (6, 'Sunnydale High', 4, 31, 6, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164239/sunnydale-high_zzpdcw.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428107/Sunnydale_High_rrhuah.webp'),
        (6, 'The Bronze', 4, 35, 6, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164279/the-bronze_ipftce.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428102/The_Bronze_iuyv1n.webp'),
        (7, 'Heorot', 2, 30, 7,
         'Has doors which can be opened and closed during a maneuver to impede movement and attacks. Opening a door costs 1 space of movement, but closing a door is free.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164131/heorot_sgmmw4.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428108/Heorot_ha2m7j.webp'),
        (9, 'Hanging Gardens', 4, 33, 8,
         'Has high ground spaces give a +1 attack bonus when a fighter is attacking from the high ground space into the adjacent space the arrow points towards.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164117/hanging-gardens_zos6dq.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428107/Hanging_Gardens_folnec.webp'),
        (10, 'The Raft', 4, 31, 8,
         'Has battlefield items which act as playable schemes or BOOST effects during combat, if you are on the space attached to the token.
 
@@ -114,7 +115,8 @@ values (1, 'Marmoreal', 4, 31, 8, '',
 
         Electro-Baton: +2
         Food Tray: +1
-        Folding Chair: +1', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164284/the-raft_ceyf0e.png'),
+        Folding Chair: +1',
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428104/The_Raft_iuptk7.webp'),
 
        (11, 'Hell''s Kitchen', 4, 30, 7,
         'Has battlefield items which act as playable schemes or BOOST effects during combat, if you are on the space attached to the token.
@@ -125,13 +127,14 @@ values (1, 'Marmoreal', 4, 31, 8, '',
 
         Fire Hydrant: +2
         Manhole Cover: +2
-        Mailbox: +1', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164127/hells-kitchen_dotpwb.png'),
+        Mailbox: +1',
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428102/Hell_s_Kitchen_l7ywai.webp'),
 
        (12, 'T. Rex Paddock', 2, 26, 6, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164269/t-rex-paddock_tyyxss.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428107/T._Rex_Paddock_e7tnlk.webp'),
        (13, 'King Solomon''s Mine', 2, 29, 7,
         'Has secret passages which connect distant parts of the map for movement, but not for attacks.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164145/king-solomons-mine_qoehum.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428103/King_Solomon_s_Mine_glo784.webp'),
        (14, 'Navy Pier', 4, 30, 6,
         'Has battlefield items which act as playable schemes or BOOST effects during combat, if you are on the space attached to the token.
 
@@ -141,7 +144,8 @@ values (1, 'Marmoreal', 4, 31, 8, '',
 
         Parking Meter: +2
         Snow Globe: +1
-        Garbage Can Lid: +1', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164168/navy-pier_auo7pl.png'),
+        Garbage Can Lid: +1',
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428105/Navy_Pier_mzrx7n.webp'),
 
        (15, 'Helicarrier', 4, 29, 7,
         'Has battlefield items which act as playable schemes or BOOST effects during combat, if you are on the space attached to the token.
@@ -152,7 +156,8 @@ values (1, 'Marmoreal', 4, 31, 8, '',
 
         Industrial Wrench: +2
         SHIELD-Issued Blaster: +2
-        Reinforced Gloves: +1', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164123/helicarrier_qhiwte.jpg'),
+        Reinforced Gloves: +1',
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428108/Helicarrier_dv70xd.webp'),
 
        (16, 'Sanctum Sanctorum', 4, 29, 7,
         'Has battlefield items which act as playable schemes or BOOST effects during combat, if you are on the space attached to the token.
@@ -164,28 +169,28 @@ values (1, 'Marmoreal', 4, 31, 8, '',
         Dragon Fang: +2
         Axe of Angarruumus: +1
         Black''s Law Dictionary: +1',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164183/sanctum_sanctorum_db3nul.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428103/Sanctum_Sanctorum_hwkrbi.webp'),
 
        (17, 'McMinnville', 5, 42, 10,
         'An Unmatched Adventures board that supports co-op play for 1-4 players against the Martian Invader Villain, or normal Unmatched play for up to 5 players.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164157/mcminnville_npgrxe.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428111/McMinnville_gfcd4x.webp'),
        (17, 'Point Pleasant', 5, 40, 7,
         'An Unmatched Adventures board that supports co-op play for 1-4 players against the Mothman Villain, or normal Unmatched play for up to 5 players.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164173/point-pleasant_vu6nn4.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428110/Point_Pleasant_tsr8h0.webp'),
        (18, 'Azuchi Castle', 2, 31, 8, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754163647/azuchi-castle_owp9pp.jpg'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428105/Azuchi_Castle_dcf1zx.webp'),
        (19, 'Globe Theatre', 4, 32, 10, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164110/globe-theatre_yd0sc5.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428109/Globe_Theatre_hjfkqg.webp'),
        (20, 'Streets of Novigrad', 4, 34, 8, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164214/streets-of-novigrad_uzqezw.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428102/Streets_of_Novigrad_kg39yh.webp'),
        (20, 'Naglfar', 4, 28, 7,
         'Has colored paths that connect the above deck and below deck areas. Spaces connected by colored paths are considered adjacent.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164163/naglfar_t8oy1r.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428102/Naglfar_z71u9m.webp'),
        (21, 'Kaer Mohren', 4, 32, 8,
         'Has one-way arrows that only allow fighters to move in one direction. Fighters can still make attacks between those spaces.',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164137/kaer-mohren_v9twt7.png'),
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428103/Kaer_Morhen_ilystw.webp'),
        (21, 'Fayrlund Forest', 4, 30, 7, '',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754164101/fayrlund-forest_vqel9z.png');
+        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428106/Fayrlund_Forest_xxrpyw.webp');
 
 insert into board_tokens(board_id, name, value, type, ability)
 values (17, 'EMP pulse array', null, 'SCHEME', 'All players discard 2 cards'),
@@ -195,126 +200,107 @@ values (17, 'EMP pulse array', null, 'SCHEME', 'All players discard 2 cards'),
        (17, 'SHIELD-issued Blaster', 2, 'VERSATILE', null),
        (17, 'Rocket pack', null, 'SCHEME', 'Place your finger in any space');
 
-insert into decks(set_id, name, front_image_url, back_image_url)
-values (1, 'Medusa',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754402063/character-cards-v0-010zoej38o5e1_wt8yz7.webp',
-        'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754402024/download_rlrnqp.jpg'),
-       (1, 'Sinbad', 'q', 'q'),
-       (1, 'Alice', 'q', 'q'),
-       (1, 'King Arthur', 'q', 'q'),
+insert into decks(set_id, name, art_image_url, front_image_url, back_image_url)
+values (1, 'Medusa', 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1755428013/Medusa_gzijuz.webp', 'q', 'q'),
+       (1, 'Sinbad', 'q', 'q', 'q'),
+       (1, 'Alice', 'q', 'q', 'q'),
+       (1, 'King Arthur', 'q', 'q', 'q'),
 
-       (2, 'Robin Hood', 'q', 'q'),
-       (2, 'Bigfoot', 'q', 'q'),
+       (2, 'Robin Hood', 'q', 'q', 'q'),
+       (2, 'Bigfoot', 'q', 'q', 'q'),
 
-       (3, 'Bruce Lee old', 'q', 'q'),
+       (3, 'Bruce Lee old', 'q', 'q', 'q'),
 
-       (4, 'InGen', 'q', 'q'),
-       (4, 'Raptors', 'q', 'q'),
+       (4, 'InGen', 'q', 'q', 'q'),
+       (4, 'Raptors', 'q', 'q', 'q'),
 
-       (5, 'Sherlock Holmes', 'q', 'q'),
-       (5, 'Dracula', 'q', 'q'),
-       (5, 'Jekyll & Hyde', 'q', 'q'),
-       (5, 'Invisible Man', 'q', 'q'),
+       (5, 'Sherlock Holmes', 'q', 'q', 'q'),
+       (5, 'Dracula', 'q', 'q', 'q'),
+       (5, 'Jekyll & Hyde', 'q', 'q', 'q'),
+       (5, 'Invisible Man', 'q', 'q', 'q'),
 
-       (6, 'Buffy', 'q', 'q'),
-       (6, 'Angel', 'q', 'q'),
-       (6, 'Spike', 'q', 'q'),
-       (6, 'Willow', 'q', 'q'),
+       (6, 'Buffy', 'q', 'q', 'q'),
+       (6, 'Angel', 'q', 'q', 'q'),
+       (6, 'Spike', 'q', 'q', 'q'),
+       (6, 'Willow', 'q', 'q', 'q'),
 
-       (7, 'Beowulf', 'q', 'q'),
-       (7, 'Little Red Riding Hood', 'q', 'q'),
+       (7, 'Beowulf', 'q', 'q', 'q'),
+       (7, 'Little Red Riding Hood', 'q', 'q', 'q'),
 
-       (8, 'Deadpool', 'q', 'q'),
+       (8, 'Deadp♥️♥️l', 'q', 'q', 'q'),
 
-       (9, 'Achilles', 'q', 'q'),
-       (9, 'Bloody Mary', 'q', 'q'),
-       (9, 'Sun Wukong', 'q', 'q'),
-       (9, 'Yennenga', 'q', 'q'),
+       (9, 'Achilles', 'q', 'q', 'q'),
+       (9, 'Bloody Mary', 'q', 'q', 'q'),
+       (9, 'Sun Wukong', 'q', 'q', 'q'),
+       (9, 'Yennenga', 'q', 'q', 'q'),
 
-       (10, 'Luke Cage', 'q', 'q'),
-       (10, 'Moon Knight', 'q', 'q'),
-       (10, 'Ghost Rider', 'q', 'q'),
+       (10, 'Luke Cage', 'q', 'q', 'q'),
+       (10, 'Moon Knight', 'q', 'q', 'q'),
+       (10, 'Ghost Rider', 'q', 'q', 'q'),
 
-       (11, 'Daredevil', 'q', 'q'),
-       (11, 'Bullseye', 'q', 'q'),
-       (11, 'Elektra', 'q', 'q'),
+       (11, 'Daredevil', 'q', 'q', 'q'),
+       (11, 'Bullseye', 'q', 'q', 'q'),
+       (11, 'Elektra', 'q', 'q', 'q'),
 
-       (12, 'Dr. Ellie Sattler', 'q', 'q'),
-       (12, 'T. Rex', 'q', 'q'),
+       (12, 'Dr. Ellie Sattler', 'q', 'q', 'q'),
+       (12, 'T. Rex', 'q', 'q', 'q'),
 
-       (13, 'Harry Houdini', 'q', 'q'),
-       (13, 'The Genie', 'q', 'q'),
+       (13, 'Harry Houdini', 'q', 'q', 'q'),
+       (13, 'The Genie', 'q', 'q', 'q'),
 
-       (14, 'Ms. Marvel', 'q', 'q'),
-       (14, 'Squirrel Girl', 'q', 'q'),
-       (14, 'Cloak and Danger', 'q', 'q'),
+       (14, 'Ms. Marvel', 'q', 'q', 'q'),
+       (14, 'Squirrel Girl', 'q', 'q', 'q'),
+       (14, 'Cloak and Danger', 'q', 'q', 'q'),
 
-       (15, 'Black Widow', 'q', 'q'),
-       (15, 'Black Panther', 'q', 'q'),
-       (15, 'Winter Soldier', 'q', 'q'),
+       (15, 'Black Widow', 'q', 'q', 'q'),
+       (15, 'Black Panther', 'q', 'q', 'q'),
+       (15, 'Winter Soldier', 'q', 'q', 'q'),
 
-       (16, 'Spider-Man', 'q', 'q'),
-       (16, 'She-Hulk', 'q', 'q'),
-       (16, 'Doctor Strange', 'q', 'q'),
+       (16, 'Spider-Man', 'q', 'q', 'q'),
+       (16, 'She-Hulk', 'q', 'q', 'q'),
+       (16, 'Doctor Strange', 'q', 'q', 'q'),
 
-       (17, 'Nikola Tesla', 'q', 'q'),
-       (17, 'Dr. Jill Trent', 'q', 'q'),
-       (17, 'Golden Bat', 'q', 'q'),
-       (17, 'Annie Christmas', 'q', 'q'),
+       (17, 'Nikola Tesla', 'q', 'q', 'q'),
+       (17, 'Dr. Jill Trent', 'q', 'q', 'q'),
+       (17, 'Golden Bat', 'q', 'q', 'q'),
+       (17, 'Annie Christmas', 'q', 'q', 'q'),
 
-       (18, 'Tomoe Gozen', 'q', 'q'),
-       (18, 'Oda Nobunaga', 'q', 'q'),
+       (18, 'Tomoe Gozen', 'q', 'q', 'q'),
+       (18, 'Oda Nobunaga', 'q', 'q', 'q'),
 
-       (19, 'Hamlet', 'q', 'q'),
-       (19, 'Titania', 'q', 'q'),
-       (19, 'The Wayward Sisters', 'q', 'q'),
-       (19, 'William Shakespeare', 'q', 'q'),
+       (19, 'Hamlet', 'q', 'q', 'q'),
+       (19, 'Titania', 'q', 'q', 'q'),
+       (19, 'The Wayward Sisters', 'q', 'q', 'q'),
+       (19, 'William Shakespeare', 'q', 'q', 'q'),
 
-       (20, 'Eredin', 'q', 'q'),
-       (20, 'Philippa', 'q', 'q'),
-       (20, 'Yennefer & Triss', 'q', 'q'),
+       (20, 'Eredin', 'q', 'q', 'q'),
+       (20, 'Philippa', 'q', 'q', 'q'),
+       (20, 'Yennefer & Triss', 'q', 'q', 'q'),
 
-       (21, 'Ciri', 'q', 'q'),
-       (21, 'Ancient Leshen', 'q', 'q'),
-       (21, 'Geralt of Rivia', 'q', 'q'),
+       (21, 'Ciri', 'q', 'q', 'q'),
+       (21, 'Ancient Leshen', 'q', 'q', 'q'),
+       (21, 'Geralt of Rivia', 'q', 'q', 'q'),
 
-       (22, 'Pandora', 'q', 'q'),
-       (22, 'Blackbeard', 'q', 'q'),
-       (22, 'Loki', 'q', 'q'),
-       (22, 'The Chupacabra', 'q', 'q'),
+       (22, 'Pandora', 'q', 'q', 'q'),
+       (22, 'Blackbeard', 'q', 'q', 'q'),
+       (22, 'Loki', 'q', 'q', 'q'),
+       (22, 'The Chupacabra', 'q', 'q', 'q'),
 
-       (23, 'Muhammad Ali', 'q', 'q'),
-       (23, 'Bruce Lee', 'q', 'q'),
+       (23, 'Muhammad Ali', 'q', 'q', 'q'),
+       (23, 'Bruce Lee', 'q', 'q', 'q'),
 
-       (24, 'Leonardo', 'q', 'q'),
-       (24, 'Raphael', 'q', 'q'),
-       (24, 'Donatello', 'q', 'q'),
-       (24, 'Michelangelo', 'q', 'q'),
+       (24, 'Leonardo', 'q', 'q', 'q'),
+       (24, 'Raphael', 'q', 'q', 'q'),
+       (24, 'Donatello', 'q', 'q', 'q'),
+       (24, 'Michelangelo', 'q', 'q', 'q'),
 
-       (25, 'Rosie the Riveter', 'q', 'q'),
-       (25, 'John Henry', 'q', 'q'),
-       (25, 'Wyatt Earp', 'q', 'q'),
-       (25, 'George Washington', 'q', 'q'),
+       (25, 'Rosie the Riveter', 'q', 'q', 'q'),
+       (25, 'John Henry', 'q', 'q', 'q'),
+       (25, 'Wyatt Earp', 'q', 'q', 'q'),
+       (25, 'George Washington', 'q', 'q', 'q'),
 
-       (26, 'Hellboy', 'q', 'q');
+       (26, 'Hellboy', 'q', 'q', 'q');
 
-create type card_type as enum ('ATTACK', 'VERSATILE', 'DEFENSE', 'SCHEME');
-create table cards
-(
-    id             bigserial primary key,
-    deck_id        smallint references decks (id),
-    title          varchar(255),
-    type           varchar(20),
-    character_name varchar,
-    value          smallint,
-    boost          smallint,
-    quantity       smallint,
-    basic_text     varchar,
-    immediate_text varchar,
-    during_text    varchar,
-    after_text     varchar,
-    image_url      text
-);
 insert into cards(deck_id, title, type, character_name, value, boost, quantity, basic_text, immediate_text, during_text,
                   after_text, image_url)
 values (1, 'Gaze of Stone', 'ATTACK', 'Medusa', 2, 4, 3, null, null, null,
@@ -345,7 +331,16 @@ values (1, 'Gaze of Stone', 'ATTACK', 'Medusa', 2, 4, 3, null, null, null,
         'Move each of your fighters up to 3 spaces. You may move them through spaces containing opposing fighters. Then, return a defeated Harpy (if any) to any space in Medusa''s zone.',
         null, null, null, 'https://res.cloudinary.com/dvjckj3bk/image/upload/v1754484110/winged-frenzy_ko3p06.png');
 
-create type attack_type as enum ('MELEE', 'RANGED', 'UNKNOWN');
+create table rule_cards
+(
+    id        smallserial primary key,
+    deck_id   smallint     not null references decks (id),
+    title     varchar(255) not null,
+    text      text,
+    quote     text,
+    image_url text
+);
+
 insert into heroes(deck_id, name, quantity, hp, move, attack_type)
 values (1, 'Medusa', 1, 16, 3, 'RANGED'),
        (2, 'Sinbad', 1, 16, 2, 'MELEE'),
@@ -452,7 +447,6 @@ values (1, 'Harpy', 3, 1, 3, 'MELEE'),
        (2, 'The Porter', 1, 6, 2, 'MELEE'),
        (3, 'The Jabberwock', 1, 8, 2, 'MELEE'),
        (4, 'Merlin', 1, 7, 2, 'RANGED'),
-
        (6, 'Outlaws', 4, 1, 1, 'MELEE'),
        (7, 'The Jackalope', 1, 6, 3, 'MELEE'),
        (8, 'Ingen Workers', 3, 1, 3, 'RANGED'),
@@ -501,7 +495,6 @@ values (26, 'Khonshu',
        (26, 'Mr. Knight', 'Mr. Knight adds +1 to all his defense values.', 1, 16, 3, 'MELEE', 'q'),
        (30, 'Elektra Resurrected', null, 1, 9, 2, 'MELEE', 'q'),
        (30, 'Squirrels', null, 8, 1, 2, 'MELEE', 'q');
-create type match_format as enum ('HEADS_UP', 'TEAMS', 'FREE_FOR_ALL', 'COOP_PLAY');
 
 insert into matches(format, created_at)
 values ('HEADS_UP', '2023-01-22 15:00:00.111000 +00:00'),
@@ -533,6 +526,9 @@ values ('HEADS_UP', '2023-01-22 15:00:00.111000 +00:00'),
        ('HEADS_UP', '2023-01-23 17:00:00.111000 +00:00'),
        ('HEADS_UP', '2023-01-23 17:00:00.111000 +00:00'),
        ('HEADS_UP', '2023-09-13 17:00:00.111000 +00:00'),
+
+       ('HEADS_UP', '2023-09-13 17:00:00.111000 +00:00'),
+
        ('TEAMS', '2023-01-24 17:00:00.111000 +00:00'),
        ('TEAMS', '2023-09-03 17:00:00.111000 +00:00'),
        ('TEAMS', '2024-01-11 17:00:00.111000 +00:00'),
@@ -627,19 +623,24 @@ values (1, 'sisenok', '2023-01-22 20:00:00.111000 +00:00'),
        (29, 'Roma', '2023-09-13 17:00:00.111000 +00:00'),
        (29, 'Lesha (web)', '2023-09-13 17:00:00.111000 +00:00'),
 
-       (30, 'sisenok', '2023-01-24 17:00:00.111000 +00:00'),
-       (30, 'Pasha''s cousin 1 & Pasha''s cousin 2', '2023-01-24 17:00:00.111000 +00:00'),
+       (30, 'sisenok', '2023-09-13 17:00:00.111000 +00:00'),
+       (30, 'Danik (web)', '2023-09-13 17:00:00.111000 +00:00'),
 
-       (31, 'sisenok & Lizyonok', '2023-09-03 17:00:00.111000 +00:00'),
-       (31, 'Mateush & Arrrishh', '2023-09-03 17:00:00.111000 +00:00'),
+       (31, 'sisenok', '2023-01-24 17:00:00.111000 +00:00'),
+       (31, 'Pasha''s cousin 1 & Pasha''s cousin 2', '2023-01-24 17:00:00.111000 +00:00'),
 
-       (32, 'Cuerno & Mateush', '2024-01-11 17:00:00.111000 +00:00'),
-       (32, 'sisenok', '2024-01-11 17:00:00.111000 +00:00'),
+       (32, 'sisenok & Lizyonok', '2023-09-03 17:00:00.111000 +00:00'),
+       (32, 'Mateush & Arrrishh', '2023-09-03 17:00:00.111000 +00:00'),
 
-       (33, 'Cuerno & Mateush', '2025-08-10 17:00:00.111000 +00:00'),
-       (33, 'Lizyonok & Gaduka', '2025-08-10 17:00:00.111000 +00:00'),
-       (34, 'Cuerno & Mateush', '2025-08-15 19:00:00.111000 +00:00'),
-       (34, 'Lizyonok & Ulyana', '2025-08-15 19:00:00.111000 +00:00');
+       (33, 'Cuerno & Mateush', '2024-01-11 17:00:00.111000 +00:00'),
+       (33, 'sisenok', '2024-01-11 17:00:00.111000 +00:00'),
+
+       (34, 'Cuerno & Mateush', '2025-08-10 17:00:00.111000 +00:00'),
+       (34, 'Lizyonok & Gaduka', '2025-08-10 17:00:00.111000 +00:00'),
+
+       (35, 'Cuerno & Mateush', '2025-08-15 19:00:00.111000 +00:00'),
+       (35, 'Lizyonok & Ulyana', '2025-08-15 19:00:00.111000 +00:00');
+
 
 insert into parties(match_id, team_id, user_id, deck_id, board_id, move_order, final_hp, is_winner, created_at)
 values (1, 1, 2, 12, 7, 1, 0, false, '2023-01-22 20:00:00.111000 +00:00'),
@@ -660,7 +661,7 @@ values (1, 1, 2, 12, 7, 1, 0, false, '2023-01-22 20:00:00.111000 +00:00'),
 
        (5, 9, 1, 21, 11, 1, 0, false, '2023-08-16 18:00:00.111000 +00:00'),
        (5, 9, 5, 22, 11, 3, 0, false, '2023-08-16 18:00:00.111000 +00:00'),
-       (5, 10, 3, 23, 11, 2, 8, true, '2023-08-16 18:00:00.111000 +00:00'),
+       (5, 10, 3, 1, 11, 2, 6, true, '2023-08-16 18:00:00.111000 +00:00'),
        (5, 10, 4, 10, 11, 4, 10, true, '2023-08-16 18:00:00.111000 +00:00'),
 
        (6, 11, 2, 1, 1, 1, 10, true, '2023-08-18 15:00:00.111000 +00:00'),
@@ -728,8 +729,8 @@ values (1, 1, 2, 12, 7, 1, 0, false, '2023-01-22 20:00:00.111000 +00:00'),
        (22, 44, 2, 2, 2, 3, 0, false, '2025-08-07 00:00:00.111000 +00:00'),
        (22, 44, 14, 3, 2, 1, 0, false, '2025-08-07 00:00:00.111000 +00:00'),
 
-       (23, 45, 14, 3, 2, 1, 8, false, '2025-08-07 00:00:00.111000 +00:00'),
-       (23, 46, 2, 4, 2, 2, 0, true, '2025-08-07 00:00:00.111000 +00:00'),
+       (23, 45, 14, 3, 2, 1, 0, false, '2025-08-07 00:00:00.111000 +00:00'),
+       (23, 46, 2, 4, 2, 2, 8, true, '2025-08-07 00:00:00.111000 +00:00'),
 
        (24, 47, 2, 2, 2, 1, 7, true, '2023-08-05 17:00:00.111000 +00:00'),
        (24, 47, 3, 21, 2, 3, 13, true, '2023-08-05 17:00:00.111000 +00:00'),
@@ -755,27 +756,30 @@ values (1, 1, 2, 12, 7, 1, 0, false, '2023-01-22 20:00:00.111000 +00:00'),
        (29, 57, 6, 19, 10, 1, 0, false, '2023-09-13 17:00:00.111000 +00:00'),
        (29, 58, 16, 18, 10, 2, 1, true, '2023-09-13 17:00:00.111000 +00:00'),
 
-       (30, 59, 2, 10, 7, 1, 12, true, '2023-01-24 17:00:00.111000 +00:00'),
-       (30, 59, 2, 3, 7, 3, 7, true, '2023-01-24 17:00:00.111000 +00:00'),
-       (30, 60, 17, 2, 7, 4, 0, false, '2023-01-24 17:00:00.111000 +00:00'),
-       (30, 60, 18, 12, 7, 2, 0, false, '2023-01-24 17:00:00.111000 +00:00'),
+       (30, 59, 2, 19, 10, 1, 8, true, '2023-09-13 17:00:00.111000 +00:00'),
+       (30, 60, 20, 18, 10, 2, 0, false, '2023-09-13 17:00:00.111000 +00:00'),
 
-       (31, 61, 2, 21, 1, 1, 12, true, '2023-09-03 17:00:00.111000 +00:00'),
-       (31, 61, 4, 2, 1, 3, 7, true, '2023-09-03 17:00:00.111000 +00:00'),
-       (31, 62, 3, 1, 1, 4, 0, false, '2023-09-03 17:00:00.111000 +00:00'),
-       (31, 62, 5, 22, 1, 2, 0, false, '2023-09-03 17:00:00.111000 +00:00'),
+       (31, 61, 2, 10, 7, 1, 12, true, '2023-01-24 17:00:00.111000 +00:00'),
+       (31, 61, 2, 3, 7, 3, 7, true, '2023-01-24 17:00:00.111000 +00:00'),
+       (31, 62, 17, 2, 7, 4, 0, false, '2023-01-24 17:00:00.111000 +00:00'),
+       (31, 62, 18, 12, 7, 2, 0, false, '2023-01-24 17:00:00.111000 +00:00'),
 
-       (32, 63, 1, 34, 1, 1, 12, false, '2024-01-11 17:00:00.111000 +00:00'),
-       (32, 63, 3, 33, 1, 3, 7, false, '2024-01-11 17:00:00.111000 +00:00'),
-       (32, 64, 2, 4, 1, 4, 0, true, '2024-01-11 17:00:00.111000 +00:00'),
-       (32, 64, 2, 1, 1, 2, 0, true, '2024-01-11 17:00:00.111000 +00:00'),
+       (32, 63, 2, 21, 1, 1, 12, true, '2023-09-03 17:00:00.111000 +00:00'),
+       (32, 63, 4, 2, 1, 3, 7, true, '2023-09-03 17:00:00.111000 +00:00'),
+       (32, 64, 3, 1, 1, 4, 0, false, '2023-09-03 17:00:00.111000 +00:00'),
+       (32, 64, 5, 22, 1, 2, 0, false, '2023-09-03 17:00:00.111000 +00:00'),
 
-       (33, 65, 1, 21, 22, 3, 14, true, '2025-08-10 17:00:00.111000 +00:00'),
-       (33, 65, 3, 23, 22, 1, 9, true, '2025-08-10 17:00:00.111000 +00:00'),
-       (33, 66, 4, 22, 22, 2, 0, false, '2025-08-10 17:00:00.111000 +00:00'),
-       (33, 66, 19, 1, 22, 4, 0, false, '2025-08-10 17:00:00.111000 +00:00'),
-       (34, 67, 1, 41, 22, 4, 0, false, '2025-08-15 19:00:00.111000 +00:00'),
-       (34, 67, 3, 24, 22, 2, 0, false, '2025-08-15 19:00:00.111000 +00:00'),
-       (34, 68, 4, 23, 22, 3, 6, true, '2025-08-15 19:00:00.111000 +00:00'),
-       (34, 68, 14, 21, 22, 1, 0, true, '2025-08-15 19:00:00.111000 +00:00');
+       (33, 65, 1, 34, 1, 1, 12, false, '2024-01-11 17:00:00.111000 +00:00'),
+       (33, 65, 3, 33, 1, 3, 7, false, '2024-01-11 17:00:00.111000 +00:00'),
+       (33, 66, 2, 4, 1, 4, 0, true, '2024-01-11 17:00:00.111000 +00:00'),
+       (33, 66, 2, 1, 1, 2, 0, true, '2024-01-11 17:00:00.111000 +00:00'),
 
+       (34, 67, 1, 21, 22, 3, 14, true, '2025-08-10 17:00:00.111000 +00:00'),
+       (34, 67, 3, 23, 22, 1, 9, true, '2025-08-10 17:00:00.111000 +00:00'),
+       (34, 68, 4, 22, 22, 2, 0, false, '2025-08-10 17:00:00.111000 +00:00'),
+       (34, 68, 19, 1, 22, 4, 0, false, '2025-08-10 17:00:00.111000 +00:00'),
+
+       (35, 69, 1, 41, 22, 4, 0, false, '2025-08-15 19:00:00.111000 +00:00'),
+       (35, 69, 3, 24, 22, 2, 0, false, '2025-08-15 19:00:00.111000 +00:00'),
+       (35, 70, 4, 23, 22, 3, 6, true, '2025-08-15 19:00:00.111000 +00:00'),
+       (35, 70, 14, 21, 22, 1, 0, true, '2025-08-15 19:00:00.111000 +00:00');
