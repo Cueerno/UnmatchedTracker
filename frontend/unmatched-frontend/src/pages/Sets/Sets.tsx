@@ -5,7 +5,7 @@ import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {getAll} from '../../api/set';
 import {SetDto} from '../../types/set';
 
-export function Sets() {
+export default function Sets() {
     const {
         data: sets,
         loading,

@@ -4,7 +4,7 @@ import {getUserParties} from '../../api/user'
 import {Party} from "../../types/party";
 import './Parties.css'
 
-export function Parties() {
+export default function Parties() {
     const [username, setUsername] = useState<string>('');
     const [parties, setParties] = useState<Party[]>([]);
     const [loading, setLoading] = useState<boolean>(false);

@@ -7,7 +7,7 @@ import './HomeCards.css';
 import {DashboardDto} from '../../types/dashboard';
 import {Link} from 'react-router-dom';
 
-export function Home() {
+export default function Home() {
     const [dashboard, setDashboard] = useState<DashboardDto | null>(null);
     const [error, setError] = useState<string>('');
 

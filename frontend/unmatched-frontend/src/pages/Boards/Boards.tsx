@@ -4,7 +4,7 @@ import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {getAll} from '../../api/board';
 import {BoardDto} from '../../types/board';
 
-export function Boards() {
+export default function Boards() {
     const {
         data: boards,
         loading,

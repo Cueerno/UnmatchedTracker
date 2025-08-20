@@ -19,7 +19,7 @@ interface Team {
     team: string;
 }
 
-export const CreateParty: React.FC = () => {
+export default function CreateParty() {
     const [partyType, setPartyType] = useState<PartyType>('HEADS_UP');
     const [players, setPlayers] = useState<Player[]>([]);
     const [teams, setTeams] = useState<Team[]>([]);

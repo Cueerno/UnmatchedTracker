@@ -4,7 +4,7 @@ import {getPartyByMatchId} from '../../api/party';
 import './Party.css';
 import {PartyPayload} from "../../types/party";
 
-export const Party: React.FC = () => {
+export default function Party() {
     const {matchId} = useParams<{ matchId: string }>();
     const navigate = useNavigate();
 

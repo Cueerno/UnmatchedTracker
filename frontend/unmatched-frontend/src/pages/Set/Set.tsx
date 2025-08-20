@@ -18,7 +18,7 @@ function attackTypeLabel(type: AttackType) {
     return type.toLowerCase()
 }
 
-export function Set() {
+export default function Set() {
     const {name: rawName} = useParams<{ name: string }>()
     const [set, setSet] = useState<SetDto | null>(null)
     const [loading, setLoading] = useState(false)

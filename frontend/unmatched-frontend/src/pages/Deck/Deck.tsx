@@ -4,7 +4,7 @@ import {getByName} from '../../api/deck';
 import {AttackType, DeckDto} from '../../types/deck';
 import './Deck.css';
 
-export function Deck() {
+export default function Deck() {
     const {name} = useParams<{ name: string }>();
     const [deck, setDeck] = useState<DeckDto | null>(null);
     const [loading, setLoading] = useState(false);

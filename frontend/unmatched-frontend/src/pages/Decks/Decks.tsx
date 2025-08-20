@@ -9,7 +9,7 @@ function attackTypeLabel(type: AttackType) {
     return type.toLowerCase()
 }
 
-export function Decks() {
+export default function Decks() {
     const {
         data: decks,
         loading,

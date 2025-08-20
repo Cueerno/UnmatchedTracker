@@ -1,16 +1,16 @@
 import {Route, Routes} from 'react-router-dom'
-import {Parties} from '../pages/Parties/Parties'
-import {Home} from '../pages/Home/Home';
-import {CreateParty} from "../pages/CreateParty/CreateParty";
-import {Party} from "../pages/Party/Party";
+import Parties from '../pages/Parties/Parties'
+import Home from '../pages/Home/Home';
+import CreateParty from "../pages/CreateParty/CreateParty";
+import Party from "../pages/Party/Party";
 import Layout from "../components/Layout/Layout";
-import {Decks} from "../pages/Decks/Decks";
-import {Deck} from "../pages/Deck/Deck";
-import {DecksTop} from "../pages/DecksTop/DecksTop";
-import {Sets} from "../pages/Sets/Sets";
-import {Set} from "../pages/Set/Set";
-import {Boards} from "../pages/Boards/Boards";
-import {CreateUser} from "../pages/CreateUser/CreateUser";
+import Decks from "../pages/Decks/Decks";
+import Deck from "../pages/Deck/Deck";
+import DecksTop from "../pages/DecksTop/DecksTop";
+import Sets from "../pages/Sets/Sets";
+import Set from "../pages/Set/Set";
+import Boards from "../pages/Boards/Boards";
+import CreateUser from "../pages/CreateUser/CreateUser";
 import NotFound from "../pages/NotFound/NotFound";
 import RandomDeck from "../pages/RandomDeck/RandomDeck";
 

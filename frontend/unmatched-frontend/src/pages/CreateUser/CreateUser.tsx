@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {createUser} from '../../api/user'
 import './CreateUser.css'
 
-export function CreateUser() {
+export default function CreateUser() {
     const [username, setUsername] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)

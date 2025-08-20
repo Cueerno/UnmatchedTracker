@@ -15,7 +15,7 @@ const FORMATS: FormatOption[] = [
     {label: 'Free-for-all', value: 'FREE_FOR_ALL'},
 ]
 
-export function DecksTop() {
+export default function DecksTop() {
     const [searchParams, setSearchParams] = useSearchParams()
     const initialFormat = searchParams.get('format') ?? undefined
 
