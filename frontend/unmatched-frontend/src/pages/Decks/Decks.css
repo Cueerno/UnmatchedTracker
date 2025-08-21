@@ -162,8 +162,19 @@
     color: #ff2323;
 }
 
+.stat.attack {
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: 8px;
+    align-items: flex-end;
+}
 
-/* move */
+.attack-icon-short {
+    height: 25px;
+    width: auto;
+    object-fit: contain;
+}
+
 .stat.move {
     flex: 0 0 18%;
     justify-content: flex-end;

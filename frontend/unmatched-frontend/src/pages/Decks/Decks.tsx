@@ -65,6 +65,14 @@ export default function Decks() {
                                             <span>{deck.hero.hp}</span>
                                         </div>
 
+                                        <div className="stat attack">
+                                            <img
+                                                className="attack-icon-short"
+                                                src={`/attack_type_short/${attackTypeLabel(deck.hero.attackType)}.png`}
+                                                alt={attackTypeLabel(deck.hero.attackType)}
+                                            />
+                                        </div>
+
                                         <div className="stat move">
                                             <div className="move-label">↕</div>
                                             <div className="move-value">{deck.hero.move}</div>
