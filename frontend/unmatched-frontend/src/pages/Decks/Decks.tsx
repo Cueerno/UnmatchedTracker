@@ -4,6 +4,7 @@ import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {getAll} from '../../api/deck';
 import {AttackType, DeckDto} from '../../types/deck';
 import './Decks.css';
+import {FaUsers} from "react-icons/fa";
 
 function attackTypeLabel(type: AttackType) {
     return type.toLowerCase();
@@ -48,16 +49,13 @@ export default function Decks() {
                                     </div>
 
                                     <div className="deck-stats-row">
-                                        <div className="stat qty">{deck.hero.quantity > 1 ? `x${deck.hero.quantity}` : ''}</div>
-
-                                        <div className="stat attack">
-                                            <img
-                                                className="attack-icon"
-                                                src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
-                                                alt={attackTypeLabel(deck.hero.attackType)}
-                                                width={36}
-                                                height={20}
-                                            />
+                                        <div className="stat qty">
+                                            {deck.hero.quantity > 1 && (
+                                                <>
+                                                    <FaUsers className="qty-icon"/>
+                                                    <span>x{deck.hero.quantity}</span>
+                                                </>
+                                            )}
                                         </div>
 
                                         <div className="stat hp">
