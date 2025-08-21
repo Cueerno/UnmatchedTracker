@@ -1,133 +1,81 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Column, DataTable} from '../../components/DataTable/DataTable'
-import {useClientTable} from '../../hooks/useClientTable/useClientTable'
-import {AttackType, DeckDto} from '../../types/deck'
-import {getAll} from '../../api/deck'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {useClientTable} from '../../hooks/useClientTable/useClientTable';
+import {getAll} from '../../api/deck';
+import {AttackType, DeckDto} from '../../types/deck';
+import './Decks.css';
 
 function attackTypeLabel(type: AttackType) {
-    return type.toLowerCase()
+    return type.toLowerCase();
 }
 
 export default function Decks() {
-    const {
-        data: decks,
-        loading,
-        error,
-        sortState,
-        onSort,
-    } = useClientTable<DeckDto>(getAll)
-
-    const columns: Column<DeckDto>[] = [
-        {
-            key: 'name',
-            label: 'Deck name',
-            sortable: true,
-            render: deck => (
-                <Link
-                    to={`/decks/${encodeURIComponent(deck.name)}`}
-                    style={{textDecoration: 'none', color: '#333'}}
-                >
-                    {deck.name}
-                </Link>
-            ),
-        },
-        {
-            key: 'hero.name',
-            label: 'Hero name',
-            sortable: true,
-            render: deck => deck.hero.name,
-        },
-        {
-            key: 'hero.quantity',
-            label: 'Quantity',
-            sortable: true,
-            render: deck => (deck.hero.quantity > 1 ? `x${deck.hero.quantity}` : null),
-        },
-        {
-            key: 'hero.hp',
-            label: 'Hp',
-            sortable: true,
-            render: deck => deck.hero.hp,
-        },
-        {
-            key: 'hero.move',
-            label: 'Move',
-            sortable: true,
-            render: deck => deck.hero.move,
-        },
-        {
-            key: 'hero.attackType',
-            label: 'Attack',
-            sortable: true,
-            render: deck => (
-                <img
-                    src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
-                    alt={attackTypeLabel(deck.hero.attackType)}
-                    width={108}
-                    height={27}
-                />
-            ),
-        },
-        {
-            key: 'sidekick.name',
-            label: 'Sidekick name',
-            sortable: true,
-            render: deck => deck.sidekick?.name ?? null,
-        },
-        {
-            key: 'sidekick.quantity',
-            label: 'Quantity',
-            sortable: true,
-            render: deck =>
-                deck.sidekick?.quantity && deck.sidekick.quantity > 1
-                    ? `x${deck.sidekick.quantity}`
-                    : null,
-        },
-        {
-            key: 'sidekick.hp',
-            label: 'Hp',
-            sortable: true,
-            render: deck => deck.sidekick?.hp ?? null,
-        },
-        {
-            key: 'sidekick.move',
-            label: 'Move',
-            sortable: true,
-            render: deck => deck.sidekick?.move ?? null,
-        },
-        {
-            key: 'sidekick.attackType',
-            label: 'Attack',
-            sortable: true,
-            render: deck =>
-                deck.sidekick ? (
-                    <img
-                        src={`/attack_type/${attackTypeLabel(deck.sidekick.attackType)}.png`}
-                        alt={attackTypeLabel(deck.sidekick.attackType)}
-                        width={108}
-                        height={27}
-                    />
-                ) : null,
-        },
-    ]
+    const {data: decks = [], loading, error} = useClientTable<DeckDto>(getAll);
 
     return (
-        <div style={{padding: 20}}>
-            <h1>Decks</h1>
+        <div className="decks-page">
+            <div className="decks-container">
+                <h1 className="decks-title">Decks</h1>
 
-            {loading && <p>Loading decks…</p>}
-            {error && <p style={{color: 'red'}}>{error}</p>}
-            {!loading && !error && decks.length === 0 && <p>No decks available.</p>}
+                {loading && <p className="decks-status">Loading decks…</p>}
+                {error && <p className="decks-status error">{error}</p>}
+                {!loading && !error && decks.length === 0 && (
+                    <p className="decks-status">No decks available.</p>
+                )}
 
-            {decks.length > 0 && (
-                <DataTable
-                    columns={columns}
-                    data={decks}
-                    sortState={sortState}
-                    onSort={onSort}
-                />
-            )}
+                <div className="decks-grid">
+                    {decks.map((deck) => (
+                        <article
+                            key={deck.name}
+                            className="deck-card"
+                            aria-label={deck.name}
+                        >
+                            <Link
+                                to={`/decks/${encodeURIComponent(deck.name)}`}
+                                className="deck-link"
+                                title={deck.name}
+                            >
+                                <div className="deck-art" aria-hidden>
+                                    <img
+                                        src={deck.artImageUrl}
+                                        alt={deck.name}
+                                    />
+                                </div>
+
+                                <div className="deck-footer">
+                                    <div className="deck-hero-name">
+                                        {deck.hero.name}
+                                    </div>
+
+                                    <div className="deck-stats-row">
+                                        <div className="stat qty">{deck.hero.quantity > 1 ? `x${deck.hero.quantity}` : ''}</div>
+
+                                        <div className="stat attack">
+                                            <img
+                                                className="attack-icon"
+                                                src={`/attack_type/${attackTypeLabel(deck.hero.attackType)}.png`}
+                                                alt={attackTypeLabel(deck.hero.attackType)}
+                                                width={36}
+                                                height={20}
+                                            />
+                                        </div>
+
+                                        <div className="stat hp">
+                                            <span className="hp-heart">❤</span>
+                                            <span>{deck.hero.hp}</span>
+                                        </div>
+
+                                        <div className="stat move">
+                                            <div className="move-label">↕</div>
+                                            <div className="move-value">{deck.hero.move}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </article>
+                    ))}
+                </div>
+            </div>
         </div>
-    )
+    );
 }
