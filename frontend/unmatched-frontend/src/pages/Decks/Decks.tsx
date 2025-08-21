@@ -11,12 +11,94 @@ function attackTypeLabel(type: AttackType) {
 }
 
 export default function Decks() {
-    const {data: decks = [], loading, error} = useClientTable<DeckDto>(getAll);
+    const {
+        data: decks = [],
+        loading,
+        error,
+        sortState,
+        onSort,
+    } = useClientTable<DeckDto>(getAll);
+
+    const sortOptions = [
+        {label: '— none —', value: ''},
+        {label: 'Deck name', value: 'name'},
+        {label: 'Attack type', value: 'hero.attackType'},
+        {label: 'Quantity', value: 'hero.quantity'},
+        {label: 'HP', value: 'hero.hp'},
+        {label: 'Move', value: 'hero.move'},
+    ];
+
+    const handleFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        if (!value) {
+            onSort(undefined);
+            return;
+        }
+        onSort(value);
+    };
+
+    const toggleDirection = () => {
+        if (sortState.sortBy) {
+            onSort(sortState.sortBy);
+        }
+    };
 
     return (
         <div className="decks-page">
             <div className="decks-container">
                 <h1 className="decks-title">Decks</h1>
+
+                <div className="sort-panel" role="region" aria-label="Sorting panel">
+                    <label className="sort-label">
+                        Sort by
+                        <select
+                            className="sort-select"
+                            value={sortState.sortBy ?? ''}
+                            onChange={handleFieldChange}
+                        >
+                            {sortOptions.map((opt) => (
+                                <option key={opt.value} value={opt.value}>
+                                    {opt.label}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <div className="sort-controls">
+                        <button
+                            type="button"
+                            className="sort-toggle"
+                            onClick={toggleDirection}
+                            disabled={!sortState.sortBy}
+                            title="Toggle direction"
+                            aria-pressed={sortState.direction === 'desc'}
+                        >
+                            {sortState.direction === 'desc' ? '↓' : '↑'}
+                        </button>
+
+                        <button
+                            type="button"
+                            className="sort-clear"
+                            onClick={() => onSort(undefined)}
+                            disabled={!sortState.sortBy}
+                            title="Clear sorting"
+                        >
+                            Clear
+                        </button>
+
+                        <div className="sort-info" aria-live="polite">
+                            {sortState.sortBy ? (
+                                <span>
+                                    {sortOptions.find(o => o.value === sortState.sortBy)?.label ?? sortState.sortBy}
+                                    {' '}
+                                    ({sortState.direction ?? 'asc'})
+                                </span>
+                            ) : (
+                                <span>Not sorted</span>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
                 {loading && <p className="decks-status">Loading decks…</p>}
                 {error && <p className="decks-status error">{error}</p>}
