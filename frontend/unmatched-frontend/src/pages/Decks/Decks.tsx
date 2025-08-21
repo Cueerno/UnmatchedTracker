@@ -37,15 +37,29 @@ export default function Decks() {
                                 title={deck.name}
                             >
                                 <div className="deck-art" aria-hidden>
-                                    <img
-                                        src={deck.artImageUrl}
-                                        alt={deck.name}
-                                    />
+                                    {deck.artImageUrl ? (
+                                        <img
+                                            src={deck.artImageUrl}
+                                            alt={deck.name}
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.style.display = "none";
+                                                target.insertAdjacentHTML(
+                                                    "afterend",
+                                                    `<div class="deck-art-fallback">Deadpool will return image soon</div>`
+                                                );
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="deck-art-fallback">
+                                            Deadpool will return image soon
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="deck-footer">
                                     <div className="deck-hero-name">
-                                        {deck.hero.name}
+                                        {deck.name}
                                     </div>
 
                                     <div className="deck-stats-row">

@@ -81,7 +81,21 @@
     display: block;
 }
 
-/* footer grey bar */
+.deck-art-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px;
+    color: #fff;
+    background: #2b0f0f;
+}
+
+
 .deck-footer {
     background: #d3c3c3;
     padding: 10px 12px;
