@@ -31,18 +31,20 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
                 </div>
 
                 <div className="deck-footer">
-                    <div className="deck-hero-name">{deck.name}</div>
-
-                    <div className="deck-stats-row">
-                        <div className="stat qty">
-                            {deck.hero.quantity > 1 && (
-                                <>
-                                    <FaUsers className="qty-icon"/>
-                                    <span>x{deck.hero.quantity}</span>
-                                </>
-                            )}
+                    <div className="deck-hero-header">
+                        <div className="deck-hero-name">
+                            {deck.name}
                         </div>
 
+                        {deck.hero.quantity > 1 && (
+                            <div className="hero-quantity">
+                                <FaUsers className="quantity-icon"/>
+                                <span>x{deck.hero.quantity}</span>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="deck-stats-row">
                         <div className="stat hp">
                             <span className="hp-heart">❤</span>
                             <span>{deck.hero.hp}</span>

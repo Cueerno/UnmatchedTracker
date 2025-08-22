@@ -161,13 +161,32 @@
     gap: 8px;
 }
 
-.deck-hero-name {
-    text-align: center;
-    font-size: 16px;
-    color: #222;
-    font-weight: 600;
-    margin: 0;
+.deck-hero-header {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    height: 24px;
 }
+
+.deck-hero-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.hero-quantity {
+    display: flex;
+    gap: 4px;
+    font-size: 14px;
+    color: #000000;
+}
+
+.hero-quantity .quantity-icon {
+    font-size: 16px;
+    color: #000000;
+}
+
+
 
 .deck-stats-row {
     display: flex;
@@ -184,19 +203,6 @@
     min-width: 0;
 }
 
-.stat.qty {
-    flex: 0 0 auto;
-    justify-content: flex-start;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.qty-icon {
-    font-size: 14px;
-    color: #333;
-}
 
 .stat.hp {
     flex: 0 0 auto;
@@ -217,13 +223,13 @@
     flex: 1 1 auto;
     justify-content: center;
     gap: 8px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .attack-icon-short {
     height: 25px;
     width: auto;
-    object-fit: contain;
+    align-self: center;
 }
 
 .stat.move {
