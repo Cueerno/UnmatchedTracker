@@ -1,12 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {FaUsers} from 'react-icons/fa';
-import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {getAll} from '../../api/deck';
 import {AttackType, DeckDto} from '../../types/deck';
-import {Card} from '../../components/Card/Card';
-import {SortPanel} from '../../components/SortPanel/SortPanel';
 import './Decks.css';
+import {ContentPage} from "../../components/ContentPage/ContentPage";
 
 function attackTypeLabel(type: AttackType) {
     return type.toLowerCase();
@@ -70,8 +68,6 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
 }
 
 export default function Decks() {
-    const {data: decks = [], loading, error, sortState, onSort} = useClientTable<DeckDto>(getAll);
-
     const sortOptions = [
         {label: '— none —', value: ''},
         {label: 'Deck name', value: 'name'},
@@ -82,27 +78,15 @@ export default function Decks() {
     ];
 
     return (
-        <div className="decks-page">
-            <div className="decks-container">
-                <h1 className="decks-title">Decks</h1>
-
-                <SortPanel options={sortOptions.filter(o => o.value)} sortState={sortState} onSort={onSort}/>
-
-                {loading && <p className="decks-status">Loading decks…</p>}
-                {error && <p className="decks-status error">{error}</p>}
-                {!loading && !error && decks.length === 0 && <p className="decks-status">No decks available.</p>}
-
-                <div className="decks-grid">
-                    {decks.map(deck => (
-                        <Card
-                            key={deck.name}
-                            data={deck}
-                            className="deck-card-wrapper"
-                            renderContent={(d) => <DeckCardRenderer deck={d as DeckDto}/>}
-                        />
-                    ))}
-                </div>
-            </div>
-        </div>
+        <ContentPage<DeckDto>
+            title="Decks"
+            fetchFn={getAll}
+            sortOptions={sortOptions.filter(o => o.value)}
+            keyExtractor={deck => deck.name}
+            renderCard={deck => <DeckCardRenderer deck={deck}/>}
+            pageClassName="decks-page"
+            contentContainerClassName="decks-container"
+            gridClassName="decks-grid"
+        />
     );
 }
