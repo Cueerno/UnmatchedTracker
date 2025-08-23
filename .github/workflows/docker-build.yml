@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -22,4 +29,4 @@ jobs:
           context: backend/services/unmatched-backend-core
           file: backend/services/unmatched-backend-core/Dockerfile
           push: true
-          tags: your-registry/unmatched-backend-core:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/unmatched-backend-core:latest
