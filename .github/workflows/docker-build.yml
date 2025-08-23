@@ -19,7 +19,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: backend/services/unmatched-backend-core
           file: backend/services/unmatched-backend-core/Dockerfile
           push: true
           tags: your-registry/unmatched-backend-core:latest
