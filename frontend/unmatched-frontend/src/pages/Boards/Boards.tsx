@@ -11,7 +11,7 @@ function BoardCardRenderer({board}: { board: BoardDto }) {
     const [imgError, setImgError] = React.useState(false);
 
     return (
-        <article aria-label={board.name}>
+        <article className="board-card" aria-label={board.name}>
             <div className="board-art" aria-hidden>
                 {board.imageUrl && !imgError ? (
                     <img
@@ -31,7 +31,7 @@ function BoardCardRenderer({board}: { board: BoardDto }) {
                     </div>
                 </div>
 
-                <div className="card-stats">
+                <div className="card-stats-board">
                     <div className="max-players">
                         <FaUsers/>{board.maxPlayers}
                     </div>

@@ -17,7 +17,7 @@
     display: block;
 }
 
-.card-stats > div {
+.card-stats-board > div {
     position: absolute;
     bottom: 8px;
     display: flex;
@@ -27,20 +27,20 @@
     color: #333;
 }
 
-.card-stats .max-players {
+.card-stats-board .max-players {
     left: 12px;
 }
 
-.card-stats .zones {
+.card-stats-board .zones {
     left: 50%;
     transform: translateX(-50%);
 }
 
-.card-stats .spaces {
+.card-stats-board .spaces {
     right: 12px;
 }
 
-.card-stats svg {
+.card-stats-board svg {
     width: 1em;
     height: 1em;
 }
