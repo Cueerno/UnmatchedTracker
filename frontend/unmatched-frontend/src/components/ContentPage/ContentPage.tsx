@@ -26,15 +26,12 @@ export function ContentPage<T>({
                                    sortOptions,
                                    renderCard,
                                    keyExtractor,
-                                   gridClassName = '',
-                                   pageClassName = '',
-                                   contentContainerClassName = '',
                                }: ContentPageProps<T>) {
     const {data = [], loading, error, sortState, onSort} = useClientTable<T>(fetchFn);
 
     return (
-        <div className={pageClassName}>
-            <div className={contentContainerClassName}>
+        <div className="content-page">
+            <div className="content-container">
                 <h1>{title}</h1>
 
                 <SortPanel
@@ -49,7 +46,7 @@ export function ContentPage<T>({
                     <p>No {title.toLowerCase()} available.</p>
                 )}
 
-                <div className={gridClassName}>
+                <div className="content-grid">
                     {data.map(item => (
                         <Card
                             key={keyExtractor(item)}

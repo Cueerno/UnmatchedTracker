@@ -14,9 +14,10 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
     const [imgError, setImgError] = React.useState(false);
 
     return (
-        <article className="deck-card" aria-label={deck.name}>
-            <Link to={`/decks/${encodeURIComponent(deck.name)}`} className="deck-link" title={deck.name}>
-                <div className="deck-art" aria-hidden>
+        <article aria-label={deck.name}>
+            <Link to={`/decks/${encodeURIComponent(deck.name)}`} className="card-link" title={deck.name}>
+
+                <div className="card-art" aria-hidden>
                     {deck.artImageUrl && !imgError ? (
                         <img
                             src={deck.artImageUrl}
@@ -24,13 +25,13 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
                             onError={() => setImgError(true)}
                         />
                     ) : (
-                        <div className="deck-art-fallback">Deadpool will return image soon</div>
+                        <div className="card-art-fallback">Deadpool will return image soon</div>
                     )}
                 </div>
 
-                <div className="deck-footer">
-                    <div className="deck-hero-header">
-                        <div className="deck-hero-name">
+                <div className="card-footer">
+                    <div className="card-header">
+                        <div className="card-title">
                             {deck.name}
                         </div>
 
@@ -42,7 +43,7 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
                         )}
                     </div>
 
-                    <div className="deck-stats-row">
+                    <div className="card-stats">
                         <div className="stat hp">
                             <span className="hp-heart">❤</span>
                             <span>{deck.hero.hp}</span>
@@ -84,9 +85,6 @@ export default function Decks() {
             sortOptions={sortOptions.filter(o => o.value)}
             keyExtractor={deck => deck.name}
             renderCard={deck => <DeckCardRenderer deck={deck}/>}
-            pageClassName="decks-page"
-            contentContainerClassName="decks-container"
-            gridClassName="decks-grid"
         />
     );
 }
