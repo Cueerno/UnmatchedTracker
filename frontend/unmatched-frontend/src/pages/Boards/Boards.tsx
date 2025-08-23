@@ -1,79 +1,72 @@
 import React from 'react';
-import {Column, DataTable} from '../../components/DataTable/DataTable';
-import {useClientTable} from '../../hooks/useClientTable/useClientTable';
-import {getAll} from '../../api/board';
-import {BoardDto} from '../../types/board';
+import {ReactComponent as Zona} from "../../assets/zona.svg";
+import {ReactComponent as Space} from "../../assets/space.svg";
+import {BoardDto} from "../../types/board";
+import {ContentPage} from "../../components/ContentPage/ContentPage";
+import {getAll} from "../../api/board";
+import "./Boards.css"
+import {FaUsers} from "react-icons/fa";
 
-export default function Boards() {
-    const {
-        data: boards,
-        loading,
-        error,
-        sortState,
-        onSort,
-    } = useClientTable<BoardDto>(getAll);
+function BoardCardRenderer({board}: { board: BoardDto }) {
+    const [imgError, setImgError] = React.useState(false);
 
-    const columns: Column<BoardDto>[] = [
-        {
-            key: 'imageUrl',
-            label: 'Image',
-            render: board =>
-                board.imageUrl ? (
+    return (
+        <article aria-label={board.name}>
+            <div className="board-art" aria-hidden>
+                {board.imageUrl && !imgError ? (
                     <img
                         src={board.imageUrl}
                         alt={board.name}
-                        style={{width: 260, height: 162.5, objectFit: 'cover'}}
+                        onError={() => setImgError(true)}
                     />
-                ) : null,
-        },
-        {
-            key: 'name',
-            label: 'Name',
-            sortable: true,
-            render: board => board.name,
-        },
-        {
-            key: 'maxPlayers',
-            label: 'Max. players',
-            sortable: true,
-            render: board => board.maxPlayers,
-        },
-        {
-            key: 'spaces',
-            label: 'Spaces',
-            sortable: true,
-            render: board => board.spaces,
-        },
-        {
-            key: 'zones',
-            label: 'Zones',
-            sortable: true,
-            render: board => board.zones,
-        },
-        {
-            key: 'feature',
-            label: 'Feature',
-            sortable: true,
-            render: board => board.feature,
-        },
+                ) : (
+                    <div className="card-art-fallback">Deadpool will return image soon</div>
+                )}
+            </div>
+
+            <div className="card-footer">
+                <div className="card-header">
+                    <div className="card-title">
+                        {board.name}
+                    </div>
+                </div>
+
+                <div className="card-stats">
+                    <div className="max-players">
+                        <FaUsers/>{board.maxPlayers}
+                    </div>
+
+                    <div className="spaces">
+                        <Space/>{board.spaces}
+                    </div>
+
+                    <div className="zones">
+                        <Zona/>{board.zones}
+                    </div>
+                </div>
+            </div>
+        </article>
+    );
+}
+
+export default function Boards() {
+    const sortOptions = [
+        {label: '— none —', value: ''},
+        {label: 'Board name', value: 'name'},
+        {label: 'Max Players', value: 'maxPlayers'},
+        {label: 'Spaces', value: 'spaces'},
+        {label: 'Zones', value: 'zones'},
+        {label: 'Feature', value: 'feature'},
     ];
 
     return (
-        <div style={{padding: 20}}>
-            <h1>Boards</h1>
-
-            {loading && <p>Loading...</p>}
-            {error && <p style={{color: 'red'}}>{error}</p>}
-            {!loading && !error && boards.length === 0 && <p>No boards available.</p>}
-
-            {boards.length > 0 && (
-                <DataTable
-                    columns={columns}
-                    data={boards}
-                    sortState={sortState}
-                    onSort={onSort}
-                />
-            )}
-        </div>
+        <ContentPage<BoardDto>
+            title={"Boards"}
+            fetchFn={getAll}
+            sortOptions={sortOptions.filter(o => o.value)}
+            keyExtractor={board => board.name}
+            renderCard={board => <BoardCardRenderer board={board}/>}
+        />
     );
 }
+
