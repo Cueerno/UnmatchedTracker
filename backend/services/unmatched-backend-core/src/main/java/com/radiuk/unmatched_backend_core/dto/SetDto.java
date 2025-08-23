@@ -21,4 +21,6 @@ public class SetDto {
     private List<BoardDto> boards;
 
     private OffsetDateTime releaseDate;
+
+    private String imageUrl;
 }
