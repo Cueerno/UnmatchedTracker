@@ -1,4 +1,11 @@
 FROM node:20-alpine AS deps
+
+ARG GIT_BRANCH
+RUN if [ "$GIT_BRANCH" != "main" ]; then \
+      echo "⚠️  Build is allowed only from the main branch, current: $GIT_BRANCH"; \
+      exit 1; \
+    fi
+
 WORKDIR /app
 
 COPY package.json package-lock.json ./
