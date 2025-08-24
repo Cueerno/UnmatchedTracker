@@ -1,4 +1,4 @@
-name: Build & Push Docker Image
+name: Build & Push Docker Images
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,10 +23,36 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push image
+      - name: Build and push backend image
         uses: docker/build-push-action@v4
         with:
           context: backend/services/unmatched-backend-core
           file: backend/services/unmatched-backend-core/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/unmatched-backend-core:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    needs: build-backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v4
+        with:
+          context: frontend/unmatched-frontend
+          file: frontend/unmatched-frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/unmatched-frontend:latest
