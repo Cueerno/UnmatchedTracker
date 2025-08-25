@@ -1,176 +1,519 @@
-.deck-container {
-    padding: 20px;
-    font-family: 'Segoe UI', sans-serif;
+/* ===================================================================
+   Deck.css — оформление страницы колоды (адаптировано под твои DTO)
+   Секция комментариев поясняет назначение блоков.
+   =================================================================== */
+
+/* -----------------------
+   Page padding / outer layout
+   ----------------------- */
+.deck-page {
+    padding: 32px;
+    background: #fbfbfb;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: Inter, 'Segoe UI', Roboto, sans-serif;
+    color: #222;
 }
 
+.deck-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* -----------------------
+   Top grid: art | details | images
+   3 колонки на больших экранах, адаптация на мобильных
+   ----------------------- */
+.deck-top-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr 220px;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 28px;
+}
+
+/* Art column: square art (1:1) */
+.deck-art-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Main art: 1:1 aspect ratio, fills column */
+.deck-art-image,
+.deck-art-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #1f0b0b, #2b0f0f);
+    box-shadow: 0 6px 20px rgba(3, 3, 3, 0.12);
+}
+
+/* Small front/back thumbnails shown under art on smaller widths */
+.deck-front-back-compact {
+    display: none;
+    gap: 8px;
+}
+
+/* -----------------------
+   Details column (title, hero, extras)
+   ----------------------- */
 .deck-header {
     display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 24px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
-.deck-info {
-    flex: 1;
+.deck-title-block {
+    display: flex;
+    flex-direction: column;
 }
 
 .deck-title {
     margin: 0;
-    font-size: 2rem;
-    color: #333;
+    font-size: 28px;
+    line-height: 1;
+    color: #111;
 }
 
 .deck-set {
-    font-weight: 400;
-    margin-left: 8px;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #666;
 }
 
-.deck-images {
+.deck-quote {
+    margin-top: 8px;
+    font-style: italic;
+    color: #555;
+}
+
+.deck-notes {
+    margin-top: 6px;
+    color: #444;
+    font-size: 14px;
+}
+
+/* Small badge style */
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e9e5ff;
+    color: #3b2f99;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+/* -----------------------
+   Hero section — figure + details
+   ----------------------- */
+.hero-section {
+    margin-bottom: 18px;
+}
+
+/* Main hero container (figure | right content) */
+.hero-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* Left: hero figure */
+.hero-left {
+    width: 160px;
+    flex: 0 0 160px;
+}
+
+.hero-figure {
+    width: 160px;
+    height: 160px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    background: radial-gradient(800px 400px at 10% 20%, rgba(200, 27, 27, 0.12), transparent 10%),
+    linear-gradient(180deg, #0b0b0b 0%, #2a0a0a 60%, var(--red) 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* Right: hero name, stat row, ability */
+.hero-right {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.hero-name {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #111;
+}
+
+.hero-qty {
+    margin-left: 10px;
+    color: #555;
+    font-weight: 600;
+}
+
+/* -----------------------
+   Hero stats row — left/center/right
+   - left: quantity & HP
+   - center: attack type (exactly centered)
+   - right: move
+   ----------------------- */
+.hero-stats-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* Left block: qty + hp */
+.stats-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-self: start;
+}
+
+/* Attack in center, centered */
+.stat.attack {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Move to the right */
+.stat.move {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 8px;
+}
+
+/* Generic stat appearance */
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* HP styling */
+.stat.hp {
+    color: #d32f2f;
+    font-weight: 700;
+}
+
+.hp-heart {
+    margin-right: 6px;
+    color: #ff3b3b;
+}
+
+/* Attack images */
+.attack-type-img {
+    height: 27px;
+    width: auto;
+    object-fit: contain;
+}
+
+.attack-type-img-sm {
+    height: 20px;
+    object-fit: contain;
+}
+
+/* -----------------------
+   Hero ability text
+   ----------------------- */
+.hero-ability {
+    margin: 6px 0 0;
+    color: #444;
+    line-height: 1.4;
+}
+
+/* -----------------------
+   Rule cards grid
+   ----------------------- */
+.rule-cards {
+    margin-top: 14px;
+}
+
+.section-title {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #222;
+}
+
+.rule-cards-grid {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
 }
 
-.deck-card-image {
-    width: 260px;
-    height: 350px;
+.rule-card {
+    width: 140px;
+    text-align: center;
+}
+
+.rule-card-image {
+    width: 100%;
+    height: 90px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 8px;
+    background: #fafafa;
 }
 
-.deck-stats {
-    margin-bottom: 24px;
-    text-align: left;
+.rule-card-noimage {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f2f2;
+    color: #888;
+    border-radius: 6px;
 }
 
-.hero-name {
-    margin: 0 0 8px;
-    font-size: 1.5rem;
-    color: #333;
+.rule-card-name {
+    margin-top: 8px;
+    font-size: 13px;
 }
 
-.hero-qty {
-    margin-left: 8px;
-    font-weight: 400;
-}
-
-.hero-detail {
-    margin: 4px 0;
+.rule-card-text {
+    margin-top: 6px;
+    font-size: 12px;
     color: #555;
 }
 
-.attack-icon {
-    width: 108px;
-    height: 27px;
-    object-fit: contain;
-    margin: 8px 0;
-}
-
-.hero-ability {
-    margin-top: 8px;
-    color: #444;
-}
-
+/* -----------------------
+   Extra characters
+   ----------------------- */
 .extra-characters {
-    margin-bottom: 24px;
+    margin-top: 14px;
 }
 
-.extra-char {
-    margin-bottom: 16px;
+.extra-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.sidekick {
-    margin-bottom: 24px;
-    padding: 12px;
-    border: 1px solid #ccc;
+.extra-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+
+.extra-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
     border-radius: 6px;
-    background: #f9f9f9;
 }
 
-.sidekick-title {
-    margin: 0 0 12px;
+.extra-info {
+    font-size: 13px;
+}
+
+.small-stats {
+    color: #666;
+    font-size: 12px;
+}
+
+/* -----------------------
+   Sidekick
+   ----------------------- */
+.sidekick-section {
+    margin-top: 14px;
+}
+
+.sidekick-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e9e9e9;
+    background: #fff;
+}
+
+.sidekick-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.sidekick-info {
+    min-width: 0;
+}
+
+.sidekick-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+/* -----------------------
+   Right column stacked images (figure / front / back)
+   ----------------------- */
+.deck-images-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.stacked-images {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+}
+
+.stacked-front, .stacked-back, .deck-front-thumb, .deck-back-thumb {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.thumb-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    background: #f2f2f2;
+    color: #888;
+    border-radius: 6px;
+}
+
+/* -----------------------
+   Cards list (bottom)
+   ----------------------- */
+.cards-section {
+    margin-top: 22px;
 }
 
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
-    padding: 24px 0;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 12px;
 }
 
 .card-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 230px;
     background: #fff;
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(6, 6, 6, 0.04);
     padding: 12px;
-}
-
-.card-title {
-    margin: 0 0 12px;
-    font-size: 1rem;
     text-align: center;
+    border: 1px solid #f0f0f0;
 }
 
 .card-image {
-    width: 250px;
-    height: 349px;
+    width: 100%;
+    height: 320px;
     object-fit: contain;
-    border-radius: 4px;
-    background-color: #f5f5f5;
+    background: #fafafa;
+    border-radius: 6px;
 }
 
 .card-noimage {
-    width: 250px;
-    height: 349px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #eee;
+    height: 320px;
+    background: #f2f2f2;
     color: #888;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    border-radius: 6px;
 }
 
-.deck-loading,
-.deck-error {
+.card-title {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.card-meta {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* -----------------------
+   Loading / error
+   ----------------------- */
+.deck-loading, .deck-error {
     text-align: center;
     color: #333;
     margin: 40px 0;
 }
 
 .deck-error {
-    color: red;
+    color: #c42222;
 }
 
-@media (max-width: 740px) {
-    .deck-header {
+/* -----------------------
+   Responsive behavior
+   ----------------------- */
+@media (max-width: 980px) {
+    .deck-top-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .deck-images-col {
+        display: none;
+    }
+
+    .deck-front-back-compact {
+        display: flex;
+    }
+
+    .hero-card {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero-card {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .deck-card-image {
-        width: 100%;
-        max-width: 260px;
-        height: auto;
+    .hero-left {
+        width: 120px;
+        flex: 0 0 120px;
+    }
+
+    .hero-figure {
+        width: 120px;
+        height: 120px;
+    }
+
+    .deck-art-image {
+        max-width: 200px;
+        border-radius: 6px;
+    }
+
+    .deck-inner {
+        padding: 0 8px;
     }
 
     .cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 
-    .card-image,
-    .card-noimage {
-        width: 100%;
-        max-width: 250px;
-        height: auto;
-    }
-
-    .attack-icon {
-        width: 80px;
-        height: auto;
+    .card-image {
+        height: 260px;
     }
 }
