@@ -6,6 +6,7 @@ import './Home.css';
 import './HomeCards.css';
 import {DashboardDto} from '../../types/dashboard';
 import {Link} from 'react-router-dom';
+import DashboardStats from "./DashboardStats";
 
 export default function Home() {
     const [dashboard, setDashboard] = useState<DashboardDto | null>(null);
@@ -129,6 +130,7 @@ export default function Home() {
 
                     {dashboard && (
                         <>
+                            <DashboardStats dashboard={dashboard} />
                             <div className="hc-grid" role="list" aria-label="Highlights">
                                 <SquareCard
                                     title="Top Deck — Strongest"

@@ -9,13 +9,21 @@ import lombok.*;
 @AllArgsConstructor
 public class DashboardDto {
 
-    DashboardSetDto theStrongestSet;
+    private DashboardSetDto theStrongestSet;
 
-    DashboardSetDto theMostPopularSet;
+    private DashboardSetDto theMostPopularSet;
 
-    DashboardDeckDto theMostPopularDeck;
+    private DashboardDeckDto theMostPopularDeck;
 
-    DashboardDeckDto theStrongestdDeck;
+    private DashboardDeckDto theStrongestdDeck;
 
-    DashboardBoardDto theMostPopularBoard;
+    private DashboardBoardDto theMostPopularBoard;
+
+    private Long numberOfUsers;
+
+    private Long numberOfParties;
+
+    private Short numberOfSets;
+
+    private Short numberOfDecks;
 }

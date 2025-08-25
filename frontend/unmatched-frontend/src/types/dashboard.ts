@@ -1,14 +1,13 @@
 export interface DashboardDto {
-
     theStrongestSet: DashboardSetDto;
-
     theMostPopularSet: DashboardSetDto;
-
     theMostPopularDeck: DashboardDeckDto;
-
     theStrongestdDeck: DashboardDeckDto;
-
     theMostPopularBoard: DashboardBoardDto;
+    numberOfUsers: number;
+    numberOfParties: number;
+    numberOfSets: number;
+    numberOfDecks: number;
 }
 
 interface DashboardSetDto {

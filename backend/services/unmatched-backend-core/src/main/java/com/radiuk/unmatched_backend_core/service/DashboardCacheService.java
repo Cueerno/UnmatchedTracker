@@ -1,9 +1,7 @@
 package com.radiuk.unmatched_backend_core.service;
 
 import com.radiuk.unmatched_backend_core.dto.DashboardDto;
-import com.radiuk.unmatched_backend_core.repository.BoardRepository;
-import com.radiuk.unmatched_backend_core.repository.DeckRepository;
-import com.radiuk.unmatched_backend_core.repository.SetRepository;
+import com.radiuk.unmatched_backend_core.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,6 +16,8 @@ public class DashboardCacheService {
     private final DeckRepository deckRepository;
     private final SetRepository setRepository;
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
+    private final PartyRepository partyRepository;
 
     @Transactional(readOnly = true)
     @Cacheable(value = "dashboard", key = "'dashboard'")
@@ -30,6 +30,10 @@ public class DashboardCacheService {
                 .theMostPopularDeck(deckRepository.getTheMostPopular())
                 .theStrongestdDeck(deckRepository.getTheStrongest())
                 .theMostPopularBoard(boardRepository.getTheMostPopular())
+                .numberOfUsers(userRepository.count())
+                .numberOfParties(partyRepository.numberOfPartes())
+                .numberOfSets((short) setRepository.count())
+                .numberOfDecks((short) deckRepository.count())
                 .build();
 
         log.info("[DashboardCacheService] -> getDashboard finished successfully: mostPopularSet={}, strongestSet={}, mostPopularDeck={}, strongestDeck={}, mostPopularBoard={}",

@@ -21,4 +21,11 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     order by p.match_id desc;
     """)
     Set<Long> getPartiesByUserId(Long userId);
+
+    @Query(nativeQuery = true, value = """
+    select
+        count(distinct p.match_id)
+    from parties p
+    """)
+    Long numberOfPartes();
 }
