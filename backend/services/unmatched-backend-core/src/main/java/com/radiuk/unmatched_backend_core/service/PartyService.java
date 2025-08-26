@@ -8,22 +8,20 @@ import com.radiuk.unmatched_backend_core.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.Set;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PartyService {
 
-    private final PartyCacheService partyCacheService;
-    private final DeckCacheService deckCacheService;
+    private final DeckService deckService;
     private final BoardRepository boardRepository;
     private final MatchRepository matchRepository;
     private final TeamRepository teamRepository;
@@ -31,14 +29,88 @@ public class PartyService {
     private final UserRepository userRepository;
     private final DeckRepository deckRepository;
 
+    @Cacheable(value = "party", key = "#matchId")
+    @Transactional(readOnly = true)
     public PartyDto getPartyByMatchId(Long matchId) {
-        log.debug("[PartyService] -> getPartyByMatchId called with matchId={}", matchId);
-        return partyCacheService.getFromCache(matchId);
+        log.debug("[PartyService] -> get getPartyByMatchId with matchId={}", matchId);
+
+        Match match = matchRepository.findById(matchId).orElseThrow(() -> {
+            log.warn("[PartService] -> getPartyByMatchId: Party not found with matchId={}", matchId);
+            return new EntityNotFoundException("Party with id " + matchId + " not found!");
+        });
+
+        List<Party> parties = partyRepository.findByMatchId(matchId);
+        log.info("[PartyService] -> Retrieved {} party entries for matchId={}", parties.size(), matchId);
+
+        List<UserPartyDto> users = parties.stream()
+                .map(party -> UserPartyDto.builder()
+                        .username(party.getUser().getUsername())
+                        .deck(party.getDeck().getName())
+                        .moveOrder(Optional.ofNullable(party.getMoveOrder()).orElse((short) 0))
+                        .finalHp(Optional.ofNullable(party.getFinalHp()).orElse((short) 0))
+                        .build())
+                .sorted(Comparator.comparingInt(UserPartyDto::getMoveOrder))
+                .toList();
+
+        log.info("[PartyService] -> Found {} parties for matchId={}", users.size(), matchId);
+
+        Match.MatchFormat format = match.getFormat();
+
+        log.info("[PartyService] -> Found format for matchId={}", format);
+
+        List<TeamDto> teams = match.getTeams().stream()
+                .map(team -> TeamDto.builder()
+                        .name(Optional.ofNullable(team.getName()).orElse("No name"))
+                        .build())
+                .toList();
+
+        log.info("[PartyService] -> Found {} teams for matchId={}", teams.size(), matchId);
+
+        String boardName = parties.stream()
+                .map(p -> p.getBoard().getName())
+                .findFirst()
+                .orElse("-");
+
+        log.info("[PartyService] -> Found {} board for matchId={}", boardName, matchId);
+
+        String winningTeam = parties.stream()
+                .filter(Party::getIsWinner)
+                .map(p -> p.getTeam().getName())
+                .findFirst()
+                .orElse("-");
+
+        log.info("[PartyService] -> Found {} winning team for matchId={}", winningTeam, matchId);
+
+        PartyDto partyDto = PartyDto.builder()
+                .matchId(matchId)
+                .users(users)
+                .format(format)
+                .teams(teams)
+                .date(match.getPlayedAt())
+                .boardName(boardName)
+                .winner(winningTeam)
+                .build();
+
+        log.info("[PartyService] -> Retrieved {} party for matchId={}", partyDto, matchId);
+
+        return partyDto;
     }
 
+    @Cacheable(value = "userPartyList", key = "#username")
+    @Transactional(readOnly = true)
     public List<PartyDto> getAllPartiesByUsername(String username) {
-        log.debug("[PartyService] -> getAllPartiesByUsername called with username={}", username);
-        return partyCacheService.getAllFromCache(username);
+        log.debug("[PartyService] -> getPartiesByUsername called with username={}", username);
+
+        User user = userRepository.findByUsername(username).orElseThrow(() -> {
+            log.warn("[PartyService] -> getPartiesByUsername: User not found with username={}", username);
+            return new EntityNotFoundException("User with name " + username + " not found!");
+        });
+
+        Set<Long> partyIds = partyRepository.getPartiesByUserId(user.getId());
+        List<PartyDto> parties = partyIds.stream().map(this::getPartyByMatchId).toList();
+
+        log.info("[PartyService] -> getPartiesByUsername finished successfully: {} parties retrieved for username={}", parties.size(), username);
+        return parties;
     }
 
     @Transactional
@@ -90,7 +162,7 @@ public class PartyService {
             partyRepository.save(Party.builder().match(match).team(team).user(user).deck(deck).board(board).moveOrder(userPartyDto.getMoveOrder()).finalHp(userPartyDto.getFinalHp()).isWinner(isUserWin(userPartyDto, partyDto)).createdAt(date).build());
         }
 
-        deckCacheService.evictTopFromCache();
+        deckService.evictTopFromCache();
 
         PartyDto createdParty = getPartyByMatchId(match.getId());
         log.info("[PartyService] -> createParty finished successfully for matchId={}", match.getId());
