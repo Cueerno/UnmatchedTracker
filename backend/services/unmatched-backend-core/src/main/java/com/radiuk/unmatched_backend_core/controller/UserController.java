@@ -16,11 +16,6 @@ public class UserController {
     private final UserService userService;
     private final PartyService partyService;
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> getFavoriteCharacters(@PathVariable String username) {
-        return ResponseEntity.ok(userService.getFavoriteCharactersByUsername(username));
-    }
-
     @GetMapping("/{username}/parties")
     public ResponseEntity<?> getParties(@PathVariable String username) {
         return ResponseEntity.ok(partyService.getAllPartiesByUsername(username));

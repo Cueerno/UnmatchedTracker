@@ -18,6 +18,7 @@ public class Hero {
 
     private String name;
 
+    @Column(name = "special_ability")
     private String specialAbility;
 
     private Short quantity;

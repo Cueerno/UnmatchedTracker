@@ -34,19 +34,6 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        d.*,
-        count(*) usage_count
-    from parties p
-    join users u on p.user_id = u.id
-    join decks d on p.deck_id = d.id
-    where u.username = :username
-    group by d.id, d.set_id, d.name
-    order by usage_count desc;
-    """)
-    List<Deck> findFavoriteCharactersByUserUsername(String username, Pageable pageable);
-
-    @Query(nativeQuery = true, value = """
-    select
         stats.name,
         stats.win_count,
         stats.total_count,
