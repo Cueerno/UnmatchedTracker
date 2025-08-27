@@ -51,18 +51,22 @@ create table decks
 create table cards
 (
     id             bigserial primary key,
-    deck_id        smallint references decks (id),
     title          varchar(255) not null,
     type           varchar(30) check (type in ('ATTACK', 'VERSATILE', 'DEFENSE', 'SCHEME')),
     character_name varchar      not null,
     value          smallint,
-    boost          smallint     not null,
-    quantity       smallint     not null,
-    basic_text     varchar,
-    immediate_text varchar,
-    during_text    varchar,
-    after_text     varchar,
-    image_url      text         not null
+    effect         text
+);
+
+create table decks_cards
+(
+    deck_id   smallint references decks (id),
+    card_id   smallint references cards (id),
+    boost     smallint not null,
+    quantity  smallint default 1,
+    image_url text     not null,
+
+    primary key (deck_id, card_id)
 );
 
 create table rule_cards
