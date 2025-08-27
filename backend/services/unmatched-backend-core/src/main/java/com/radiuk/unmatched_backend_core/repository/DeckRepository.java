@@ -25,15 +25,6 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
 
     @Query(nativeQuery = true, value = """
     select
-        s.name
-    from decks d
-    join sets s on d.set_id = s.id
-    where d.name = :name
-    """)
-    String getSetNameByName(String name);
-
-    @Query(nativeQuery = true, value = """
-    select
         stats.name,
         stats.win_count,
         stats.total_count,

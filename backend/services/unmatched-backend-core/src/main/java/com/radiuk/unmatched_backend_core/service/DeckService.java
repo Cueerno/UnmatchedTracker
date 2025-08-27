@@ -44,8 +44,7 @@ public class DeckService {
 
         return deckRepository.findByName(name).map(deck -> {
             DeckDto dto = deckMapper.toDto(deck);
-            dto.setSetName(deckRepository.getSetNameByName(name));
-            log.info("[DeckService] -> getByName finished successfully: deck retrieved with name={}, setName={}", dto.getName(), dto.getSetName());
+            log.info("[DeckService] -> getByName finished successfully: deck retrieved with name={}", dto.getName());
             return dto;
         }).orElseThrow(() -> {
             log.warn("[DeckService] -> getByName entity not found: type=Deck, key={}", name);

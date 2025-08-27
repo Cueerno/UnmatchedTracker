@@ -7,6 +7,7 @@ import com.radiuk.unmatched_backend_core.model.Card;
 import com.radiuk.unmatched_backend_core.model.Deck;
 import com.radiuk.unmatched_backend_core.model.DeckCard;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface DeckMapper {
 
     DeckCardDto toDeckCardDto(DeckCard deckCard);
 
+    @Mapping(source = "set.name", target = "setName")
     DeckDto toDto(Deck deck);
 
     List<DeckDto> toDtos(List<Deck> decks);

@@ -15,13 +15,17 @@ import java.util.HashSet;
 @NamedEntityGraph(
         name = "Deck.withAll",
         attributeNodes = {
+                @NamedAttributeNode("set"),
                 @NamedAttributeNode("hero"),
                 @NamedAttributeNode("sidekick"),
                 @NamedAttributeNode(value = "cards", subgraph = "deckCard-with-card"),
                 @NamedAttributeNode("ruleCards"),
                 @NamedAttributeNode("extraCharacters")
         },
-        subgraphs = @NamedSubgraph(name = "deckCard-with-card", attributeNodes = @NamedAttributeNode("card"))
+        subgraphs = @NamedSubgraph(
+                name = "deckCard-with-card",
+                attributeNodes = @NamedAttributeNode("card")
+        )
 )
 public class Deck {
     @Id
