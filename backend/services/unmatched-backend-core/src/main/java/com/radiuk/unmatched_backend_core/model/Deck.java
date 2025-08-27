@@ -17,10 +17,11 @@ import java.util.HashSet;
         attributeNodes = {
                 @NamedAttributeNode("hero"),
                 @NamedAttributeNode("sidekick"),
-                @NamedAttributeNode("cards"),
+                @NamedAttributeNode(value = "cards", subgraph = "deckCard-with-card"),
                 @NamedAttributeNode("ruleCards"),
                 @NamedAttributeNode("extraCharacters")
-        }
+        },
+        subgraphs = @NamedSubgraph(name = "deckCard-with-card", attributeNodes = @NamedAttributeNode("card"))
 )
 public class Deck {
     @Id
@@ -56,7 +57,7 @@ public class Deck {
     private Sidekick sidekick;
 
     @OneToMany(mappedBy = "deck")
-    private java.util.Set<Card> cards = new HashSet<>();
+    private java.util.Set<DeckCard> cards = new HashSet<>();
 
     @OneToMany(mappedBy = "deck")
     private java.util.Set<RuleCard> ruleCards = new HashSet<>();

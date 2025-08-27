@@ -4,6 +4,9 @@ import com.radiuk.unmatched_backend_core.model.types.CardType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -16,9 +19,8 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deck_id")
-    private Deck deck;
+    @OneToMany(mappedBy = "card")
+    private Set<DeckCard> decks = new HashSet<>();
 
     private String title;
 
@@ -30,22 +32,5 @@ public class Card {
 
     private Short value;
 
-    private Short boost;
-
-    private Short quantity;
-
-    @Column(name = "basic_text")
-    private String basicText;
-
-    @Column(name = "immediate_text")
-    private String immediateText;
-
-    @Column(name = "during_text")
-    private String duringText;
-
-    @Column(name = "after_text")
-    private String afterText;
-
-    @Column(name = "image_url")
-    private String imageUrl;
+    private String effect;
 }

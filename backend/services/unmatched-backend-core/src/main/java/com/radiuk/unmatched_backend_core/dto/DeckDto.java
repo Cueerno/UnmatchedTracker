@@ -29,7 +29,7 @@ public class DeckDto {
 
     private SidekickDto sidekick;
 
-    private List<CardDto> cards;
+    private List<DeckCardDto> cards;
 
     private List<RuleCardDto> ruleCards;
 

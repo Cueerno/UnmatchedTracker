@@ -18,17 +18,5 @@ public class CardDto {
 
     private Short value;
 
-    private Short boost;
-
-    private Short quantity;
-
-    private String basicText;
-
-    private String immediateText;
-
-    private String duringText;
-
-    private String afterText;
-
-    private String imageUrl;
+    private String effect;
 }

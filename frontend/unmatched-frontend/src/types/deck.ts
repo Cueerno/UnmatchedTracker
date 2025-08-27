@@ -30,7 +30,7 @@ export interface DeckDto {
     backImageUrl: string;
     hero: HeroDto;
     sidekick: SidekickDto;
-    cards: CardDto[];
+    cards: DeckCardDto[];
     ruleCards: RuleCardDto[];
     extraCharacters: ExtraCharacterDto[];
 }
@@ -45,18 +45,19 @@ export interface HeroDto {
     imageUrl: string;
 }
 
+export interface DeckCardDto {
+    card: CardDto;
+    boost: number;
+    quantity: number;
+    imageUrl: string;
+}
+
 export interface CardDto {
     title: string;
     type: CardType;
     characterName: string;
     value: number;
-    boost: number;
-    quantity: number;
-    basicText: string;
-    immediateText: string;
-    duringText: string;
-    afterText: string;
-    imageUrl: string;
+    effect: string;
 }
 
 export enum CardType {
