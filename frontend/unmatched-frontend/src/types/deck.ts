@@ -1,25 +1,3 @@
-export interface SidekickDto {
-    name: string,
-    quantity: number,
-    hp: number,
-    move: number,
-    attackType: AttackType;
-    imageUrl: string;
-}
-
-export enum AttackType {
-    MELEE = 'MELEE',
-    RANGED = 'RANGED',
-    UNKNOWN = 'UNKNOWN'
-}
-
-export interface DeckRatingDto {
-    name: string;
-    winCount: number;
-    totalCount: number;
-    winRatePercent: number;
-}
-
 export interface DeckDto {
     setName: string;
     name: string;
@@ -33,6 +11,21 @@ export interface DeckDto {
     cards: DeckCardDto[];
     ruleCards: RuleCardDto[];
     extraCharacters: ExtraCharacterDto[];
+}
+
+export interface SidekickDto {
+    name: string,
+    quantity: number,
+    hp: number,
+    move: number,
+    attackType: AttackType;
+    imageUrl: string;
+}
+
+export enum AttackType {
+    MELEE = 'MELEE',
+    RANGED = 'RANGED',
+    UNKNOWN = 'UNKNOWN'
 }
 
 export interface HeroDto {
@@ -81,4 +74,11 @@ export interface ExtraCharacterDto {
     move: number;
     attackType: AttackType;
     imageUrl: string;
+}
+
+export interface DeckRatingDto {
+    name: string;
+    winCount: number;
+    totalCount: number;
+    winRatePercent: number;
 }
