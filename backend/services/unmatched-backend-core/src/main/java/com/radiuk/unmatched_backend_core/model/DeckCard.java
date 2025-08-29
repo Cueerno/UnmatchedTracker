@@ -25,6 +25,9 @@ public class DeckCard {
     @JoinColumn(name = "card_id")
     private Card card;
 
+    @Column(name = "character_name")
+    private String characterName;
+
     private Short boost;
 
     private Short quantity;

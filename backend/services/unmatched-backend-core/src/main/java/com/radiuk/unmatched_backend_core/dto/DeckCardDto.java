@@ -11,6 +11,8 @@ public class DeckCardDto {
 
     private CardDto card;
 
+    private String characterName;
+
     private Short boost;
 
     private Short quantity;

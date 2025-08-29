@@ -27,9 +27,6 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private CardType type;
 
-    @Column(name = "character_name")
-    private String characterName;
-
     private Short value;
 
     private String effect;

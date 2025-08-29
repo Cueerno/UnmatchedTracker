@@ -14,8 +14,6 @@ public class CardDto {
 
     private CardType type;
 
-    private String characterName;
-
     private Short value;
 
     private String effect;
