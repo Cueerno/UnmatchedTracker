@@ -16,6 +16,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.*;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -60,6 +61,9 @@ public class RedisCacheConfig {
         Jackson2JsonRedisSerializer<DeckDto> deckSerializer = new Jackson2JsonRedisSerializer<>(DeckDto.class);
         deckSerializer.setObjectMapper(objectMapper);
 
+        Jackson2JsonRedisSerializer<CardDto> cardSerializer = new Jackson2JsonRedisSerializer<>(CardDto.class);
+        cardSerializer.setObjectMapper(objectMapper);
+
         Jackson2JsonRedisSerializer<BoardDto> boardSerializer = new Jackson2JsonRedisSerializer<>(BoardDto.class);
         boardSerializer.setObjectMapper(objectMapper);
 
@@ -68,22 +72,26 @@ public class RedisCacheConfig {
 
         GenericJackson2JsonRedisSerializer listSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
 
-        Map<String, RedisCacheConfiguration> configs = Map.of(
-                "userPartyList", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), listSerializer)),
-                "party",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), partySerializer)),
+        Map<String, RedisCacheConfiguration> configs = new HashMap<>();
 
-                "setList",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
-                "set",           createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), setSerializer)),
+        configs.put("userPartyList", createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), listSerializer)));
+        configs.put("party",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(20), partySerializer)));
 
-                "deckList",      createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
-                "deck",          createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), deckSerializer)),
-                "deckTop",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
+        configs.put("setList",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
+        configs.put("set",           createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), setSerializer)));
 
-                "boardList",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)),
-                "board",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), boardSerializer)),
+        configs.put("deckList",      createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
+        configs.put("deck",          createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), deckSerializer)));
+        configs.put("deckTop",       createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
 
-                "dashboard",    createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), dashboardSerializer))
-        );
+        configs.put("cardList",      createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
+        configs.put("card",          createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), cardSerializer)));
+
+        configs.put("boardList",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
+        configs.put("board",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), boardSerializer)));
+
+        configs.put("dashboard",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), dashboardSerializer)));
+
 
         return RedisCacheManager.builder(factory)
                 .cacheDefaults(baseConfig)
