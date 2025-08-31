@@ -22,7 +22,7 @@ public class BoardController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<?> getAllBoards(@PathVariable String name) {
+    public ResponseEntity<?> getByName(@PathVariable String name) {
         return ResponseEntity.ok(boardService.getByName(name));
     }
 }
