@@ -6,6 +6,7 @@ import {
     FaBoxOpen,
     FaChartBar,
     FaChessBoard,
+    FaIdCard,
     FaLayerGroup,
     FaPlus,
     FaRandom,
@@ -51,6 +52,7 @@ export default function Header() {
             submenu: [
                 {to: '/sets', icon: <FaBoxOpen/>, label: 'Sets'},
                 {to: '/decks', icon: <FaLayerGroup/>, label: 'Decks'},
+                {to: '/cards', icon: <FaIdCard/>, label: 'Cards'},
                 {to: '/boards', icon: <FaChessBoard/>, label: 'Boards'},
             ],
         },
