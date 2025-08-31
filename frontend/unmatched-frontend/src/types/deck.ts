@@ -1,3 +1,5 @@
+import {CardDto} from "./card";
+
 export interface DeckDto {
     setName: string;
     name: string;
@@ -43,21 +45,6 @@ export interface DeckCardDto {
     boost: number;
     quantity: number;
     imageUrl: string;
-}
-
-export interface CardDto {
-    title: string;
-    type: CardType;
-    characterName: string;
-    value: number;
-    effect: string;
-}
-
-export enum CardType {
-    ATTACK = 'ATTACK',
-    ATTACK_DEFENSE = 'ATTACK_DEFENSE',
-    DEFENSE = 'DEFENSE',
-    SCHEME = 'SCHEME'
 }
 
 export interface RuleCardDto {
