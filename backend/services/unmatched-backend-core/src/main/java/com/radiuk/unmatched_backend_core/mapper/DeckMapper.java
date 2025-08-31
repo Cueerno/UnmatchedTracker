@@ -16,6 +16,8 @@ public interface DeckMapper {
 
     CardDto toCardDto(Card card);
 
+    List<CardDto> toCardDtos(List<Card> cards);
+
     DeckCardDto toDeckCardDto(DeckCard deckCard);
 
     @Mapping(source = "set.name", target = "setName")
