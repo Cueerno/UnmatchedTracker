@@ -8,11 +8,10 @@ function cardTypeLabel(type: CardType) {
     return type.toLowerCase();
 }
 
-
 function CardCardRenderer({card}: { card: CardDto }) {
     return (
         <article aria-label={card.title}>
-            <Link to={`/cards/${encodeURIComponent(card.title.concat(card.characterName))}`} className="card-link" title={card.title}>
+            <Link to={`/cards/${encodeURIComponent(card.title)}`} className="card-link" title={card.title}>
 
                 <div className="card-footer">
                     <div className="card-header">
@@ -27,6 +26,12 @@ function CardCardRenderer({card}: { card: CardDto }) {
                                 className="card-icon"
                                 src={`/card_type/${cardTypeLabel(card.type)}.png`}
                                 alt={cardTypeLabel(card.type)}
+
+                                style={{
+                                    width: '150px',
+                                    height: 'auto',
+                                    background: "black"
+                                }}
                             />
                         </div>
 

@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {getByTitle} from "../../api/card";
 import {useParams} from "react-router-dom";
-import {CardDto} from "../../types/card";
+import {CardDto, CardType} from "../../types/card";
+
+function cardTypeLabel(type: CardType) {
+    return type.toLowerCase();
+}
+
 
 export default function Card() {
     const {title} = useParams<{ title: string }>();
@@ -18,11 +23,25 @@ export default function Card() {
             .finally(() => setLoading(false));
     }, [title]);
 
+    if (loading)  return <div>Loading card…</div>;
+    if (error)    return <div style={{ color: "red" }}>Error: {error}</div>;
+    if (!card)    return <div>No card data</div>;
+
     return (
         <div>
-            <p>{card?.title}</p>
-            <p>{card?.type}</p>
-            <p>{card?.value}</p>
+            <p>{card.title}</p>
+            <img
+                className="card-icon"
+                src={`/card_type/${cardTypeLabel(card.type)}.png`}
+                alt={cardTypeLabel(card.type)}
+
+                style={{
+                    width: '150px',
+                    height: 'auto',
+                    background: "black"
+                }}
+                />
+            <p>{card.value}</p>
         </div>
     );
 }
