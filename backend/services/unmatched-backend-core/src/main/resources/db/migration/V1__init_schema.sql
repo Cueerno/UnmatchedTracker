@@ -51,7 +51,7 @@ create table decks
 create table cards
 (
     id     bigserial primary key,
-    title  varchar(255) not null,
+    title  varchar(255) not null unique,
     type   varchar(30) check (type in ('ATTACK', 'VERSATILE', 'DEFENSE', 'SCHEME')),
     value  smallint,
     effect text
