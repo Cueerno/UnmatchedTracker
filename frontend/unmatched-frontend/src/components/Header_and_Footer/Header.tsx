@@ -37,7 +37,13 @@ export default function Header() {
     const mobileRef = useRef<HTMLDivElement>(null);
 
     const links: NavItem[] = [
-        {to: '/user/create', icon: <FaUser/>, label: 'Sign up'},
+        {
+            icon: <FaUser/>,
+            label: 'User',
+            submenu: [
+                {to: '/user/create', icon: <FaUser/>, label: 'Sign up'}
+            ],
+        },
         {
             icon: <FaUsers/>,
             label: 'Parties',

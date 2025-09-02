@@ -21,20 +21,20 @@ export default function Dropdown({icon, label, submenu}: DropdownProps) {
             className="nav-link dropdown"
             onClick={() => setOpen(o => !o)}
         >
-      <span className="nav-link-inner">
-        {icon}
-          <span>{label}</span>
-      </span>
+            <span className="nav-link-inner">
+                {icon}
+                <span>{label}</span>
+            </span>
 
             {open && (
                 <ul className="dropdown-menu">
                     {submenu.map(sub => (
                         <li key={sub.to}>
                             <Link to={sub.to} className="dropdown-item">
-                <span className="nav-link-inner">
-                  {sub.icon}
-                    <span>{sub.label}</span>
-                </span>
+                                <span className="nav-link-inner">
+                                    {sub.icon}
+                                    <span>{sub.label}</span>
+                                </span>
                             </Link>
                         </li>
                     ))}
