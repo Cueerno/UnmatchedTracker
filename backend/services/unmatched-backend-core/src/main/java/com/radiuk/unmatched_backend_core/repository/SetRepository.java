@@ -1,6 +1,6 @@
 package com.radiuk.unmatched_backend_core.repository;
 
-import com.radiuk.unmatched_backend_core.dto.DashboardSetDto;
+import com.radiuk.unmatched_backend_core.dto.HomeDashboardSummary;
 import com.radiuk.unmatched_backend_core.model.Set;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -32,7 +32,7 @@ public interface SetRepository extends JpaRepository<Set, Short> {
     order by sum(case when p.is_winner then 1 else 0 end )::float / count(*) desc
     limit 1;
     """)
-    DashboardSetDto getTheStrongest();
+    HomeDashboardSummary getTheStrongest();
 
     @Query(nativeQuery = true, value = """
     select
@@ -45,5 +45,5 @@ public interface SetRepository extends JpaRepository<Set, Short> {
     order by count(distinct p.match_id) desc
     limit 1;
     """)
-    DashboardSetDto getTheMostPopular();
+    HomeDashboardSummary getTheMostPopular();
 }

@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DashboardSetDto {
+public class HomeDashboardSummary {
 
-    private String name;
+    String name;
 
-    private String imageUrl;
+    String imageUrl;
 }

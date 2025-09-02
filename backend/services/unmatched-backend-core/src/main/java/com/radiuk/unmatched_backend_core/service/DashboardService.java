@@ -1,6 +1,7 @@
 package com.radiuk.unmatched_backend_core.service;
 
 import com.radiuk.unmatched_backend_core.dto.*;
+import com.radiuk.unmatched_backend_core.mapper.BoardMapper;
 import com.radiuk.unmatched_backend_core.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,18 +19,19 @@ public class DashboardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final PartyRepository partyRepository;
+    private final BoardMapper boardMapper;
 
     @Transactional(readOnly = true)
     @Cacheable(value = "dashboard", key = "'dashboard'")
-    public DashboardDto getDashboard() {
+    public HomeDashboardDto getDashboard() {
         log.debug("[DashboardService] -> getDashboard called");
 
-        DashboardDto dashboard = DashboardDto.builder()
+        HomeDashboardDto dashboard = HomeDashboardDto.builder()
                 .theMostPopularSet(setRepository.getTheMostPopular())
                 .theStrongestSet(setRepository.getTheStrongest())
                 .theMostPopularDeck(deckRepository.getTheMostPopular())
                 .theStrongestdDeck(deckRepository.getTheStrongest())
-                .theMostPopularBoard(boardRepository.getTheMostPopular())
+                .theMostPopularBoard(boardMapper.toDto(boardRepository.getTheMostPopular()))
                 .numberOfUsers(userRepository.count())
                 .numberOfParties(partyRepository.numberOfPartes())
                 .numberOfSets((short) setRepository.count())

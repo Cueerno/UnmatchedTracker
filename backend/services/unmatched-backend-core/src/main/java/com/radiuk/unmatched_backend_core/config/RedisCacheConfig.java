@@ -67,7 +67,7 @@ public class RedisCacheConfig {
         Jackson2JsonRedisSerializer<BoardDto> boardSerializer = new Jackson2JsonRedisSerializer<>(BoardDto.class);
         boardSerializer.setObjectMapper(objectMapper);
 
-        Jackson2JsonRedisSerializer<DashboardDto> dashboardSerializer = new Jackson2JsonRedisSerializer<>(DashboardDto.class);
+        Jackson2JsonRedisSerializer<HomeDashboardDto> dashboardSerializer = new Jackson2JsonRedisSerializer<>(HomeDashboardDto.class);
         dashboardSerializer.setObjectMapper(objectMapper);
 
         GenericJackson2JsonRedisSerializer listSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);

@@ -4,12 +4,12 @@ import {ReactComponent as UnmatchedLogo} from '../../assets/unmatched-logo.svg';
 import {getDashboard} from '../../api/dashboard';
 import './Home.css';
 import './HomeCards.css';
-import {DashboardDto} from '../../types/dashboard';
+import {HomeDashboardDto} from '../../types/dashboard';
 import {Link} from 'react-router-dom';
 import DashboardStats from "./DashboardStats";
 
 export default function Home() {
-    const [dashboard, setDashboard] = useState<DashboardDto | null>(null);
+    const [dashboard, setDashboard] = useState<HomeDashboardDto | null>(null);
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function Home() {
         </article>
     );
 
-    const BoardCard = ({board}: { board: DashboardDto["theMostPopularBoard"] }) => {
+    const BoardCard = ({board}: { board: HomeDashboardDto["theMostPopularBoard"] }) => {
         return (
             <article className="hc-board-card">
                 <div className="hc-board-thumb">
@@ -135,14 +135,14 @@ export default function Home() {
                                 <SquareCard
                                     title="Top Deck — Strongest"
                                     subtitle={dashboard.theStrongestdDeck.name}
-                                    imageUrl={dashboard.theStrongestdDeck.artImageUrl}
+                                    imageUrl={dashboard.theStrongestdDeck.imageUrl}
                                     badge="Strongest"
                                 />
 
                                 <SquareCard
                                     title="Top Deck — Most Popular"
                                     subtitle={dashboard.theMostPopularDeck.name}
-                                    imageUrl={dashboard.theMostPopularDeck.artImageUrl}
+                                    imageUrl={dashboard.theMostPopularDeck.imageUrl}
                                     badge="Popular"
                                 />
 

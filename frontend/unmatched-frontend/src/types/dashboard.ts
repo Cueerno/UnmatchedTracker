@@ -1,30 +1,18 @@
-export interface DashboardDto {
-    theStrongestSet: DashboardSetDto;
-    theMostPopularSet: DashboardSetDto;
-    theMostPopularDeck: DashboardDeckDto;
-    theStrongestdDeck: DashboardDeckDto;
-    theMostPopularBoard: DashboardBoardDto;
+import {BoardDto} from "./board";
+
+export interface HomeDashboardDto {
+    theStrongestSet: HomeDashboardSummary;
+    theMostPopularSet: HomeDashboardSummary;
+    theMostPopularDeck: HomeDashboardSummary;
+    theStrongestdDeck: HomeDashboardSummary;
+    theMostPopularBoard: BoardDto;
     numberOfUsers: number;
     numberOfParties: number;
     numberOfSets: number;
     numberOfDecks: number;
 }
 
-interface DashboardSetDto {
+interface HomeDashboardSummary {
     name: string;
     imageUrl: string;
 }
-
-interface DashboardDeckDto {
-    name: string;
-    artImageUrl: string;
-}
-
-interface DashboardBoardDto {
-    name: string;
-    maxPlayers: number;
-    spaces: number;
-    zones: number;
-    imageUrl: string;
-}
-

@@ -1,6 +1,6 @@
 package com.radiuk.unmatched_backend_core.repository;
 
-import com.radiuk.unmatched_backend_core.dto.DashboardDeckDto;
+import com.radiuk.unmatched_backend_core.dto.HomeDashboardSummary;
 import com.radiuk.unmatched_backend_core.dto.DeckRatingDto;
 import com.radiuk.unmatched_backend_core.model.Deck;
 import org.springframework.data.domain.Pageable;
@@ -53,7 +53,7 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     order by count(*) filter (where p.is_winner) desc
     limit 1;
     """)
-    DashboardDeckDto getTheStrongest();
+    HomeDashboardSummary getTheStrongest();
 
     @Query(nativeQuery = true, value = """
     select
@@ -64,7 +64,7 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     order by count(*) desc
     limit 1;
     """)
-    DashboardDeckDto getTheMostPopular();
+    HomeDashboardSummary getTheMostPopular();
 
     @EntityGraph("Deck.withAll")
     @Query(value = """
