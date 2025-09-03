@@ -22,7 +22,7 @@ public class Match {
     private String note;
 
     @Column(name = "created_at")
-    private OffsetDateTime playedAt;
+    private OffsetDateTime created_at;
 
     @OneToMany(mappedBy = "match")
     private List<Team> teams = new ArrayList<>();

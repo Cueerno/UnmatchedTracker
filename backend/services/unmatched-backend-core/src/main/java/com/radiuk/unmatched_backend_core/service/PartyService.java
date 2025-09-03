@@ -86,7 +86,7 @@ public class PartyService {
                 .users(users)
                 .format(format)
                 .teams(teams)
-                .date(match.getPlayedAt())
+                .date(parties.getFirst().getCreatedAt())
                 .boardName(boardName)
                 .winner(winningTeam)
                 .build();
@@ -132,7 +132,7 @@ public class PartyService {
 
         Match match = new Match();
         match.setFormat(partyDto.getFormat());
-        match.setPlayedAt(date);
+        match.setCreated_at(date);
         matchRepository.save(match);
 
         Map<String, Team> teamMap = new HashMap<>();
