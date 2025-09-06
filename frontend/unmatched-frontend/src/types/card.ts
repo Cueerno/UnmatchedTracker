@@ -1,7 +1,6 @@
 export interface CardDto {
     title: string;
     type: CardType;
-    characterName: string;
     value: number;
     effect: string;
 }

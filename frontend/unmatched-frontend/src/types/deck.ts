@@ -42,6 +42,7 @@ export interface HeroDto {
 
 export interface DeckCardDto {
     card: CardDto;
+    characterName: string;
     boost: number;
     quantity: number;
     imageUrl: string;
