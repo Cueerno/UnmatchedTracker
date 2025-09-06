@@ -1,6 +1,5 @@
 package com.radiuk.unmatched_backend_core.model;
 
-import com.radiuk.unmatched_backend_core.model.types.AttackType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,31 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Hero {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
+public class Hero extends HeroBase {
 
-    private String name;
-
-    @Column(name = "special_ability")
-    private String specialAbility;
-
-    private Short quantity;
-
-    private Short hp;
-
-    private Short move;
-
-    @Column(name = "attack_type")
-    @Enumerated(EnumType.STRING)
-    private AttackType attackType;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "deck_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deck_id")
     private Deck deck;
-
 }
