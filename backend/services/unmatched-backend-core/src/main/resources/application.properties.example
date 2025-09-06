@@ -24,3 +24,7 @@ logging.level.root=
 logging.level.org.springframework.web=
 logging.level.com.radiuk.unmatched_backend_core=
 logging.file.name=b
+
+#Backup
+backup.csv.path.party=backend/services/unmatched-backend-core/backup/parties.csv
+backup.csv.path.user=backend/services/unmatched-backend-core/backup/users.csv

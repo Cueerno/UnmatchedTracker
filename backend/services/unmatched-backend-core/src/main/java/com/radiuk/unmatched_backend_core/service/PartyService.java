@@ -28,6 +28,7 @@ public class PartyService {
     private final PartyRepository partyRepository;
     private final UserRepository userRepository;
     private final DeckRepository deckRepository;
+    private final CvsBackupService cvsBackupService;
 
     @Cacheable(value = "party", key = "#matchId")
     @Transactional(readOnly = true)
@@ -159,14 +160,24 @@ public class PartyService {
 
             Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
 
-            partyRepository.save(Party.builder().match(match).team(team).user(user).deck(deck).board(board).moveOrder(userPartyDto.getMoveOrder()).finalHp(userPartyDto.getFinalHp()).isWinner(isUserWin(userPartyDto, partyDto)).createdAt(date).build());
+            Party savedParty = partyRepository.save(Party.builder()
+                    .match(match)
+                    .team(team)
+                    .user(user)
+                    .deck(deck)
+                    .board(board)
+                    .moveOrder(userPartyDto.getMoveOrder())
+                    .finalHp(userPartyDto.getFinalHp())
+                    .isWinner(isUserWin(userPartyDto, partyDto))
+                    .createdAt(date)
+                    .build());
+
+            cvsBackupService.backupParty(savedParty);
         }
 
         deckService.evictTopFromCache();
 
-        PartyDto createdParty = getPartyByMatchId(match.getId());
         log.info("[PartyService] -> createParty finished successfully for matchId={}", match.getId());
-        return createdParty;
     }
 
     private boolean isUserWin(UserPartyDto user, PartyDto dto) {

@@ -18,13 +18,18 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final CvsBackupService cvsBackupService;
 
     @Transactional
     public void createUser(UserDto userDto) {
         log.debug("[UserService] -> createUser called with userDto={}", userDto);
+
         User user = userMapper.toEntity(userDto);
         user.setRegisteredAt(OffsetDateTime.now());
-        userRepository.save(user);
-        log.info("[UserService] -> createUser finished successfully for username={}", userDto.getUsername());
+
+        User savedUser = userRepository.save(user);
+        log.info("[UserService] -> createUser finished successfully for username={}", savedUser.getUsername());
+
+        cvsBackupService.backupUser(savedUser);
     }
 }
