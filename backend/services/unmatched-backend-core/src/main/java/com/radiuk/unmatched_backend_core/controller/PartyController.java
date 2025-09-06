@@ -21,6 +21,7 @@ public class PartyController {
 
     @PostMapping("")
     public ResponseEntity<?> createParty(@RequestBody PartyDto partyDto) {
-        return ResponseEntity.ok(partyService.createParty(partyDto));
+        partyService.createParty(partyDto);
+        return ResponseEntity.ok(new MessageResponse("Party created successfully"));
     }
 }

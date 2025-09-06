@@ -57,7 +57,7 @@ public class PartyService {
 
         Match.MatchFormat format = match.getFormat();
 
-        log.info("[PartyService] -> Found format for matchId={}", format);
+        log.info("[PartyService] -> Found format={} for matchId={}", format, matchId);
 
         List<TeamDto> teams = match.getTeams().stream()
                 .map(team -> TeamDto.builder()
@@ -115,7 +115,7 @@ public class PartyService {
     }
 
     @Transactional
-    public PartyDto createParty(PartyDto partyDto) {
+    public void createParty(PartyDto partyDto) {
         log.debug("[PartyService] -> createParty called with partyDto={}", partyDto);
 
         OffsetDateTime date;
