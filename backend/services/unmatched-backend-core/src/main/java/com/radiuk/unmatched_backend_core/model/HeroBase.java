@@ -16,9 +16,6 @@ public abstract class HeroBase {
 
     private String name;
 
-    @Column(name = "special_ability")
-    private String specialAbility;
-
     private Short quantity;
 
     private Short hp;

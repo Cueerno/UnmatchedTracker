@@ -15,4 +15,7 @@ public class ExtraCharacter extends HeroBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "deck_id")
     private Deck deck;
+
+    @Column(name = "special_ability")
+    private String specialAbility;
 }
