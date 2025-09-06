@@ -22,9 +22,9 @@ function SetCardRenderer({set}: { set: SetDto }) {
 
     return (
         <article aria-label={set.name}>
-            <Link to={`/sets/${encodeURIComponent(set.name)}`} className="card-link" title={set.name}>
+            <Link to={`/sets/${encodeURIComponent(set.name)}`} className="card-item-link" title={set.name}>
 
-                <div className="card-art" aria-hidden>
+                <div className="card-item-art" aria-hidden>
                     {set.imageUrl && !imgError ? (
                         <img
                             src={set.imageUrl}
@@ -32,18 +32,18 @@ function SetCardRenderer({set}: { set: SetDto }) {
                             onError={() => setImgError(true)}
                         />
                     ) : (
-                        <div className="card-art-fallback">Deadpool will return image soon</div>
+                        <div className="card-item-art-fallback">Deadpool will return image soon</div>
                     )}
                 </div>
 
-                <div className="card-footer">
-                    <div className="card-header">
-                        <div className="card-title">
+                <div className="card-item-footer">
+                    <div className="card-item-header">
+                        <div className="card-item-title">
                             {set.name}
                         </div>
                     </div>
 
-                    <div className="card-stats">
+                    <div className="card-item-stats">
                         <div className="release-date">
                             {getYear(set.releaseDate)}
                         </div>

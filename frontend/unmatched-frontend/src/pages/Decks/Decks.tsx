@@ -15,9 +15,9 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
 
     return (
         <article aria-label={deck.name}>
-            <Link to={`/decks/${encodeURIComponent(deck.name)}`} className="card-link" title={deck.name}>
+            <Link to={`/decks/${encodeURIComponent(deck.name)}`} className="card-item-link" title={deck.name}>
 
-                <div className="card-art" aria-hidden>
+                <div className="card-item-art" aria-hidden>
                     {deck.artImageUrl && !imgError ? (
                         <img
                             src={deck.artImageUrl}
@@ -25,13 +25,13 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
                             onError={() => setImgError(true)}
                         />
                     ) : (
-                        <div className="card-art-fallback">Deadpool will return image soon</div>
+                        <div className="card-item-art-fallback">Deadpool will return image soon</div>
                     )}
                 </div>
 
-                <div className="card-footer">
-                    <div className="card-header">
-                        <div className="card-title">
+                <div className="card-item-footer">
+                    <div className="card-item-header">
+                        <div className="card-item-title">
                             {deck.name}
                         </div>
 
@@ -43,7 +43,7 @@ function DeckCardRenderer({deck}: { deck: DeckDto }) {
                         )}
                     </div>
 
-                    <div className="card-stats">
+                    <div className="card-item-stats">
                         <div className="stat hp">
                             <span className="hp-heart">❤</span>
                             <span>{deck.hero.hp}</span>

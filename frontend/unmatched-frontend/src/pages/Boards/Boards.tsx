@@ -20,13 +20,13 @@ function BoardCardRenderer({board}: { board: BoardDto }) {
                         onError={() => setImgError(true)}
                     />
                 ) : (
-                    <div className="card-art-fallback">Deadpool will return image soon</div>
+                    <div className="card-item-art-fallback">Deadpool will return image soon</div>
                 )}
             </div>
 
-            <div className="card-footer">
-                <div className="card-header">
-                    <div className="card-title">
+            <div className="card-item-footer">
+                <div className="card-item-header">
+                    <div className="card-item-title">
                         {board.name}
                     </div>
                 </div>

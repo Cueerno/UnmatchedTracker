@@ -1,7 +1,7 @@
 import React from 'react';
 import {useClientTable} from '../../hooks/useClientTable/useClientTable';
 import {SortPanel} from '../SortPanel/SortPanel';
-import {Card} from '../Card/Card';
+import {CardItem} from '../CardItem/CardItem';
 import "./ContentPage.css"
 
 export interface SortOption {
@@ -48,7 +48,7 @@ export function ContentPage<T>({
 
                 <div className="content-grid">
                     {data.map(item => (
-                        <Card
+                        <CardItem
                             key={keyExtractor(item)}
                             data={item}
                             className="content-card-wrapper"

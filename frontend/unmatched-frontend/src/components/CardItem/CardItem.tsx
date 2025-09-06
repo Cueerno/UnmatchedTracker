@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './CardItem.css';
 
 interface CardProps<T> {
     data: T;
@@ -8,13 +8,13 @@ interface CardProps<T> {
     wrapper?: ((children: React.ReactNode, item: T) => React.ReactNode) | string;
 }
 
-export function Card<T>({ data, renderContent, className = '', wrapper }: CardProps<T>) {
-    const content = <div className={`card ${className}`.trim()} role="group">{renderContent(data)}</div>;
+export function CardItem<T>({ data, renderContent, className = '', wrapper }: CardProps<T>) {
+    const content = <div className={`card-item ${className}`.trim()} role="group">{renderContent(data)}</div>;
 
     if (!wrapper) return content;
 
     if (typeof wrapper === 'string') {
-        return <a href={wrapper} className="card-link" aria-label="card-link">{content}</a>;
+        return <a href={wrapper} className="card-item-link" aria-label="card-item-link">{content}</a>;
     }
 
     return <>{wrapper(content, data)}</>;

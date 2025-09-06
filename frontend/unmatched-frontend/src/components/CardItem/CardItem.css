@@ -1,14 +1,14 @@
-.card-status {
+.card-item-status {
     color: #666;
     text-align: center;
     margin: 12px 0;
 }
 
-.card-status.error {
+.card-item-status.error {
     color: #d32f2f;
 }
 
-.card {
+.card-item {
     position: relative;
     display: block;
     width: 100%;
@@ -21,18 +21,18 @@
     border: 3px solid #000000;
 }
 
-.card:hover {
+.card-item:hover {
     transform: translateY(-6px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.card-link {
+.card-item-link {
     display: block;
     color: inherit;
     text-decoration: none;
 }
 
-.card-art {
+.card-item-art {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -44,14 +44,14 @@
     overflow: hidden;
 }
 
-.card-art img {
+.card-item-art img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.card-art-fallback {
+.card-item-art-fallback {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +66,7 @@
     linear-gradient(180deg, #0b0b0b 0%, #2a0a0a 60%, var(--red) 100%);
 }
 
-.card-footer {
+.card-item-footer {
     background: #d3c3c3;
     padding: 10px 12px;
     border-top: 3px solid #050404;
@@ -75,20 +75,20 @@
     gap: 8px;
 }
 
-.card-header {
+.card-item-header {
     display: flex;
     justify-content: center;
     gap: 8px;
     height: 24px;
 }
 
-.card-title {
+.card-item-title {
     font-size: 16px;
     font-weight: 600;
     color: #000;
 }
 
-.card-stats {
+.card-item-stats {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -96,7 +96,7 @@
     color: #333;
 }
 
-.card-stats .stat {
+.card-item-stats .stat {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -104,48 +104,48 @@
 }
 
 @media (max-width: 740px) {
-    .card-container {
+    .card-item-container {
         padding: 0 12px;
     }
 
-    .card-grid {
+    .card-item-grid {
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 18px;
     }
 
-    .card-footer {
+    .card-item-footer {
         padding: 8px;
         gap: 6px;
     }
 
-    .card-title {
+    .card-item-title {
         font-size: 14px;
     }
 
-    .card-stats {
+    .card-item-stats {
         font-size: 11px;
     }
 }
 
 @media (max-width: 480px) {
-    .card-page {
+    .card-item-page {
         padding: 12px 6px;
     }
 
-    .card-grid {
+    .card-item-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    .card-footer {
+    .card-item-footer {
         padding: 6px;
     }
 
-    .card-title {
+    .card-item-title {
         font-size: 13px;
     }
 
-    .card-stats {
+    .card-item-stats {
         flex-wrap: wrap;
         justify-content: space-between;
         font-size: 10px;
