@@ -23,7 +23,7 @@ public class User {
     @Column(name = "registered_at")
     private OffsetDateTime registeredAt;
 
-
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Party> parties = new ArrayList<>();
 

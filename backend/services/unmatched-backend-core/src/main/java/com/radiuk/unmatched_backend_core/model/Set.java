@@ -47,9 +47,11 @@ public class Set {
     @Column(name = "release_date")
     private OffsetDateTime releaseDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "set")
     private java.util.Set<Board> boards = new HashSet<>();
 
+    @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "set")
     private java.util.Set<Deck> decks = new HashSet<>();
 }

@@ -24,9 +24,11 @@ public class Match {
     @Column(name = "created_at")
     private OffsetDateTime created_at;
 
+    @Builder.Default
     @OneToMany(mappedBy = "match")
     private List<Team> teams = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "match")
     private List<Party> parties = new ArrayList<>();
 

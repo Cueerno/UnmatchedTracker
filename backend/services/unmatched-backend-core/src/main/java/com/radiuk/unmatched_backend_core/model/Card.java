@@ -19,6 +19,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Builder.Default
     @OneToMany(mappedBy = "card")
     private Set<DeckCard> decks = new HashSet<>();
 

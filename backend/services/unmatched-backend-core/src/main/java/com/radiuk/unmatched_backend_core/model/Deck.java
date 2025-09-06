@@ -51,6 +51,7 @@ public class Deck {
     @Column(name = "back_image_url")
     private String backImageUrl;
 
+    @Builder.Default
     @OneToMany(mappedBy = "deck")
     private java.util.Set<Party> parties = new HashSet<>();
 
@@ -60,12 +61,15 @@ public class Deck {
     @OneToOne(mappedBy = "deck")
     private Sidekick sidekick;
 
+    @Builder.Default
     @OneToMany(mappedBy = "deck")
     private java.util.Set<DeckCard> cards = new HashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "deck")
     private java.util.Set<RuleCard> ruleCards = new HashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "deck")
     private java.util.Set<ExtraCharacter> extraCharacters = new HashSet<>();
 }

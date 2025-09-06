@@ -1,8 +1,7 @@
 package com.radiuk.unmatched_backend_core.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "boards")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +37,7 @@ public class Board {
     @JoinColumn(name = "set_id")
     private Set set;
 
+    @Builder.Default
     @OneToMany(mappedBy = "board")
     private List<Party> parties = new ArrayList<>();
 }

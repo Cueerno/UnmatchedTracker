@@ -28,6 +28,7 @@ public class Team {
     @JoinColumn(name = "match_id")
     private Match match;
 
+    @Builder.Default
     @OneToMany(mappedBy = "team")
     private List<Party> parties = new ArrayList<>();
 }
