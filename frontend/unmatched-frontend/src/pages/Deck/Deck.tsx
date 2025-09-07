@@ -5,7 +5,6 @@ import {AttackType, DeckCardDto, DeckDto, ExtraCharacterDto, RuleCardDto,} from 
 import {SortPanel} from "../../components/SortPanel/SortPanel";
 import "./Deck.css";
 
-/** Image with fallback block */
 function ImageWithFallback({
                                src,
                                alt,
@@ -242,16 +241,41 @@ export default function Deck() {
                     <div className="cards-grid">
                         {sortedCards && sortedCards.length > 0 ? (
                             sortedCards.map((dc: DeckCardDto, idx: number) => (
-                                <div className="card-tile" key={`${dc.card.title}-${idx}`}>
-                                    <div className="card-image-wrap">
-                                        <ImageWithFallback src={dc.imageUrl} alt={dc.card.title} className="card-thumb"
-                                                           fallback={<div className="card-noimage">No image</div>}/>
+                                // <div className="card-tile" key={`${dc.card.title}-${idx}`}>
+                                //     <div className="card-image-wrap">
+                                //         <ImageWithFallback src={dc.imageUrl} alt={dc.card.title} className="card-thumb"
+                                //                            fallback={<div className="card-noimage">No image</div>}/>
+                                //     </div>
+                                //     <div className="card-meta">
+                                //         <div className="card-title">{dc.card.title}</div>
+                                //         <div className="card-sub">Type: {dc.card.type}</div>
+                                //         <div className="card-sub">Qty: {dc.quantity} · Boost: {dc.boost}</div>
+                                //         {dc.card.effect && <div className="card-effect">{dc.card.effect}</div>}
+                                //     </div>
+                                // </div>
+
+                                <div className="deck-card">
+                                    <div className="deck-card-header">
+                                        <span className="title">{dc.card.title}</span>
+                                        <span className={`cost cost-${dc.card.type.toLowerCase()}`}>
+                                        <img
+                                            className="card-icon"
+                                            src={`/card_type/${dc.card.type.toLowerCase()}.png`}
+                                            alt={dc.card.type.toLowerCase()}
+                                        />
+                                        <span className="cost-value">{dc.card.value}</span>
+                                    </span>
                                     </div>
-                                    <div className="card-meta">
-                                        <div className="card-title">{dc.card.title}</div>
-                                        <div className="card-sub">Type: {dc.card.type}</div>
-                                        <div className="card-sub">Qty: {dc.quantity} · Boost: {dc.boost}</div>
-                                        {dc.card.effect && <div className="card-effect">{dc.card.effect}</div>}
+
+                                    <div className="card-body">
+                                        <div className="ability">
+                                            <span className="ability-name">{dc.card.effect}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="deck-card-footer">
+                                        <span className="subtext">{dc.characterName}</span>
+                                        <span className="qty">x{dc.quantity ?? 1}</span>
                                     </div>
                                 </div>
                             ))

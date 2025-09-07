@@ -1,0 +1,84 @@
+.deck-card {
+    width: 200px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.deck-card-header {
+    background: #222;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+.cost {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.cost .card-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+}
+
+.cost .card-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.type-attack {
+    background: #d32f2f;
+}
+
+.type-versatile {
+    background: #8e24aa;
+}
+
+.type-defense {
+    background: #1976d2;
+}
+
+.type-scheme {
+    background: #f9a825;
+}
+
+.card-body {
+    background: #f4f4f4;
+    padding: 10px;
+}
+
+.card-effect {
+    display: flex;
+    justify-content: space-between;
+    background: #000000;
+    color: #fff;
+    padding: 7px;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+.effect {
+    font-size: 13px;
+}
+
+.desc {
+    font-size: 12px;
+}
+
+.deck-card-footer {
+    background: #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    font-size: 12px;
+}
