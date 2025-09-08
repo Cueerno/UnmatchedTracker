@@ -24,6 +24,7 @@ public class Party {
     private Short finalHp;
 
     @Column(name = "is_winner")
+    @Builder.Default
     private Boolean isWinner = false;
 
     @Column(name = "created_at")

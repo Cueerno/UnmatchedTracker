@@ -4,6 +4,7 @@ import com.radiuk.unmatched_backend_core.dto.DeckDto;
 import com.radiuk.unmatched_backend_core.dto.DeckRatingDto;
 import com.radiuk.unmatched_backend_core.mapper.DeckMapper;
 import com.radiuk.unmatched_backend_core.model.Match;
+import com.radiuk.unmatched_backend_core.dto.DeckWithCardsDto;
 import com.radiuk.unmatched_backend_core.repository.DeckRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -39,13 +40,13 @@ public class DeckService {
 
     @Cacheable(value = "deck", key = "#name")
     @Transactional(readOnly = true)
-    public DeckDto getByName(String name) {
+    public DeckWithCardsDto getByName(String name) {
         log.debug("[DeckService] -> getByName called with name={}", name);
 
         return deckRepository.findByName(name).map(deck -> {
-            DeckDto dto = deckMapper.toDto(deck);
-            log.info("[DeckService] -> getByName finished successfully: deck retrieved with name={}", dto.getName());
-            return dto;
+            DeckWithCardsDto deckDto = deckMapper.toDtoWithCards(deck);
+            log.info("[DeckService] -> getByName finished successfully: deck retrieved with name={}", deckDto.getName());
+            return deckDto;
         }).orElseThrow(() -> {
             log.warn("[DeckService] -> getByName entity not found: type=Deck, key={}", name);
             return new EntityNotFoundException("Deck with name " + name + " not found");

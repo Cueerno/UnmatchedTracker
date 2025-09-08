@@ -14,6 +14,27 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@NamedEntityGraph(
+        name = "Card.withDecks",
+        attributeNodes = {
+                @NamedAttributeNode(value = "decks", subgraph = "deckCard-subgraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "deckCard-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "deck", subgraph = "deck-subgraph")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "deck-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("hero"),
+                                @NamedAttributeNode("sidekick")
+                        }
+                )
+        }
+)
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

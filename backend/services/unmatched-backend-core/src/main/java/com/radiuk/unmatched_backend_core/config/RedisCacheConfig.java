@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.radiuk.unmatched_backend_core.dto.*;
+import com.radiuk.unmatched_backend_core.dto.CardWithDecksDto;
+import com.radiuk.unmatched_backend_core.dto.DeckWithCardsDto;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -58,10 +60,10 @@ public class RedisCacheConfig {
         Jackson2JsonRedisSerializer<SetDto> setSerializer = new Jackson2JsonRedisSerializer<>(SetDto.class);
         setSerializer.setObjectMapper(objectMapper);
 
-        Jackson2JsonRedisSerializer<DeckDto> deckSerializer = new Jackson2JsonRedisSerializer<>(DeckDto.class);
+        Jackson2JsonRedisSerializer<DeckWithCardsDto> deckSerializer = new Jackson2JsonRedisSerializer<>(DeckWithCardsDto.class);
         deckSerializer.setObjectMapper(objectMapper);
 
-        Jackson2JsonRedisSerializer<CardDto> cardSerializer = new Jackson2JsonRedisSerializer<>(CardDto.class);
+        Jackson2JsonRedisSerializer<CardWithDecksDto> cardSerializer = new Jackson2JsonRedisSerializer<>(CardWithDecksDto.class);
         cardSerializer.setObjectMapper(objectMapper);
 
         Jackson2JsonRedisSerializer<BoardDto> boardSerializer = new Jackson2JsonRedisSerializer<>(BoardDto.class);

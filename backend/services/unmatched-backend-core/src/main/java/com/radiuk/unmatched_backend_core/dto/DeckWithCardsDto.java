@@ -1,15 +1,13 @@
 package com.radiuk.unmatched_backend_core.dto;
 
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeckDto {
+public class DeckWithCardsDto {
 
     private String setName;
 
@@ -29,7 +27,9 @@ public class DeckDto {
 
     private SidekickDto sidekick;
 
-    private Set<RuleCardDto> ruleCards = new HashSet<>();
+    private List<RuleCardDto> ruleCards;
 
-    private Set<ExtraCharacterDto> extraCharacters = new HashSet<>();
+    private List<ExtraCharacterDto> extraCharacters;
+
+    private List<DeckCardDto> cards;
 }

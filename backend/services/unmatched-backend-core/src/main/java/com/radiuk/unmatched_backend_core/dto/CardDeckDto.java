@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeckCardDto {
+public class CardDeckDto {
 
     private String deckName;
 
@@ -17,6 +17,4 @@ public class DeckCardDto {
     private Short quantity;
 
     private String imageUrl;
-
-    private CardDto card;
 }
