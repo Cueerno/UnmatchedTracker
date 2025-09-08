@@ -16,6 +16,9 @@ Unmatched Tracker - web app for the addictive board game **Unmatched**.
 - PostgreSQL
 - Redis (caching)
 
+### Backup
+- CSV file
+
 ### Backend
 - Language: Java 21,
 - Framework: Spring Boot 3.5.4 (Web, Data JPA, Security),
@@ -26,6 +29,7 @@ Unmatched Tracker - web app for the addictive board game **Unmatched**.
 - Framework: React
 
 ### Docker
+- Docker Compose
 
 ### Cloud Storage
 - Cloudinary
