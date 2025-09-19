@@ -5,7 +5,6 @@ import com.radiuk.unmatched_backend_core.mapper.SetMapper;
 import com.radiuk.unmatched_backend_core.repository.SetRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static com.radiuk.unmatched_backend_core.util.SortUtil.getSort;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SetService {
@@ -25,26 +23,14 @@ public class SetService {
     @Cacheable(value = "setList", key = "#sortBy + ':' + #direction")
     @Transactional(readOnly = true)
     public List<SetDto> getAll(String sortBy, String direction) {
-        log.debug("[SetService] -> getAll called with sortBy={}, direction={}", sortBy, direction);
-
-        List<SetDto> sets = setMapper.toDtos(setRepository.findAll(getSort(sortBy, direction)));
-
-        log.info("[SetService] -> getAll finished successfully: found {} sets", sets.size());
-        return sets;
+        return setMapper.toDtos(setRepository.findAll(getSort(sortBy, direction)));
     }
 
     @Cacheable(value = "set", key = "#name")
     @Transactional(readOnly = true)
     public SetDto getByName(String name) {
-        log.debug("[SetService] -> getByName called with name={}", name);
-
-        return setRepository.findByName(name).map(entity -> {
-            SetDto dto = setMapper.toDto(entity);
-            log.info("[SetService] -> getByName finished successfully: set retrieved with name={}", dto.getName());
-            return dto;
-        }).orElseThrow(() -> {
-            log.warn("[SetService] -> getByName entity not found: type=Set, key={}", name);
-            return new EntityNotFoundException("Set with name " + name + " not found!");
-        });
+        return setRepository.findByName(name)
+                .map(setMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Set with name " + name + " not found!"));
     }
 }

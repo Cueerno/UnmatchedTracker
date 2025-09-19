@@ -1,15 +1,13 @@
 package com.radiuk.unmatched_backend_core.service;
 
-import com.radiuk.unmatched_backend_core.dto.*;
+import com.radiuk.unmatched_backend_core.dto.HomeDashboardDto;
 import com.radiuk.unmatched_backend_core.mapper.BoardMapper;
 import com.radiuk.unmatched_backend_core.repository.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DashboardService {
@@ -24,9 +22,8 @@ public class DashboardService {
     @Transactional(readOnly = true)
     @Cacheable(value = "dashboard", key = "'dashboard'")
     public HomeDashboardDto getDashboard() {
-        log.debug("[DashboardService] -> getDashboard called");
 
-        HomeDashboardDto dashboard = HomeDashboardDto.builder()
+        return HomeDashboardDto.builder()
                 .theMostPopularSet(setRepository.getTheMostPopular())
                 .theStrongestSet(setRepository.getTheStrongest())
                 .theMostPopularDeck(deckRepository.getTheMostPopular())
@@ -37,15 +34,5 @@ public class DashboardService {
                 .numberOfSets((short) setRepository.count())
                 .numberOfDecks((short) deckRepository.count())
                 .build();
-
-        log.info("[DashboardService] -> getDashboard finished successfully: mostPopularSet={}, strongestSet={}, mostPopularDeck={}, strongestDeck={}, mostPopularBoard={}",
-                dashboard.getTheMostPopularSet(),
-                dashboard.getTheStrongestSet(),
-                dashboard.getTheMostPopularDeck(),
-                dashboard.getTheStrongestdDeck(),
-                dashboard.getTheMostPopularBoard()
-        );
-
-        return dashboard;
     }
 }

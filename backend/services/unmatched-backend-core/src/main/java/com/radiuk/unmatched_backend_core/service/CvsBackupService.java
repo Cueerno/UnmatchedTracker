@@ -3,7 +3,6 @@ package com.radiuk.unmatched_backend_core.service;
 import com.radiuk.unmatched_backend_core.model.Party;
 import com.radiuk.unmatched_backend_core.model.User;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.*;
 
 @Component
-@Slf4j
 public class CvsBackupService {
 
     private final Path partyCsvFile;
@@ -19,7 +17,7 @@ public class CvsBackupService {
 
     public CvsBackupService(
             @Value("${backup.csv.path.party}") String partyFilePath,
-            @Value("${backup.csv.path.user}")  String userFilePath
+            @Value("${backup.csv.path.user}") String userFilePath
     ) {
         this.partyCsvFile = Paths.get(partyFilePath);
         this.userCsvFile  = Paths.get(userFilePath);
@@ -28,11 +26,11 @@ public class CvsBackupService {
     @PostConstruct
     private void init() {
         try {
-            // Создаём файлы и сразу пишем заголовки
             initFile(partyCsvFile, "party_id,match_id,team_id,user_id,deck_id,board_id,move_order,final_hp,is_winner,created_at");
             initFile(userCsvFile,  "user_id,username,registered_at");
         } catch (IOException e) {
-            log.error("Failed to initialize CSV backup paths", e);
+            // исключение можно обработать или пробросить
+            throw new RuntimeException("Failed to initialize CSV backup paths", e);
         }
     }
 
@@ -40,17 +38,14 @@ public class CvsBackupService {
         Path parent = file.getParent();
         if (parent != null && !Files.exists(parent)) {
             Files.createDirectories(parent);
-            log.info("Created backup directory: {}", parent);
         }
         if (!Files.exists(file)) {
             Files.createFile(file);
-            log.info("Created CSV backup file: {}", file);
             Files.writeString(
                     file,
                     header + System.lineSeparator(),
                     StandardOpenOption.APPEND
             );
-            log.info("Wrote CSV header to: {}", file);
         }
     }
 
@@ -85,7 +80,7 @@ public class CvsBackupService {
         try {
             Files.writeString(file, line, StandardOpenOption.APPEND);
         } catch (IOException e) {
-            log.error("Failed to write CSV backup to {}", file, e);
+            throw new RuntimeException("Failed to write CSV backup to " + file, e);
         }
     }
 }
