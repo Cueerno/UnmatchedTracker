@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getByTitle} from "../../api/card";
 import {useParams} from "react-router-dom";
-import {CardDto, CardType} from "../../types/card";
+import {CardType, CardWithDecksDto} from "../../types/card";
 
 function cardTypeLabel(type: CardType) {
     return type.toLowerCase();
@@ -10,7 +10,7 @@ function cardTypeLabel(type: CardType) {
 
 export default function Card() {
     const {title} = useParams<{ title: string }>();
-    const [card, setCard] = useState<CardDto | null>(null);
+    const [card, setCard] = useState<CardWithDecksDto | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 

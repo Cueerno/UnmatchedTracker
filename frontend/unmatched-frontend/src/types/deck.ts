@@ -1,5 +1,11 @@
 import {CardDto} from "./card";
 
+export enum AttackType {
+    MELEE = 'MELEE',
+    RANGED = 'RANGED',
+    UNKNOWN = 'UNKNOWN'
+}
+
 export interface DeckDto {
     setName: string;
     name: string;
@@ -10,9 +16,32 @@ export interface DeckDto {
     backImageUrl: string;
     hero: HeroDto;
     sidekick: SidekickDto;
-    cards: DeckCardDto[];
     ruleCards: RuleCardDto[];
     extraCharacters: ExtraCharacterDto[];
+}
+
+export interface DeckWithCardsDto {
+    setName: string;
+    name: string;
+    notes: string;
+    quote: string;
+    artImageUrl: string;
+    frontImageUrl: string;
+    backImageUrl: string;
+    hero: HeroDto;
+    sidekick: SidekickDto;
+    ruleCards: RuleCardDto[];
+    extraCharacters: ExtraCharacterDto[];
+    cards: DeckCardDto[];
+}
+
+export interface DeckCardDto {
+    deckName: string;
+    characterName: string;
+    boost: number;
+    quantity: number;
+    imageUrl: string;
+    card: CardDto;
 }
 
 export interface SidekickDto {
@@ -24,12 +53,6 @@ export interface SidekickDto {
     imageUrl: string;
 }
 
-export enum AttackType {
-    MELEE = 'MELEE',
-    RANGED = 'RANGED',
-    UNKNOWN = 'UNKNOWN'
-}
-
 export interface HeroDto {
     name: string;
     specialAbility: string;
@@ -37,14 +60,6 @@ export interface HeroDto {
     hp: number;
     move: number;
     attackType: AttackType;
-    imageUrl: string;
-}
-
-export interface DeckCardDto {
-    card: CardDto;
-    characterName: string;
-    boost: number;
-    quantity: number;
     imageUrl: string;
 }
 

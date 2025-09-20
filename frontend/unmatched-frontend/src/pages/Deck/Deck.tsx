@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getByName} from "../../api/deck";
-import {AttackType, DeckCardDto, DeckDto, ExtraCharacterDto, RuleCardDto,} from "../../types/deck";
+import {AttackType, DeckCardDto, DeckWithCardsDto, ExtraCharacterDto, RuleCardDto} from "../../types/deck";
 import {SortPanel} from "../../components/SortPanel/SortPanel";
 import "./Deck.css";
 
@@ -46,7 +46,7 @@ function sortCardsBy(cards: DeckCardDto[], sortBy?: string, direction: Direction
 
 export default function Deck() {
     const {name} = useParams<{ name: string }>();
-    const [deck, setDeck] = useState<DeckDto | null>(null);
+    const [deck, setDeck] = useState<DeckWithCardsDto | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
