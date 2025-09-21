@@ -1,17 +1,18 @@
 import React from "react";
-import "./DeckCard.css";
-import {CardDto} from "../../types/card";
+import "./CardComponent.css";
+import {CardWithDecksDto} from "../../types/card";
 
-export interface DeckCardProps extends CardDto {
+export interface DeckCardProps extends CardWithDecksDto {
     showFooter?: boolean;
 }
 
-export default function DeckCard({
-                                     title,
-                                     value,
-                                     type,
-                                     effect,
-                                     showFooter
+export function CardComponent({
+                                  title,
+                                  value,
+                                  type,
+                                  effect,
+                                  showFooter,
+                                  decks
                                  }: DeckCardProps) {
     const typeKey = type.toLowerCase();
 
@@ -37,8 +38,8 @@ export default function DeckCard({
 
             {showFooter && (
                 <div className="card-item">
-                    {/*<span className="subtext">{characterName}</span>*/}
-                    {/*<span className="qty">x{qty ?? 1}</span>*/}
+                    {/*<span className="subtext">{decks.characterName}</span>*/}
+                    {/*<span className="qty">x{decks.quantity ?? 1}</span>*/}
                 </div>
             )}
         </div>
