@@ -53,5 +53,6 @@ docker-compose up --build
 
 5. Go to your browser and enjoy!
 
-## 🗄 Database diagram
-![Database Schema Diagram](diagrams/database.png)
+## 🗄 Database diagrams
+![Database Schema Diagram](diagrams/party_db.png)
+![Database Schema Diagram](diagrams/umdb.png)
