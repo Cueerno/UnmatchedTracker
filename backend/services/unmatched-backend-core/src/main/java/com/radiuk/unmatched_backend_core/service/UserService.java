@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +20,6 @@ public class UserService {
     @Transactional
     public void createUser(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
-        user.setRegisteredAt(OffsetDateTime.now());
 
         User savedUser = userRepository.save(user);
         cvsBackupService.backupUser(savedUser);
