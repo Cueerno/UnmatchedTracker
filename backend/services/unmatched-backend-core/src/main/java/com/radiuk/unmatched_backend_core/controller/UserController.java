@@ -16,6 +16,11 @@ public class UserController {
     private final UserService userService;
     private final PartyService partyService;
 
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDto> getUser(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getMe(username));
+    }
+
     @GetMapping("/{username}/parties")
     public ResponseEntity<?> getParties(@PathVariable String username) {
         return ResponseEntity.ok(partyService.getAllPartiesByUsername(username));
