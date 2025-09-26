@@ -1,6 +1,7 @@
 package com.radiuk.unmatched_backend_core.service;
 
 import com.radiuk.unmatched_backend_core.dto.*;
+import com.radiuk.unmatched_backend_core.exception.PartyNotFoundException;
 import com.radiuk.unmatched_backend_core.model.*;
 import com.radiuk.unmatched_backend_core.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -31,7 +32,7 @@ public class PartyService {
     public PartyDto getPartyByMatchId(Long matchId) {
 
         Match match = matchRepository.findById(matchId)
-                .orElseThrow(() -> new EntityNotFoundException("Party with id " + matchId + " not found!"));
+                .orElseThrow(() -> new PartyNotFoundException("Party with id " + matchId + " not found!"));
 
         List<Party> parties = partyRepository.findByMatchId(matchId);
 
