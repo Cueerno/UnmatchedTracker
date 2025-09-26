@@ -18,6 +18,7 @@ interface ContentPageProps<T> {
     gridClassName?: string;
     pageClassName?: string;
     contentContainerClassName?: string;
+    searchFields?: string[];
 }
 
 export function ContentPage<T>({
@@ -26,8 +27,27 @@ export function ContentPage<T>({
                                    sortOptions,
                                    renderCard,
                                    keyExtractor,
+                                   searchFields,
                                }: ContentPageProps<T>) {
-    const {data = [], loading, error, sortState, onSort} = useClientTable<T>(fetchFn);
+    const {
+        data = [],
+        loading,
+        error,
+        sortState,
+        onSort,
+        searchQuery,
+        setSearchQuery,
+    } = useClientTable<T>(fetchFn, {searchFields});
+
+    const fetchOptions = async (): Promise<string[]> => {
+        try {
+            const items = await fetchFn();
+            return items.map(i => keyExtractor(i));
+        } catch (e) {
+            console.error('fetchOptions error', e);
+            return [];
+        }
+    };
 
     return (
         <div className="content-page">
@@ -38,6 +58,10 @@ export function ContentPage<T>({
                     options={sortOptions}
                     sortState={sortState}
                     onSort={onSort}
+
+                    searchValue={searchQuery}
+                    onSearchChange={setSearchQuery}
+                    fetchSearchOptions={fetchOptions}
                 />
 
                 {loading && <p>Loading {title.toLowerCase()}…</p>}

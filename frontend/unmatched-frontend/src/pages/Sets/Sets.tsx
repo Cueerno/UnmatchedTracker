@@ -81,6 +81,7 @@ export default function Sets() {
             sortOptions={sortOptions.filter(o => o.value)}
             keyExtractor={set => set.name}
             renderCard={set => <SetCardRenderer set={set}/>}
+            searchFields={['name']}
         />
     );
 }

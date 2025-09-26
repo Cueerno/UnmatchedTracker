@@ -8,13 +8,19 @@ export interface SortState {
 }
 
 export function useClientTable<T>(
-    fetcher: () => Promise<T[]>
+    fetcher: () => Promise<T[]>,
+    opts?: {
+        searchFields?: string[];
+    }
 ): {
     data: T[];
     loading: boolean;
     error: string | null;
     sortState: SortState;
     onSort: (field?: string) => void;
+
+    searchQuery: string;
+    setSearchQuery: (q: string) => void;
 } {
     const [original, setOriginal] = useState<T[]>([]);
     const [data, setData] = useState<T[]>([]);
@@ -24,6 +30,8 @@ export function useClientTable<T>(
     const [sortBy, setSortBy] = useState<string | undefined>(undefined);
     const [direction, setDirection] = useState<Dir | undefined>(undefined);
 
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
     const didFetchOnce = useRef(false);
 
     const getValue = (item: any, path?: string) => {
@@ -31,36 +39,51 @@ export function useClientTable<T>(
         return path.split('.').reduce((o, key) => (o == null ? undefined : o[key]), item);
     };
 
-    const sortData = (field?: string, dir?: Dir) => {
-        if (!field || !dir) {
-            setData([...original]);
-            return;
+    const compareValues = (va: any, vb: any) => {
+        if (va == null && vb != null) return -1;
+        if (vb == null && va != null) return 1;
+        if (va == null && vb == null) return 0;
+
+        if (typeof va === 'string' && typeof vb === 'string') {
+            return va.localeCompare(vb);
         }
-
-        const sorted = [...original].sort((a, b) => {
-            const va = getValue(a, field);
-            const vb = getValue(b, field);
-
-            if (va == null && vb != null) return -1;
-            if (vb == null && va != null) return 1;
-            if (va == null && vb == null) return 0;
-
-            if (typeof va === 'string' && typeof vb === 'string') {
-                return va.localeCompare(vb);
-            }
-
-            if (typeof va === 'number' && typeof vb === 'number') {
-                return va - vb;
-            }
-
-            return String(va).localeCompare(String(vb));
-        });
-
-        if (dir === 'desc') {
-            sorted.reverse();
+        if (typeof va === 'number' && typeof vb === 'number') {
+            return va - vb;
         }
-        setData(sorted);
+        return String(va).localeCompare(String(vb));
     };
+
+    useEffect(() => {
+        let base: T[] = [...original];
+
+        if (searchQuery && searchQuery.trim() !== '') {
+            const q = searchQuery.trim().toLowerCase();
+            const fields = opts?.searchFields;
+
+            base = base.filter(item => {
+                if (fields && fields.length > 0) {
+                    return fields.some(f => {
+                        const v = getValue(item, f);
+                        return v != null && String(v).toLowerCase().includes(q);
+                    });
+                } else {
+                    // fallback: stringify whole item
+                    return JSON.stringify(item).toLowerCase().includes(q);
+                }
+            });
+        }
+
+        if (sortBy) {
+            base.sort((a, b) => {
+                const va = getValue(a, sortBy);
+                const vb = getValue(b, sortBy);
+                return compareValues(va, vb);
+            });
+            if (direction === 'desc') base.reverse();
+        }
+
+        setData(base);
+    }, [original, searchQuery, sortBy, direction, opts?.searchFields]);
 
     useEffect(() => {
         if (didFetchOnce.current) return;
@@ -72,21 +95,19 @@ export function useClientTable<T>(
                 setOriginal(items);
                 setData(items);
             })
-            .catch(e => setError(e.message || 'Loading error'))
+            .catch(e => setError(e?.message || 'Loading error'))
             .finally(() => setLoading(false));
     }, [fetcher]);
 
     const onSort = (field?: string) => {
-        let nextDir: Dir | undefined;
         if (field) {
-            nextDir = field === sortBy ? (direction === 'asc' ? 'desc' : 'asc') : 'asc';
+            const nextDir = field === sortBy ? (direction === 'asc' ? 'desc' : 'asc') : 'asc';
             setSortBy(field);
             setDirection(nextDir);
         } else {
             setSortBy(undefined);
             setDirection(undefined);
         }
-        sortData(field, nextDir);
     };
 
     return {
@@ -95,5 +116,8 @@ export function useClientTable<T>(
         error,
         sortState: { sortBy, direction },
         onSort,
+
+        searchQuery,
+        setSearchQuery,
     };
 }
