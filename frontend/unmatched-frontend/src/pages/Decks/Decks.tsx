@@ -85,6 +85,7 @@ export default function Decks() {
             sortOptions={sortOptions.filter(o => o.value)}
             keyExtractor={deck => deck.name}
             renderCard={deck => <DeckCardRenderer deck={deck}/>}
+            searchFields={['name']}
         />
     );
 }

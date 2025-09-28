@@ -48,6 +48,7 @@ export default function Cards() {
             sortOptions={sortOptions.filter(o => o.value)}
             renderCard={card => <CardCardRenderer card={card}/>}
             keyExtractor={card => card.title}
+            searchFields={['title']}
         />
     );
 }

@@ -48,6 +48,22 @@ export const SortPanel: React.FC<SortPanelProps> = ({
 
     return (
         <div className={`sort-panel ${className ?? ''}`} role="region" aria-label="Sorting panel">
+            <label className="sort-label">
+                Sort by
+                <select
+                    className="sort-select"
+                    value={sortState.sortBy ?? ''}
+                    onChange={handleFieldChange}
+                >
+                    <option value="">— none —</option>
+                    {options.map(opt => (
+                        <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                        </option>
+                    ))}
+                </select>
+            </label>
+
             {onSearchChange && fetchSearchOptions && (
                 <div className="search-section">
                     <AutocompleteInput
@@ -68,22 +84,6 @@ export const SortPanel: React.FC<SortPanelProps> = ({
                     )}
                 </div>
             )}
-
-            <label className="sort-label">
-                Sort by
-                <select
-                    className="sort-select"
-                    value={sortState.sortBy ?? ''}
-                    onChange={handleFieldChange}
-                >
-                    <option value="">— none —</option>
-                    {options.map(opt => (
-                        <option key={opt.value} value={opt.value}>
-                            {opt.label}
-                        </option>
-                    ))}
-                </select>
-            </label>
 
             <div className="sort-controls">
                 <button

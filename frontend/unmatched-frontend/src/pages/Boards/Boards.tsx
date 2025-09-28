@@ -66,6 +66,7 @@ export default function Boards() {
             sortOptions={sortOptions.filter(o => o.value)}
             keyExtractor={board => board.name}
             renderCard={board => <BoardCardRenderer board={board}/>}
+            searchFields={['name']}
         />
     );
 }
