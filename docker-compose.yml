@@ -35,12 +35,27 @@ services:
     volumes:
       - redis_data:/data
 
-  backend:
+  backend-core:
     build:
       context: "./backend/services/unmatched-backend-core"
       dockerfile: "Dockerfile"
     ports:
       - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+
+  user-service:
+    build:
+      context: "./backend/services/user-service"
+      dockerfile: "Dockerfile"
+    ports:
+      - "8081:8081"
     env_file:
       - .env
     environment:
@@ -59,7 +74,8 @@ services:
     ports:
       - '3000:80'
     depends_on:
-      - backend
+      - backend-core
+      - user-service
 
 volumes:
   postgres_data:
