@@ -1,0 +1,24 @@
+spring.application.name=user-service
+
+server.port=8081
+
+# Data Source
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/
+spring.datasource.username=
+spring.datasource.password=
+
+# Hibernate
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# JWT
+jwt.secret-base64=
+jwt.expiration=
+
+# Logging
+logging.level.root=INFO
+logging.level.org.springframework.web=DEBUG
+logging.level.com.radiuk.auth_service=DEBUG
+logging.file.name=backend/services/user-service/logs
