@@ -41,7 +41,8 @@ export default function Header() {
             icon: <FaUser/>,
             label: 'User',
             submenu: [
-                {to: '/user/create', icon: <FaUser/>, label: 'Sign up'}
+                {to: '/signup', icon: <FaUser/>, label: 'Sign up'},
+                {to: '/login', icon: <FaUser/>, label: 'Log in'}
             ],
         },
         {
