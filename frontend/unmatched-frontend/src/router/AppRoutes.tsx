@@ -10,11 +10,12 @@ import DecksTop from "../pages/DecksTop/DecksTop";
 import Sets from "../pages/Sets/Sets";
 import Set from "../pages/Set/Set";
 import Boards from "../pages/Boards/Boards";
-import CreateUser from "../pages/CreateUser/CreateUser";
+import SignUp from "../pages/SignUp/SignUp";
 import NotFound from "../pages/NotFound/NotFound";
 import RandomDeck from "../pages/RandomDeck/RandomDeck";
 import Cards from "../pages/Cards/Cards";
 import Card from "../pages/Card/Card";
+import Login from "../pages/Login/Login";
 
 export default function AppRoutes() {
     return (
@@ -23,7 +24,8 @@ export default function AppRoutes() {
 
                 <Route path="/" element={<Home/>}/>
 
-                <Route path="/user/create" element={<CreateUser/>}/>
+                <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/login" element={<Login/>}/>
 
                 <Route path="/parties" element={<Parties/>}/>
                 <Route path="/parties/:matchId" element={<Party/>}/>
