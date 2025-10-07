@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class User {
 
     @CreatedDate
     @Column(name = "registered_at")
-    private OffsetDateTime registeredAt;
+    private Instant registeredAt;
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
