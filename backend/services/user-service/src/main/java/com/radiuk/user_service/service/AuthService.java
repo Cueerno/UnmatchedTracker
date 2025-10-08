@@ -1,5 +1,6 @@
 package com.radiuk.user_service.service;
 
+import com.radiuk.user_service.annotation.NoLogging;
 import com.radiuk.user_service.dto.AuthDto;
 import com.radiuk.user_service.dto.AuthResponse;
 import com.radiuk.user_service.dto.RegistrationDto;
@@ -9,6 +10,7 @@ import com.radiuk.user_service.mapper.UserMapper;
 import com.radiuk.user_service.model.User;
 import com.radiuk.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -53,15 +56,25 @@ public class AuthService {
         return userMapper.toResponseDto(savedUser);
     }
 
+    @NoLogging
     @Transactional(readOnly = true)
     public AuthResponse authenticate(AuthDto dto) {
+        String username = dto.username();
+        log.debug("Authenticating user {}", username);
+
         User user = userRepository.findByUsername(dto.username())
-                .orElseThrow(() -> new BadCredentialsException("Invalid credentials, user with this username not found"));
+                .orElseThrow(() -> {
+                    log.warn("Authentication failed: user '{}' not found", username);
+                    return new BadCredentialsException("Invalid credentials, user with this username not found");
+                });
+
 
         if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
+            log.warn("Authentication failed: invalid password");
             throw new BadCredentialsException("Invalid credentials, invalid password");
         }
 
+        log.info("Authenticated user {}", username);
         return new AuthResponse(generateToken(user), "Bearer", tokenExpirySeconds);
     }
 
