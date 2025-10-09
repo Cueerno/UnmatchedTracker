@@ -19,6 +19,9 @@ spring.jpa.properties.hibernate.dialect=
 spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
+# Actuator
+management.endpoints.web.exposure.include=health, info
+
 # Logging
 logging.level.root=
 logging.level.org.springframework.web=
