@@ -1,6 +1,6 @@
-import {API_BASE_URL} from "./config";
+import {UMDB_API_BASE_URL} from "./config";
 
-const backUrl = `${API_BASE_URL}/umdb/cards`;
+const backUrl = `${UMDB_API_BASE_URL}/umdb/cards`;
 
 export async function getAll() {
     const res = await fetch(`${backUrl}/all`, {

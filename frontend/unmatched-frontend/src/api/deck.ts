@@ -1,7 +1,7 @@
 import {DeckDto, DeckRatingDto} from "../types/deck";
-import {API_BASE_URL} from "./config";
+import {UMDB_API_BASE_URL} from "./config";
 
-const backUrl = `${API_BASE_URL}/umdb/decks`;
+const backUrl = `${UMDB_API_BASE_URL}/umdb/decks`;
 
 export async function getAll(sortBy: string = 'name', direction: string = 'asc') {
     const params = new URLSearchParams({sortBy, direction});
