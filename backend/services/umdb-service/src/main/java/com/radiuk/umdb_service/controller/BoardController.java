@@ -15,7 +15,7 @@ public class BoardController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllBoards(
-            @RequestParam(defaultValue = "spaces", required = false) String sortBy,
+            @RequestParam(defaultValue = "name", required = false) String sortBy,
             @RequestParam(defaultValue = "asc", required = false) String direction
     ) {
         return ResponseEntity.ok(boardService.getAll(sortBy, direction));
