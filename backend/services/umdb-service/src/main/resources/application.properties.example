@@ -14,6 +14,11 @@ spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.default_schema=umdb-service
 
+# Flyway
+spring.flyway.user=
+spring.flyway.password=
+spring.flyway.schemas=umdb-service
+
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
 

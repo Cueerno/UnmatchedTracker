@@ -13,6 +13,12 @@ spring.cache.type=redis
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.default_schema=umdb-service
+
+# Flyway
+spring.flyway.user=${POSTGRES_USER}
+spring.flyway.password=${POSTGRES_PASSWORD}
+spring.flyway.schemas=umdb-service
 
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
