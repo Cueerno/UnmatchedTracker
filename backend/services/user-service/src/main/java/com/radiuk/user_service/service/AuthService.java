@@ -12,6 +12,7 @@ import com.radiuk.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -58,6 +59,7 @@ public class AuthService {
 
     @NoLogging
     @Transactional(readOnly = true)
+    @CachePut(value = "user", key = "#dto.username()")
     public AuthResponse authenticate(AuthDto dto) {
         String username = dto.username();
         log.debug("Authenticating user {}", username);

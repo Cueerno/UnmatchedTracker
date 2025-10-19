@@ -9,6 +9,7 @@ import com.radiuk.user_service.mapper.UserMapper;
 import com.radiuk.user_service.model.User;
 import com.radiuk.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "user", key = "#jwt.subject()")
     public ResponseDto getMe(Jwt jwt) {
         String username = jwt.getSubject();
 
@@ -32,6 +34,7 @@ public class UserService {
     }
 
     @Transactional
+    @CachePut(value = "user", key = "#jwt.subject()")
     public ResponseDto updateMe(UpdateDto updateDto, Jwt jwt) {
         String username = jwt.getSubject();
 
@@ -56,6 +59,7 @@ public class UserService {
     }
 
     @Transactional
+    @CacheEvict(value = "user", key = "#jwt.subject()")
     public void deleteMe(Jwt jwt) {
         String username = jwt.getSubject();
 
@@ -66,6 +70,7 @@ public class UserService {
     }
 
     @Transactional
+    @CachePut(value = "user", key = "#jwt.subject()")
     public void updatePassword(Jwt jwt, UpdatePasswordDto updatePasswordDto) {
         String username = jwt.getSubject();
 
