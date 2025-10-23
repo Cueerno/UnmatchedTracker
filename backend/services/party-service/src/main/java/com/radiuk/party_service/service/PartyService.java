@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.*;
 
 @Service
@@ -88,7 +88,7 @@ public class PartyService {
     @Transactional
     public void createParty(PartyDto partyDto) {
 
-        OffsetDateTime date = partyDto.getDate() != null ? partyDto.getDate() : OffsetDateTime.now();
+        Instant date = partyDto.getDate() != null ? partyDto.getDate() : Instant.now();
 
         Board board = boardRepository.findByName(partyDto.getBoardName())
                 .orElseThrow(() -> new EntityNotFoundException("Board with name " + partyDto.getBoardName() + " not found!"));

@@ -3,7 +3,7 @@ package com.radiuk.party_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Match {
     private String note;
 
     @Column(name = "created_at")
-    private OffsetDateTime created_at;
+    private Instant created_at;
 
     @Builder.Default
     @OneToMany(mappedBy = "match")

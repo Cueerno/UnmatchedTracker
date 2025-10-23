@@ -3,7 +3,7 @@ package com.radiuk.party_service.dto;
 import com.radiuk.party_service.model.Match;
 import lombok.*;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -17,7 +17,7 @@ public class PartyDto {
 
     private Match.MatchFormat format;
 
-    private OffsetDateTime date;
+    private Instant date;
 
     private String boardName;
 

@@ -3,7 +3,7 @@ package com.radiuk.party_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Team {
     private String name;
 
     @Column(name = "created_at")
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "match_id")

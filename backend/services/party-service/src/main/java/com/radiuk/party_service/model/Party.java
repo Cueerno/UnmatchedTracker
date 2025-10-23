@@ -3,7 +3,7 @@ package com.radiuk.party_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -28,7 +28,7 @@ public class Party {
     private Boolean isWinner = false;
 
     @Column(name = "created_at")
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "match_id")
