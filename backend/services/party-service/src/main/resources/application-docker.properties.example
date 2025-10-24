@@ -28,3 +28,6 @@ logging.level.root=INFO
 logging.level.org.springframework.web=DEBUG
 logging.level.com.radiuk.umdb-service=DEBUG
 logging.file.name=backend/services/party-service/logs
+
+# Backup
+backup.csv.path.party=backend/services/party-service/backup/parties.csv

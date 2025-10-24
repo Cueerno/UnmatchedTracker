@@ -1,7 +1,6 @@
 package com.radiuk.party_service.service;
 
-import com.radiuk.unmatched_backend_core.model.Party;
-import com.radiuk.unmatched_backend_core.model.User;
+import com.radiuk.party_service.model.Party;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,23 +15,18 @@ import java.nio.file.StandardOpenOption;
 public class CvsBackupService {
 
     private final Path partyCsvFile;
-    private final Path userCsvFile;
 
     public CvsBackupService(
-            @Value("${backup.csv.path.party}") String partyFilePath,
-            @Value("${backup.csv.path.user}") String userFilePath
+            @Value("${backup.csv.path.party}") String partyFilePath
     ) {
         this.partyCsvFile = Paths.get(partyFilePath);
-        this.userCsvFile  = Paths.get(userFilePath);
     }
 
     @PostConstruct
     private void init() {
         try {
             initFile(partyCsvFile, "party_id,match_id,team_id,user_id,deck_id,board_id,move_order,final_hp,is_winner,created_at");
-            initFile(userCsvFile,  "user_id,username,registered_at");
         } catch (IOException e) {
-            // исключение можно обработать или пробросить
             throw new RuntimeException("Failed to initialize CSV backup paths", e);
         }
     }
@@ -58,25 +52,15 @@ public class CvsBackupService {
                 party.getId(),
                 party.getMatch().getId(),
                 party.getTeam().getId(),
-                party.getUser().getId(),
-                party.getDeck().getId(),
-                party.getBoard() != null ? party.getBoard().getId() : "",
+                party.getUserId(),
+                party.getDeckId(),
+                party.getBoardId(),
                 party.getMoveOrder(),
                 party.getFinalHp(),
                 party.getIsWinner(),
                 party.getCreatedAt()
         );
         writeLine(partyCsvFile, line);
-    }
-
-    public void backupUser(User user) {
-        String line = String.format(
-                "%d,%s,%s%n",
-                user.getId(),
-                user.getUsername(),
-                user.getRegisteredAt()
-        );
-        writeLine(userCsvFile, line);
     }
 
     private void writeLine(Path file, String line) {

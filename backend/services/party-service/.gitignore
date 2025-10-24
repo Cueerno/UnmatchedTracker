@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 logs/
+backup/
 /src/main/resources/db/migration/
 
 ### STS ###
