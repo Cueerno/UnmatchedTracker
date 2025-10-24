@@ -8,7 +8,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "parties")
+@Table(name = "parties", schema = "party-service")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
