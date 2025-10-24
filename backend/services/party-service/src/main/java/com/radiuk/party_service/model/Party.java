@@ -38,16 +38,13 @@ public class Party {
     @JoinColumn(name = "team_id")
     private Team team;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "deck_id", nullable = false)
-//    private Deck deck;
-//
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "board_id")
-//    private Board board;
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "deck_id")
+    private Short deckId;
+
+    @Column(name = "board_id")
+    private Short boardId;
 
 }
