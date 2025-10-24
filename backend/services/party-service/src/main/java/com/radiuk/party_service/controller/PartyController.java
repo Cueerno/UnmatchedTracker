@@ -1,7 +1,7 @@
 package com.radiuk.party_service.controller;
 
-import com.radiuk.unmatched_backend_core.dto.PartyDto;
-import com.radiuk.unmatched_backend_core.service.PartyService;
+import com.radiuk.party_service.dto.PartyDto;
+import com.radiuk.party_service.service.PartyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
