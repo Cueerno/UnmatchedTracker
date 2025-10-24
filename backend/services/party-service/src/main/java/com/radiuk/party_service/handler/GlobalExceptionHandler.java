@@ -1,8 +1,6 @@
 package com.radiuk.party_service.handler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.radiuk.unmatched_backend_core.exception.UserNotCreatedException;
-import com.radiuk.unmatched_backend_core.exception.UserNotUpdatedException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -19,12 +17,6 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-    //AccessDeniedException
-
-    //JwtException
-
-    // BadCridentialsExcaption
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
@@ -57,30 +49,6 @@ public class GlobalExceptionHandler {
                         OffsetDateTime.now(),
                         HttpStatus.NOT_FOUND.value(),
                         HttpStatus.NOT_FOUND.getReasonPhrase(),
-                        exception.getMessage()
-                )
-        );
-    }
-
-    @ExceptionHandler(UserNotCreatedException.class)
-    public ResponseEntity<ErrorResponse> handleUserNotCreatedException(UserNotCreatedException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new ErrorResponse(
-                        OffsetDateTime.now(),
-                        HttpStatus.BAD_REQUEST.value(),
-                        HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                        exception.getMessage()
-                )
-        );
-    }
-
-    @ExceptionHandler(UserNotUpdatedException.class)
-    public ResponseEntity<ErrorResponse> handleUserNotUpdatedException(UserNotUpdatedException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new ErrorResponse(
-                        OffsetDateTime.now(),
-                        HttpStatus.BAD_REQUEST.value(),
-                        HttpStatus.BAD_REQUEST.getReasonPhrase(),
                         exception.getMessage()
                 )
         );
