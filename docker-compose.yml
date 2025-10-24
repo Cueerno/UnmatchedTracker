@@ -98,6 +98,26 @@ services:
       start_period: 15s
     restart: always
 
+  party-service:
+    build:
+      context: "./backend/services/party-service"
+      dockerfile: "Dockerfile"
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+      - redis
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: always
 
   frontend:
     build:
@@ -111,6 +131,7 @@ services:
       - backend-core
       - user-service
       - umdb-service
+      - party-service
 
 volumes:
   postgres_data:
