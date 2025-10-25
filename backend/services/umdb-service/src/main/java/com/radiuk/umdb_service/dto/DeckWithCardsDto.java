@@ -10,6 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 public class DeckWithCardsDto {
 
+    private Short id;
+
     private String setName;
 
     private String name;

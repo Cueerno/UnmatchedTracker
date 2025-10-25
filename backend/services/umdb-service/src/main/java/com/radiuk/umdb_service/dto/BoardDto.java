@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class BoardDto {
 
+    private Short id;
+
     private String name;
 
     private Short maxPlayers;

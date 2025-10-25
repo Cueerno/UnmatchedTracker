@@ -1,4 +1,4 @@
-package com.radiuk.user_service.dto;
+package com.radiuk.party_service.dto.proxy;
 
 import java.time.Instant;
 
@@ -8,4 +8,5 @@ public record ResponseDto(
         String username,
         String email,
         Instant registeredAt
-) {}
+) {
+}
