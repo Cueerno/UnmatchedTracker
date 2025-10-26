@@ -26,8 +26,16 @@ public class BoardService {
         return boardMapper.toDtos(boardRepository.findAll(getSort(sortBy, direction)));
     }
 
-    @Cacheable(value = "board", key = "#name")
     @Transactional(readOnly = true)
+    @Cacheable(value = "board", key = "#id")
+    public BoardDto getById(Short id) {
+        return boardRepository.findById(id)
+                .map(boardMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Board with id " + id + " not found!"));
+    }
+
+    @Transactional(readOnly = true)
+    @Cacheable(value = "board", key = "#name")
     public BoardDto getByName(String name) {
         return boardRepository.findByName(name)
                 .map(boardMapper::toDto)

@@ -21,7 +21,12 @@ public class BoardController {
         return ResponseEntity.ok(boardService.getAll(sortBy, direction));
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getById(@PathVariable Short id) {
+        return ResponseEntity.ok(boardService.getById(id));
+    }
+
+    @GetMapping("/name/{name}")
     public ResponseEntity<?> getByName(@PathVariable String name) {
         return ResponseEntity.ok(boardService.getByName(name));
     }
