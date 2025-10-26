@@ -1,6 +1,8 @@
 package com.radiuk.user_service.config;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
+import com.radiuk.user_service.security.InternalApiFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,16 +18,20 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     @Value("${jwt.secret-base64}")
     private String secretBase64;
+
+    private final InternalApiFilter internalApiFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,7 +39,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                "/api/v1/auth/**"
+                                "/api/v1/auth/**",
+                                "/api/v1/internal/**"
                         ).permitAll()
 
                         .requestMatchers(
@@ -48,7 +55,9 @@ public class SecurityConfig {
                         .jwt(jwt -> jwt
                                 .jwtAuthenticationConverter(jwtAuthenticationConverter())
                         )
-                );
+                )
+
+                .addFilterBefore(internalApiFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
