@@ -19,6 +19,11 @@ public class PartyController {
         return ResponseEntity.ok(partyService.getPartyByMatchId(matchId));
     }
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<?> getUsersPatry(@PathVariable String username) {
+        return ResponseEntity.ok(partyService.getAllPartiesByUsername(username));
+    }
+
     @PostMapping("")
     public ResponseEntity<?> createParty(@RequestBody PartyDto partyDto) {
         partyService.createParty(partyDto);

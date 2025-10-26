@@ -16,7 +16,7 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     @Query(nativeQuery = true, value = """
     select
         p.match_id
-    from parties p
+    from "party-service".parties p
     where p.user_id = :userId
     order by p.match_id desc;
     """)
@@ -25,7 +25,7 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     @Query(nativeQuery = true, value = """
     select
         count(distinct p.match_id)
-    from parties p
+    from "party-service".parties p
     """)
     Long numberOfPartes();
 }

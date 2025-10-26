@@ -82,10 +82,9 @@ public class PartyService {
     @Transactional(readOnly = true)
     public List<PartyDto> getAllPartiesByUsername(String username) {
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new EntityNotFoundException("User with name " + username + " not found!"));
+        ResponseDto user = userProxy.getUserByUsername(username);
 
-        Set<Long> partyIds = partyRepository.getPartiesByUserId(user.getId());
+        Set<Long> partyIds = partyRepository.getPartiesByUserId(user.id());
         return partyIds.stream().map(this::getPartyByMatchId).toList();
     }
 
