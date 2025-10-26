@@ -1,9 +1,17 @@
 package com.radiuk.party_service.service;
 
+import com.radiuk.party_service.dto.PartyDto;
+import com.radiuk.party_service.dto.TeamDto;
+import com.radiuk.party_service.dto.UserPartyDto;
+import com.radiuk.party_service.dto.proxy.BoardDto;
+import com.radiuk.party_service.dto.proxy.DeckDto;
+import com.radiuk.party_service.dto.proxy.ResponseDto;
 import com.radiuk.party_service.exception.PartyNotFoundException;
-import com.radiuk.party_service.service.CvsBackupService;
-import com.radiuk.party_service.service.DeckService;
-import jakarta.persistence.EntityNotFoundException;
+import com.radiuk.party_service.model.Match;
+import com.radiuk.party_service.model.Party;
+import com.radiuk.party_service.model.Team;
+import com.radiuk.party_service.proxy.*;
+import com.radiuk.party_service.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -16,14 +24,13 @@ import java.util.*;
 @RequiredArgsConstructor
 public class PartyService {
 
-//    private final DeckService deckService;
-//    private final BoardRepository boardRepository;
-//    private final MatchRepository matchRepository;
-//    private final TeamRepository teamRepository;
-//    private final PartyRepository partyRepository;
-//    private final UserRepository userRepository;
-//    private final DeckRepository deckRepository;
+    private final BoardProxy boardProxy;
+    private final MatchRepository matchRepository;
+    private final TeamRepository teamRepository;
+    private final PartyRepository partyRepository;
+    private final DeckProxy deckProxy;
     private final CvsBackupService cvsBackupService;
+    private final UserProxy userProxy;
 
     @Cacheable(value = "party", key = "#matchId")
     @Transactional(readOnly = true)
@@ -36,8 +43,8 @@ public class PartyService {
 
         List<UserPartyDto> users = parties.stream()
                 .map(party -> UserPartyDto.builder()
-                        .username(party.getUser().getUsername())
-                        .deck(party.getDeck().getName())
+                        .username(userProxy.getUserById(party.getUserId()).username())
+                        .deck(deckProxy.getDeckById(party.getDeckId()).name())
                         .moveOrder(Optional.ofNullable(party.getMoveOrder()).orElse((short) 0))
                         .finalHp(Optional.ofNullable(party.getFinalHp()).orElse((short) 0))
                         .build())
@@ -52,10 +59,7 @@ public class PartyService {
                         .build())
                 .toList();
 
-        String boardName = parties.stream()
-                .map(p -> p.getBoard().getName())
-                .findFirst()
-                .orElse("-");
+        BoardDto board = boardProxy.getBoardById(parties.getFirst().getBoardId());
 
         String winningTeam = parties.stream()
                 .filter(Party::getIsWinner)
@@ -69,7 +73,7 @@ public class PartyService {
                 .format(format)
                 .teams(teams)
                 .date(parties.getFirst().getCreatedAt())
-                .boardName(boardName)
+                .boardName(board.name())
                 .winner(winningTeam)
                 .build();
     }
