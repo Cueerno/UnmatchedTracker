@@ -24,6 +24,22 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "user", key = "#id")
+    public ResponseDto getById(Long id) {
+        return userRepository.findById(id)
+                .map(userMapper::toResponseDto)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
+    @Transactional(readOnly = true)
+    @Cacheable(value = "user", key = "#username")
+    public ResponseDto getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(userMapper::toResponseDto)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
+    @Transactional(readOnly = true)
     @Cacheable(value = "user", key = "#jwt.subject()")
     public ResponseDto getMe(Jwt jwt) {
         String username = jwt.getSubject();
