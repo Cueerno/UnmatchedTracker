@@ -20,6 +20,10 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     @Override
     List<Deck> findAll(Sort sort);
 
+    @Override
+    @EntityGraph("Deck.withAll")
+    Optional<Deck> findById(Short id);
+
     @EntityGraph("Deck.withAll")
     Optional<Deck> findByName(String name);
 
