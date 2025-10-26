@@ -31,3 +31,6 @@ logging.file.name=backend/services/party-service/logs
 
 # Backup
 backup.csv.path.party=backend/services/party-service/backup/parties.csv
+
+# Internal secret
+internal.api.secret=${INTERNAL_API_SECRET}
