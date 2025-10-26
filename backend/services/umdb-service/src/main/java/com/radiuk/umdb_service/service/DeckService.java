@@ -31,8 +31,16 @@ public class DeckService {
         return deckMapper.toDtos(deckRepository.findAll(getSort(sortBy, direction)));
     }
 
-    @Cacheable(value = "deck", key = "#name")
     @Transactional(readOnly = true)
+    @Cacheable(value = "deck", key = "#id")
+    public DeckWithCardsDto getById(Short id) {
+        return deckRepository.findById(id)
+                .map(deckMapper::toDtoWithCards)
+                .orElseThrow(() -> new EntityNotFoundException("Deck with id " + id + " not found"));
+    }
+
+    @Transactional(readOnly = true)
+    @Cacheable(value = "deck", key = "#name")
     public DeckWithCardsDto getByName(String name) {
         return deckRepository.findByName(name)
                 .map(deckMapper::toDtoWithCards)

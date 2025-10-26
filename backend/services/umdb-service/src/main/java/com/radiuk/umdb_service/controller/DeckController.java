@@ -22,7 +22,12 @@ public class DeckController {
         return ResponseEntity.ok(deckService.getAll(sortBy, direction));
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getById(@PathVariable Short id) {
+        return ResponseEntity.ok(deckService.getById(id));
+    }
+
+    @GetMapping("/name/{name}")
     public ResponseEntity<?> getByName(@PathVariable String name) {
         return ResponseEntity.ok(deckService.getByName(name));
     }
