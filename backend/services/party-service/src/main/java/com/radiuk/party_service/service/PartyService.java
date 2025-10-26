@@ -94,8 +94,7 @@ public class PartyService {
 
         Instant date = partyDto.getDate() != null ? partyDto.getDate() : Instant.now();
 
-        Board board = boardRepository.findByName(partyDto.getBoardName())
-                .orElseThrow(() -> new EntityNotFoundException("Board with name " + partyDto.getBoardName() + " not found!"));
+        BoardDto board = boardProxy.getBoardByName(partyDto.getBoardName());
 
         Match match = new Match();
         match.setFormat(partyDto.getFormat());
@@ -114,20 +113,18 @@ public class PartyService {
         }
 
         for (UserPartyDto userPartyDto : partyDto.getUsers()) {
-            User user = userRepository.findByUsername(userPartyDto.getUsername())
-                    .orElseThrow(() -> new EntityNotFoundException("User with name " + userPartyDto.getUsername() + " not found!"));
+            ResponseDto user = userProxy.getUserByUsername(userPartyDto.getUsername());
 
-            Deck deck = deckRepository.findByName(userPartyDto.getDeck())
-                    .orElseThrow(() -> new EntityNotFoundException("Deck with name " + userPartyDto.getDeck() + " not found!"));
+            DeckDto deck = deckProxy.getDeckByName(userPartyDto.getDeck());
 
             Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
 
             Party savedParty = partyRepository.save(Party.builder()
                     .match(match)
                     .team(team)
-                    .user(user)
-                    .deck(deck)
-                    .board(board)
+                    .userId(user.id())
+                    .deckId(deck.id())
+                    .boardId(board.id())
                     .moveOrder(userPartyDto.getMoveOrder())
                     .finalHp(userPartyDto.getFinalHp())
                     .isWinner(isUserWin(userPartyDto, partyDto))
@@ -136,8 +133,6 @@ public class PartyService {
 
             cvsBackupService.backupParty(savedParty);
         }
-
-        deckService.evictTopFromCache();
     }
 
     private boolean isUserWin(UserPartyDto user, PartyDto dto) {
