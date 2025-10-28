@@ -28,7 +28,7 @@ public class DashboardService {
                 .theStrongestdDeck(deckRepository.getTheStrongest())
                 .theMostPopularBoard(boardMapper.toDto(boardRepository.getTheMostPopular()))
                 //.numberOfUsers(userRepository.count())
-                //.numberOfParties(partyRepository.numberOfPartes())
+                .numberOfParties(deckRepository.numberOfPartes())
                 .numberOfSets((short) setRepository.count())
                 .numberOfDecks((short) deckRepository.count())
                 .build();

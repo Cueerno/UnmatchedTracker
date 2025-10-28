@@ -1,6 +1,6 @@
-import {API_BASE_URL} from "./config";
+import {UMDB_API_BASE_URL} from "./config";
 
-const backUrl = `${API_BASE_URL}/dashboard`;
+const backUrl = `${UMDB_API_BASE_URL}/dashboard`;
 
 export async function getDashboard() {
     const res = await fetch(`${backUrl}`, {

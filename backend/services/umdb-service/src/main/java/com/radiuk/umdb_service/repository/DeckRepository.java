@@ -38,9 +38,9 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
             d.name,
             count(*) filter (where p.is_winner) win_count,
             count(*) total_count
-        from parties p
-        join decks d on p.deck_id = d.id
-        join matches m on m.id = p.match_id
+        from "party-service".parties p
+        join "umdb-service".decks d on p.deck_id = d.id
+        join "party-service".matches m on m.id = p.match_id
         where m.format like :formatName
         group by d.name
         ) stats
@@ -51,8 +51,8 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     @Query(nativeQuery = true, value = """
     select
          d.name, d.art_image_url
-    from parties p
-    join decks d on p.deck_id = d.id
+    from "party-service".parties p
+    join "umdb-service".decks d on p.deck_id = d.id
     group by d.name, d.art_image_url
     order by count(*) filter (where p.is_winner) desc
     limit 1;
@@ -62,13 +62,20 @@ public interface DeckRepository extends JpaRepository<Deck, Short> {
     @Query(nativeQuery = true, value = """
     select
         d.name, d.art_image_url
-    from parties p
-    join decks d on p.deck_id = d.id
+    from "party-service".parties p
+    join "umdb-service".decks d on p.deck_id = d.id
     group by d.name, d.art_image_url
     order by count(*) desc
     limit 1;
     """)
     HomeDashboardSummary getTheMostPopular();
+
+    @Query(nativeQuery = true, value = """
+    select
+        count(distinct p.match_id)
+    from "party-service".parties p
+    """)
+    Long numberOfPartes();
 
     @EntityGraph("Deck.withAll")
     @Query(value = """

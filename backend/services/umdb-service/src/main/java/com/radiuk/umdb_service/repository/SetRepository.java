@@ -25,9 +25,9 @@ public interface SetRepository extends JpaRepository<Set, Short> {
     select
         s.name,
         s.image_url
-    from parties p
-    join decks d on d.id = p.deck_id
-    join sets s on s.id = d.set_id
+    from "party-service".parties p
+    join "umdb-service".decks d on d.id = p.deck_id
+    join "umdb-service".sets s on s.id = d.set_id
     group by s.name, s.image_url
     order by sum(case when p.is_winner then 1 else 0 end )::float / count(*) desc
     limit 1;
@@ -38,9 +38,9 @@ public interface SetRepository extends JpaRepository<Set, Short> {
     select
         s.name,
         s.image_url
-    from parties p
-    join decks d on d.id = p.deck_id
-    join sets s on s.id = d.set_id
+    from "party-service".parties p
+    join "umdb-service".decks d on d.id = p.deck_id
+    join "umdb-service".sets s on s.id = d.set_id
     group by s.name, s.image_url
     order by count(distinct p.match_id) desc
     limit 1;

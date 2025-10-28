@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.radiuk.umdb_service.dto.BoardDto;
-import com.radiuk.umdb_service.dto.CardWithDecksDto;
-import com.radiuk.umdb_service.dto.DeckWithCardsDto;
-import com.radiuk.umdb_service.dto.SetDto;
+import com.radiuk.umdb_service.dto.*;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -67,6 +64,9 @@ public class RedisCacheConfig {
         Jackson2JsonRedisSerializer<BoardDto> boardSerializer = new Jackson2JsonRedisSerializer<>(BoardDto.class);
         boardSerializer.setObjectMapper(objectMapper);
 
+        Jackson2JsonRedisSerializer<HomeDashboardDto> dashboardSerializer = new Jackson2JsonRedisSerializer<>(HomeDashboardDto.class);
+        dashboardSerializer.setObjectMapper(objectMapper);
+
         GenericJackson2JsonRedisSerializer listSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
 
         Map<String, RedisCacheConfiguration> configs = new HashMap<>();
@@ -83,6 +83,7 @@ public class RedisCacheConfig {
 
         configs.put("boardList",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), listSerializer)));
         configs.put("board",         createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), boardSerializer)));
+        configs.put("dashboard",     createConfig.apply(new CacheConfigEntry(Duration.ofMinutes(10), dashboardSerializer)));
 
         return RedisCacheManager.builder(factory)
                 .cacheDefaults(baseConfig)

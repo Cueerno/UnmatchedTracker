@@ -15,8 +15,8 @@ public interface BoardRepository extends JpaRepository<Board, Short> {
     @Query(nativeQuery = true, value = """
     select
         b.*
-    from parties p
-    join boards b on p.board_id = b.id
+    from "party-service".parties p
+    join "umdb-service".boards b on p.board_id = b.id
     group by b.id, set_id, name, max_players, spaces, zones, feature, image_url
     order by count(distinct match_id) desc
     limit 1;
