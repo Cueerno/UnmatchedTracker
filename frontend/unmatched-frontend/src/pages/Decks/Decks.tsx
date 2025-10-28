@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {FaUsers} from 'react-icons/fa';
-import {getAll} from '../../api/deck';
+import {getAll} from '../../api/umdbDeck';
 import {AttackType, DeckDto} from '../../types/deck';
 import './Decks.css';
 import {ContentPage} from "../../components/ContentPage/ContentPage";

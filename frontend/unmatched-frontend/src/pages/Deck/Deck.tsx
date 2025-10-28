@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {useParams} from "react-router-dom";
-import {getByName} from "../../api/deck";
+import {getByName} from "../../api/umdbDeck";
 import {AttackType, DeckCardDto, DeckWithCardsDto, ExtraCharacterDto, RuleCardDto} from "../../types/deck";
 import {SortPanel} from "../../components/SortPanel/SortPanel";
 import "./Deck.css";

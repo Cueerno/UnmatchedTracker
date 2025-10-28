@@ -2,7 +2,7 @@ import React, {FormEvent, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {createParty} from '../../api/party';
 import {getNames as getBoardNames} from '../../api/board';
-import {getNames as getDecksNames} from '../../api/deck';
+import {getNames as getDecksNames} from '../../api/umdbDeck';
 import './CreateParty.css';
 import {AutocompleteInput} from "../../components/AutocompleteInput/AutocompleteInput";
 
