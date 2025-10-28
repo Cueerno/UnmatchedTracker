@@ -19,6 +19,23 @@ export async function getPartyByMatchId(matchId: number) {
     return res.json()
 }
 
+export async function getUserParties(username: string) {
+    const res = await fetch(`${backUrl}/user/${username}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+
+    if (!res.ok) {
+        const text = await res.text()
+        throw new Error(`Error ${res.status}: ${text}`)
+    }
+
+    return res.json()
+}
+
+
 export async function createParty(party: PartyPayload) {
     const res = await fetch(`${backUrl}`, {
         method: 'POST',

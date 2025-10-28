@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {getUserParties} from '../../api/user'
+import {getUserParties} from '../../api/party'
 import {Party} from "../../types/party";
 import './Parties.css'
 
