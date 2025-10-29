@@ -30,6 +30,12 @@ public class PartyController {
         return ResponseEntity.ok(new MessageResponse("Party created successfully"));
     }
 
+    @PatchMapping("/{matchId}")
+    public ResponseEntity<?> update(@PathVariable Long matchId) {
+        partyService.update(matchId);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{matchId}")
     public ResponseEntity<?> delete(@PathVariable Long matchId) {
         partyService.delete(matchId);

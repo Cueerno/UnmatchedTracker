@@ -135,6 +135,11 @@ public class PartyService {
         }
     }
 
+    public void update(Long matchId) {
+
+    }
+
+    @Transactional
     public void delete(Long matchId) {
         if (!matchRepository.existsById(matchId)) {
             throw new EntityNotFoundException("Match with id " + matchId + " not found");
