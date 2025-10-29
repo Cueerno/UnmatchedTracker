@@ -8,7 +8,6 @@ import com.radiuk.umdb_service.model.Match;
 import com.radiuk.umdb_service.repository.DeckRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,10 +56,5 @@ public class DeckService {
     @Transactional(readOnly = true)
     public List<DeckDto> getRandom(Short quantity) {
         return deckMapper.toDtos(deckRepository.getRandom(PageRequest.of(0, quantity)));
-    }
-
-    @CacheEvict(value = "decksTop", key = "'top'")
-    public void evictTopFromCache() {
-
     }
 }
