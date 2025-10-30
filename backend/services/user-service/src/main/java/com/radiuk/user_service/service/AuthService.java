@@ -34,6 +34,7 @@ public class AuthService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
+    private final CvsBackupService cvsBackupService;
 
     @Value("${jwt.expiration}")
     private long tokenExpirySeconds;
@@ -53,6 +54,8 @@ public class AuthService {
         user.setRole(User.Role.USER);
 
         User savedUser = userRepository.save(user);
+
+        cvsBackupService.backupUser(savedUser);
 
         return userMapper.toResponseDto(savedUser);
     }
