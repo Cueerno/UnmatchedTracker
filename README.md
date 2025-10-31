@@ -6,7 +6,7 @@ Unmatched Tracker - web app for the addictive board game **Unmatched**.
 - View all game sets, decks, heroes and boards. 
 - View information about a specific set. 
 - Get a list of decks and cards.
-- Manage parties.
+- Manage parties (create, update, delete).
 - Building top decks by wins
 - Good time with deadpool.
 
