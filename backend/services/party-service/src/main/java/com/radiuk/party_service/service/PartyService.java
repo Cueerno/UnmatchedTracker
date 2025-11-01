@@ -12,6 +12,7 @@ import com.radiuk.party_service.model.Party;
 import com.radiuk.party_service.model.Team;
 import com.radiuk.party_service.proxy.*;
 import com.radiuk.party_service.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -132,6 +133,13 @@ public class PartyService {
 
             cvsBackupService.backupParty(savedParty);
         }
+    }
+
+    public void delete(Long matchId) {
+        if (!matchRepository.existsById(matchId)) {
+            throw new EntityNotFoundException("Match with id " + matchId + " not found");
+        }
+        matchRepository.deleteById(matchId);
     }
 
     private boolean isUserWin(UserPartyDto user, PartyDto dto) {

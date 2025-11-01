@@ -2,6 +2,8 @@ package com.radiuk.party_service.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ public class Team {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "match_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Match match;
 
     @Builder.Default
-    @OneToMany(mappedBy = "team")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Party> parties = new ArrayList<>();
 }

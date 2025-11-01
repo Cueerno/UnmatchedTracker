@@ -15,7 +15,7 @@ public class PartyController {
     private final PartyService partyService;
 
     @GetMapping("/{matchId}")
-    public ResponseEntity<?> getPatry(@PathVariable Long matchId) {
+    public ResponseEntity<?> getById(@PathVariable Long matchId) {
         return ResponseEntity.ok(partyService.getPartyByMatchId(matchId));
     }
 
@@ -25,8 +25,14 @@ public class PartyController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> createParty(@RequestBody PartyDto partyDto) {
+    public ResponseEntity<?> create(@RequestBody PartyDto partyDto) {
         partyService.createParty(partyDto);
         return ResponseEntity.ok(new MessageResponse("Party created successfully"));
+    }
+
+    @DeleteMapping("/{matchId}")
+    public ResponseEntity<?> delete(@PathVariable Long matchId) {
+        partyService.delete(matchId);
+        return ResponseEntity.noContent().build();
     }
 }

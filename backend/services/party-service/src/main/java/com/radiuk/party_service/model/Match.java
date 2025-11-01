@@ -2,6 +2,8 @@ package com.radiuk.party_service.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -25,11 +27,13 @@ public class Match {
     private Instant created_at;
 
     @Builder.Default
-    @OneToMany(mappedBy = "match")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Team> teams = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "match")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Party> parties = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
