@@ -81,7 +81,7 @@ public class PartyService {
 
     @Cacheable(value = "userPartyList", key = "#username")
     @Transactional(readOnly = true)
-    public List<PartyDto> getAllPartiesByUsername(String username) {
+    public List<PartyDto> getPartiesByUserUsername(String username) {
 
         ResponseDto user = userProxy.getUserByUsername(username);
 
@@ -90,7 +90,7 @@ public class PartyService {
     }
 
     @Transactional
-    public void createParty(PartyDto partyDto) {
+    public void create(PartyDto partyDto) {
 
         Instant date = partyDto.getDate() != null ? partyDto.getDate() : Instant.now();
 
