@@ -14,6 +14,7 @@ import com.radiuk.party_service.proxy.*;
 import com.radiuk.party_service.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,8 +102,39 @@ public class PartyService {
         match.setCreated_at(date);
         matchRepository.save(match);
 
+        createTeamsAndParties(partyDto, match, date, board);
+    }
+
+    @CacheEvict(value = "party", key = "#matchId")
+    @Transactional
+    public void update(Long matchId, PartyDto updatedPartyDto) {
+        Match match = matchRepository.findById(matchId)
+                .orElseThrow(() -> new PartyNotFoundException("Party with id " + matchId + " not found!"));
+
+        match.setFormat(updatedPartyDto.getFormat());
+        match.setCreated_at(
+                updatedPartyDto.getDate() != null
+                        ? updatedPartyDto.getDate()
+                        : match.getCreated_at()
+        );
+        matchRepository.save(match);
+
+        List<Team> existingTeams = teamRepository.findByMatchId(matchId);
+        for (Team team : existingTeams) {
+            partyRepository.deleteAll(partyRepository.findByMatchId(team.getId()));
+        }
+        teamRepository.deleteAll(existingTeams);
+
+        Instant date = updatedPartyDto.getDate() != null ? updatedPartyDto.getDate() : Instant.now();
+
+        BoardDto board = boardProxy.getBoardByName(updatedPartyDto.getBoardName());
+
+        createTeamsAndParties(updatedPartyDto, match, date, board);
+    }
+
+    private void createTeamsAndParties(PartyDto updatedPartyDto, Match match, Instant date, BoardDto board) {
         Map<String, Team> teamMap = new HashMap<>();
-        for (TeamDto teamDto : partyDto.getTeams()) {
+        for (TeamDto teamDto : updatedPartyDto.getTeams()) {
             Team team = new Team();
             team.setName(teamDto.getName());
             team.setMatch(match);
@@ -112,12 +144,10 @@ public class PartyService {
             teamMap.put(teamDto.getName(), team);
         }
 
-        for (UserPartyDto userPartyDto : partyDto.getUsers()) {
+        for (UserPartyDto userPartyDto : updatedPartyDto.getUsers()) {
             ResponseDto user = userProxy.getUserByUsername(userPartyDto.getUsername());
-
             DeckDto deck = deckProxy.getDeckByName(userPartyDto.getDeck());
-
-            Team team = teamMap.get(getUserTeamName(userPartyDto, partyDto));
+            Team team = teamMap.get(getUserTeamName(userPartyDto, updatedPartyDto));
 
             Party savedParty = partyRepository.save(Party.builder()
                     .match(match)
@@ -127,16 +157,12 @@ public class PartyService {
                     .boardId(board.id())
                     .moveOrder(userPartyDto.getMoveOrder())
                     .finalHp(userPartyDto.getFinalHp())
-                    .isWinner(isUserWin(userPartyDto, partyDto))
+                    .isWinner(isUserWin(userPartyDto, updatedPartyDto))
                     .createdAt(date)
                     .build());
 
             cvsBackupService.backupParty(savedParty);
         }
-    }
-
-    public void update(Long matchId) {
-
     }
 
     @Transactional

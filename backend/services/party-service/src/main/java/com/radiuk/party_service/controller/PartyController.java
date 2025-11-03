@@ -31,8 +31,8 @@ public class PartyController {
     }
 
     @PatchMapping("/{matchId}")
-    public ResponseEntity<?> update(@PathVariable Long matchId) {
-        partyService.update(matchId);
+    public ResponseEntity<?> update(@PathVariable Long matchId, @RequestBody PartyDto updatedPartyDto) {
+        partyService.update(matchId, updatedPartyDto);
         return ResponseEntity.noContent().build();
     }
 
