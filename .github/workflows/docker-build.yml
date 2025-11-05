@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        service: [user-service, umdb-service, party-service, unmatched-backend-core]
+        service: [user-service, umdb-service, party-service, unmatched-backend-core, backup-service]
 
     steps:
       - name: Checkout code
