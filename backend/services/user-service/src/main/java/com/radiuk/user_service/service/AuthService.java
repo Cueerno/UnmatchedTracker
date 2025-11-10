@@ -1,10 +1,7 @@
 package com.radiuk.user_service.service;
 
 import com.radiuk.user_service.annotation.NoLogging;
-import com.radiuk.user_service.dto.AuthDto;
-import com.radiuk.user_service.dto.AuthResponse;
-import com.radiuk.user_service.dto.RegistrationDto;
-import com.radiuk.user_service.dto.ResponseDto;
+import com.radiuk.user_service.dto.*;
 import com.radiuk.user_service.exception.UserNotCreatedException;
 import com.radiuk.user_service.mapper.UserMapper;
 import com.radiuk.user_service.model.User;
@@ -13,13 +10,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwsHeader;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +29,7 @@ public class AuthService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
-    private final CvsBackupService cvsBackupService;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Value("${jwt.expiration}")
     private long tokenExpirySeconds;
@@ -55,7 +50,7 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        cvsBackupService.backupUser(savedUser);
+        applicationEventPublisher.publishEvent(new UserEvent(user));
 
         return userMapper.toResponseDto(savedUser);
     }
