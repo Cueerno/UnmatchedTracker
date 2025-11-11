@@ -16,13 +16,18 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     public static final String EXCHANGE_NAME = "backup.exchange";
+
     public static final String USER_QUEUE = "backup.user.queue";
     public static final String USER_ROUTING_KEY = "backup.user.created";
+
+    public static final String PARTY_QUEUE = "backup.party.queue";
+    public static final String PARTY_ROUTING_KEY = "backup.party.created";
 
     @Bean
     public TopicExchange backupExchange() {
         return new TopicExchange(EXCHANGE_NAME, true, false);
     }
+
 
     @Bean
     public Queue userCreatedQueue() {
@@ -33,6 +38,17 @@ public class RabbitConfig {
     public Binding userBinding(Queue userCreatedQueue, TopicExchange backupExchange) {
         return BindingBuilder.bind(userCreatedQueue).to(backupExchange).with(USER_ROUTING_KEY);
     }
+
+
+    public Queue partyCreatedQueue() {
+        return new Queue(PARTY_QUEUE, true);
+    }
+
+    @Bean
+    public Binding partyBinding(Queue partyCreatedQueue, TopicExchange backupExchange) {
+        return BindingBuilder.bind(partyCreatedQueue).to(backupExchange).with(PARTY_ROUTING_KEY);
+    }
+
 
     @Bean
     public MessageConverter jsonMessageConverter() {
