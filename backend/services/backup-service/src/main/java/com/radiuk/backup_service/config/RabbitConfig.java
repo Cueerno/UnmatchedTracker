@@ -39,7 +39,7 @@ public class RabbitConfig {
         return BindingBuilder.bind(userCreatedQueue).to(backupExchange).with(USER_ROUTING_KEY);
     }
 
-
+    @Bean
     public Queue partyCreatedQueue() {
         return new Queue(PARTY_QUEUE, true);
     }
