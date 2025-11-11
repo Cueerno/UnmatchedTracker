@@ -16,6 +16,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,7 @@ public class PartyService {
     private final TeamRepository teamRepository;
     private final PartyRepository partyRepository;
     private final DeckProxy deckProxy;
-    private final CvsBackupService cvsBackupService;
+    private final ApplicationEventPublisher applicationEventPublisher;
     private final UserProxy userProxy;
 
     @Cacheable(value = "party", key = "#matchId")
@@ -161,7 +162,7 @@ public class PartyService {
                     .createdAt(date)
                     .build());
 
-            cvsBackupService.backupParty(savedParty);
+            applicationEventPublisher.publishEvent(new PartyEvent(savedParty));
         }
     }
 
