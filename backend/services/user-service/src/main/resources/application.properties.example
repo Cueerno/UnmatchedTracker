@@ -34,6 +34,3 @@ logging.file.name=backend/services/user-service/logs
 
 # Internal secret
 internal.api.secret=
-
-#Backup
-backup.csv.path.user=backend/services/user-service/backup/users.csv

@@ -50,7 +50,7 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        applicationEventPublisher.publishEvent(new UserEvent(user));
+        applicationEventPublisher.publishEvent(new UserEvent(savedUser));
 
         return userMapper.toResponseDto(savedUser);
     }

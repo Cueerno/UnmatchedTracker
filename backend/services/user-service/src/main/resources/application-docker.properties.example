@@ -32,5 +32,3 @@ logging.file.name=backend/services/unmatched-backend-core/logs
 # Internal secret
 internal.api.secret=${INTERNAL_API_SECRET}
 
-#Backup
-backup.csv.path.user=backend/services/user-service/backup/users.csv
