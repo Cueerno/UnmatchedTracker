@@ -46,7 +46,7 @@ public class UserBackupService {
         }
     }
 
-    public void backupUser(User user) {
+    public void backupUser(User user) throws IOException {
         String line = String.format(
                 "%d,%s,%s,%s,%s,%s%n,%s%n",
                 user.getId(),
@@ -60,12 +60,8 @@ public class UserBackupService {
         writeLine(userCsvFile, line);
     }
 
-    private void writeLine(Path file, String line) {
-        try {
-            Files.writeString(file, line, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to write CSV backup to " + file, e);
-        }
+    private void writeLine(Path file, String line) throws IOException {
+        Files.writeString(file, line, StandardOpenOption.APPEND);
     }
 }
 

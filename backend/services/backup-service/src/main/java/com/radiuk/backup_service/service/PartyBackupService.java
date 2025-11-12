@@ -23,12 +23,8 @@ public class PartyBackupService {
     }
 
     @PostConstruct
-    private void init() {
-        try {
-            initFile(partyCsvFile, "party_id,match_id,team_id,user_id,deck_id,board_id,move_order,final_hp,is_winner,created_at");
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to initialize CSV backup paths", e);
-        }
+    private void init() throws IOException {
+        initFile(partyCsvFile, "party_id,match_id,team_id,user_id,deck_id,board_id,move_order,final_hp,is_winner,created_at");
     }
 
     private void initFile(Path file, String header) throws IOException {
@@ -46,7 +42,7 @@ public class PartyBackupService {
         }
     }
 
-    public void backupParty(Party party) {
+    public void backupParty(Party party) throws IOException {
         String line = String.format(
                 "%d,%d,%d,%d,%d,%s,%d,%d,%b,%s%n",
                 party.getId()
@@ -63,11 +59,7 @@ public class PartyBackupService {
         writeLine(partyCsvFile, line);
     }
 
-    private void writeLine(Path file, String line) {
-        try {
-            Files.writeString(file, line, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to write CSV backup to " + file, e);
-        }
+    private void writeLine(Path file, String line) throws IOException {
+        Files.writeString(file, line, StandardOpenOption.APPEND);
     }
 }

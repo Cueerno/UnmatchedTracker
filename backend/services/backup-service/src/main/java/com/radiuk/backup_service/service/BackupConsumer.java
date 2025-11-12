@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 @RequiredArgsConstructor
 public class BackupConsumer {
@@ -15,12 +17,12 @@ public class BackupConsumer {
     private final PartyBackupService partyBackupService;
 
     @RabbitListener(queues = RabbitConfig.USER_QUEUE)
-    public void onUserCreated(User user) {
+    public void onUserCreated(User user) throws IOException {
         userBackupService.backupUser(user);
     }
 
     @RabbitListener(queues = RabbitConfig.PARTY_QUEUE)
-    public void onPartyCreated(Party party) {
+    public void onPartyCreated(Party party) throws IOException {
         partyBackupService.backupParty(party);
     }
 }
