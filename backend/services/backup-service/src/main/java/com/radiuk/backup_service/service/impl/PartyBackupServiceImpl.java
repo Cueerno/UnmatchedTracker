@@ -46,16 +46,16 @@ public class PartyBackupServiceImpl implements PartyBackupService {
     public void backupParty(Party party) throws IOException {
         String line = String.format(
                 "%d,%d,%d,%d,%d,%s,%d,%d,%b,%s%n",
-                party.getId()
-//                party.getMatch().getId(),
-//                party.getTeam().getId(),
-//                party.getUserId(),
-//                party.getDeckId(),
-//                party.getBoardId(),
-//                party.getMoveOrder(),
-//                party.getFinalHp(),
-//                party.getIsWinner(),
-//                party.getCreatedAt()
+                party.getId(),
+                party.getMatchId(),
+                party.getTeamId(),
+                party.getUserId(),
+                party.getDeckId(),
+                party.getBoardId(),
+                party.getMoveOrder(),
+                party.getFinalHp(),
+                party.getIsWinner(),
+                party.getCreatedAt()
         );
         writeLine(partyCsvFile, line);
     }
