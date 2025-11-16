@@ -11,12 +11,6 @@ spring.rabbitmq.password=${RABBIT_PASS}
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
 
-# Logging
-logging.level.root=INFO
-logging.level.org.springframework.web=DEBUG
-logging.level.com.radiuk.auth_service=DEBUG
-logging.file.name=backend/services/backup-service/logs
-
 # Backup
 backup.csv.path.user=backend/services/backup-service/backup/users.csv
 backup.csv.path.party=backend/services/backup-service/backup/parties.csv
