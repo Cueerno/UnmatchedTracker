@@ -23,11 +23,5 @@ spring.flyway.schemas=party-service
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
 
-# Logging
-logging.level.root=INFO
-logging.level.org.springframework.web=DEBUG
-logging.level.com.radiuk.umdb-service=DEBUG
-logging.file.name=backend/services/party-service/logs
-
 # Internal secret
 internal.api.secret=${INTERNAL_API_SECRET}

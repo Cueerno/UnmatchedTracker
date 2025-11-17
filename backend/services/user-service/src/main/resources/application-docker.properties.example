@@ -23,12 +23,6 @@ spring.rabbitmq.password=${RABBIT_PASS}
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
 
-# Logging
-logging.level.root=INFO
-logging.level.org.springframework.web=DEBUG
-logging.level.com.radiuk.unmatched_backend_core=DEBUG
-logging.file.name=backend/services/unmatched-backend-core/logs
-
 # Internal secret
 internal.api.secret=${INTERNAL_API_SECRET}
 

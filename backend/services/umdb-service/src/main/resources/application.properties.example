@@ -21,9 +21,3 @@ spring.flyway.schemas=umdb-service
 
 # Actuator
 management.endpoints.web.exposure.include=health, info, metrics
-
-# Logging
-logging.level.root=INFO
-logging.level.org.springframework.web=DEBUG
-logging.level.com.radiuk.auth_service=DEBUG
-logging.file.name=backend/services/umdb-service/logs
