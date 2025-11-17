@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class LoggingAspect {
 
-    @Pointcut("execution(public * com.radiuk.umdb_service.service..*(..))")
+    @Pointcut("execution(public * com.radiuk.umdb_service.service.impl..*(..))")
     public void serviceMethods() {}
 
     @Before("serviceMethods()")

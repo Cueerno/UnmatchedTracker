@@ -5,6 +5,7 @@ import com.radiuk.backup_service.service.UserBackupService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-@Component
+@Service
 public class UserBackupServiceImpl implements UserBackupService {
 
     private final Path userCsvFile;
@@ -47,6 +48,7 @@ public class UserBackupServiceImpl implements UserBackupService {
         }
     }
 
+    @Override
     public void backupUser(User user) throws IOException {
         String line = String.format(
                 "%d,%s,%s,%s,%s,%s%n,%s%n",

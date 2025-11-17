@@ -5,6 +5,7 @@ import com.radiuk.backup_service.service.PartyBackupService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-@Component
+@Service
 public class PartyBackupServiceImpl implements PartyBackupService {
 
     private final Path partyCsvFile;
@@ -43,6 +44,7 @@ public class PartyBackupServiceImpl implements PartyBackupService {
         }
     }
 
+    @Override
     public void backupParty(Party party) throws IOException {
         String line = String.format(
                 "%d,%d,%d,%d,%d,%s,%d,%d,%b,%s%n",

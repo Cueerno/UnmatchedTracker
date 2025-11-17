@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class LoggingAspect {
 
-    @Pointcut("execution(public * com.radiuk.user_service.service..*(..))")
+    @Pointcut("execution(public * com.radiuk.user_service.service.impl..*(..))")
     public void serviceMethods() {}
 
     @Pointcut("@annotation(com.radiuk.user_service.annotation.NoLogging)")
