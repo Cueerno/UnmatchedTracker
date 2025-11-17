@@ -1,6 +1,7 @@
-package com.radiuk.user_service.service;
+package com.radiuk.user_service.producer;
 
 import com.radiuk.user_service.config.RabbitConfig;
+import com.radiuk.user_service.model.UserEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;

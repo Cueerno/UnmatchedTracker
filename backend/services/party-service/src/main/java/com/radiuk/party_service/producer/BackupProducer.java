@@ -1,4 +1,4 @@
-package com.radiuk.party_service.service;
+package com.radiuk.party_service.producer;
 
 import com.radiuk.party_service.config.RabbitConfig;
 import com.radiuk.party_service.dto.PartyDto;
